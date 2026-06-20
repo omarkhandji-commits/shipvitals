@@ -1,0 +1,7 @@
+interface:
+  display_name: "ShipVitals"
+  short_description: "Evidence-based release readiness gate"
+  default_prompt: "Use $shipvitals to audit this project and return a release verdict with evidence."
+
+policy:
+  allow_implicit_invocation: true

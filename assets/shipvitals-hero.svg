@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="ShipVitals Release Gate">
+  <rect width="1200" height="630" fill="#0b0f14"/>
+  <rect x="70" y="70" width="1060" height="490" rx="34" fill="#111827" stroke="#2d3748"/>
+  <text x="110" y="150" fill="#f8fafc" font-family="Inter, Arial" font-size="54" font-weight="700">ShipVitals</text>
+  <text x="110" y="205" fill="#cbd5e1" font-family="Inter, Arial" font-size="28">Release gate for assisted projects</text>
+  <g font-family="Inter, Arial" font-size="24" fill="#e2e8f0">
+    <rect x="110" y="275" width="220" height="72" rx="18" fill="#1f2937"/><text x="135" y="320">Spec-first</text>
+    <rect x="360" y="275" width="220" height="72" rx="18" fill="#1f2937"/><text x="385" y="320">Evidence</text>
+    <rect x="610" y="275" width="220" height="72" rx="18" fill="#1f2937"/><text x="635" y="320">Visual QA</text>
+    <rect x="860" y="275" width="220" height="72" rx="18" fill="#1f2937"/><text x="885" y="320">CI Gate</text>
+  </g>
+  <text x="110" y="445" fill="#94a3b8" font-family="Inter, Arial" font-size="26">READY / ALMOST READY / NOT READY / DEMO ONLY</text>
+</svg>

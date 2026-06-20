@@ -1,0 +1,32 @@
+{
+  "levels": [
+    {
+      "id": "L0_CLAIM",
+      "meaning": "Claim only; no file or command proof."
+    },
+    {
+      "id": "L1_STATIC_SCAN",
+      "meaning": "Files inspected or scanned."
+    },
+    {
+      "id": "L2_CONFIGURED",
+      "meaning": "Project promise and config are present."
+    },
+    {
+      "id": "L3_COMMANDS_EXECUTED",
+      "meaning": "Build/lint/test/typecheck or project commands executed."
+    },
+    {
+      "id": "L4_RUNTIME_VISUAL",
+      "meaning": "App ran with screenshots or runtime logs where applicable."
+    },
+    {
+      "id": "L5_CI_REPRODUCIBLE",
+      "meaning": "Gate can run in CI or hook."
+    },
+    {
+      "id": "L6_INDEPENDENT_REVIEW",
+      "meaning": "A separate model or human reviewer checked the report."
+    }
+  ]
+}

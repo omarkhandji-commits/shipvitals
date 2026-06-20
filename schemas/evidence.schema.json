@@ -1,0 +1,114 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "ShipVitals Evidence Pack",
+ "type": "object",
+ "required": [
+ "tool",
+ "version",
+ "target",
+ "verdict",
+ "score",
+ "evidence",
+ "findings"
+ ],
+ "properties": {
+ "tool": {
+ "const": "shipvitals"
+ },
+ "version": {
+ "type": "string"
+ },
+ "target": {
+ "type": "string"
+ },
+ "verdict": {
+ "enum": [
+ "READY",
+ "ALMOST READY",
+ "NOT READY",
+ "DEMO ONLY"
+ ]
+ },
+ "score": {
+ "type": "number",
+ "minimum": 0,
+ "maximum": 100
+ },
+ "score_cap": {
+ "type": "string"
+ },
+ "evidence": {
+ "type": "array",
+ "items": {
+ "type": "object",
+ "required": [
+ "id",
+ "status",
+ "level"
+ ],
+ "properties": {
+ "id": {
+ "type": "string"
+ },
+ "status": {
+ "type": "string"
+ },
+ "level": {
+ "type": "string"
+ },
+ "source": {
+ "type": "string"
+ },
+ "summary": {
+ "type": "string"
+ }
+ }
+ }
+ },
+ "findings": {
+ "type": "array",
+ "items": {
+ "type": "object",
+ "required": [
+ "severity",
+ "area",
+ "title",
+ "evidence",
+ "fix",
+ "retest"
+ ],
+ "properties": {
+ "severity": {
+ "enum": [
+ "P0",
+ "P1",
+ "P2",
+ "P3"
+ ]
+ },
+ "area": {
+ "type": "string"
+ },
+ "title": {
+ "type": "string"
+ },
+ "location": {
+ "type": "string"
+ },
+ "evidence": {
+ "type": "string"
+ },
+ "why_it_matters": {
+ "type": "string"
+ },
+ "fix": {
+ "type": "string"
+ },
+ "retest": {
+ "type": "string"
+ }
+ }
+ }
+ }
+ }
+}

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shipvitals-cli"
+version = "1.0.0b1"
+description = "Release readiness audit and go/no-go verdict for AI-built apps."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "ShipVitals contributors" }]
+keywords = ["release-gate", "quality-gate", "release-readiness", "production-readiness", "ai-coding", "ship-ready", "codex", "claude-code", "cursor"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://omarkhandji-commits.github.io/shipvitals/"
+Documentation = "https://github.com/omarkhandji-commits/shipvitals#readme"
+Repository = "https://github.com/omarkhandji-commits/shipvitals"
+Issues = "https://github.com/omarkhandji-commits/shipvitals/issues"
+Changelog = "https://github.com/omarkhandji-commits/shipvitals/blob/main/CHANGELOG.md"
+
+[project.scripts]
+shipvitals = "shipvitals_cli.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["shipvitals_cli", "skills", "skills.*"]
+
+[tool.setuptools.package-data]
+"skills.shipvitals" = ["**/*.md", "**/*.json", "**/*.html", "**/*.yaml", "**/*.yml"]

@@ -1,0 +1,36 @@
+{
+  "verdicts": {
+    "READY": {
+      "max_p0": 0,
+      "max_p1": 0,
+      "minimum_evidence": "L4_RUNTIME_VISUAL",
+      "requires_config": true
+    },
+    "ALMOST READY": {
+      "max_p0": 0,
+      "max_p1": 3,
+      "minimum_evidence": "L3_COMMANDS_EXECUTED"
+    },
+    "NOT READY": {
+      "when": [
+        "any P0 finding",
+        "failed build/test without explanation",
+        "missing critical flow proof"
+      ]
+    },
+    "DEMO ONLY": {
+      "when": [
+        "fake integration",
+        "demo data in core flow",
+        "payment/auth/email not real where promised"
+      ]
+    }
+  },
+  "score_caps": {
+    "has_p0": 59,
+    "no_runtime_proof": 74,
+    "no_visual_proof_for_ui": 79,
+    "no_product_promise": 69,
+    "secret_candidate": 49
+  }
+}

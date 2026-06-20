@@ -1,0 +1,35 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:47Z",
+  "scope": "ShipVitals repository before first public push",
+  "verdict": "ALMOST READY",
+  "score": 89,
+  "p0": [],
+  "p1": [],
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC",
+    "L3_RUNTIME",
+    "L4_VISUAL_FLOW"
+  ],
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "command_results": [
+    { "cmd": "npm run validate", "exit_code": 0, "seconds": 2.29 },
+    { "cmd": "npm run test", "exit_code": 0, "seconds": 16.94 },
+    { "cmd": "npm run test:compile", "exit_code": 0, "seconds": 0.82 },
+    { "cmd": "npm run scorecard", "exit_code": 0, "seconds": 0.98 },
+    { "cmd": "npm run schema:check", "exit_code": 0, "seconds": 1.12 },
+    { "cmd": "npm run tone:check", "exit_code": 0, "seconds": 1.15 },
+    { "cmd": "npm run benchmark:real", "exit_code": 0, "seconds": 33.03 },
+    { "cmd": "npm pack --dry-run", "exit_code": 0, "seconds": 1.58 },
+    { "cmd": "npm run test:package", "exit_code": 0, "seconds": 16.99 },
+    { "cmd": "npm run site:check", "exit_code": 0, "seconds": 1.33 }
+  ],
+  "privacy_note": "Local absolute paths and raw command output were removed from this public artifact."
+}

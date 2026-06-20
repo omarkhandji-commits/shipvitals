@@ -1,0 +1,61 @@
+name: ShipVitals
+description: "Run ShipVitals as a release gate."
+author: "omarkhandji-commits"
+branding:
+  icon: "activity"
+  color: "orange"
+inputs:
+  path:
+    description: "Project path to audit"
+    required: false
+    default: .
+  mode:
+    description: "Audit mode: quick or deep"
+    required: false
+    default: quick
+  runtime-proof:
+    description: "Existing runtime artifact path or HTTPS URL."
+    required: false
+    default: ""
+  visual-proof:
+    description: "Existing screenshot, video, trace path, or HTTPS URL."
+    required: false
+    default: ""
+  ci-proof:
+    description: "CI or hook reproducibility proof."
+    required: false
+    default: ""
+  independent-review:
+    description: "Independent review proof for high-stakes releases."
+    required: false
+    default: ""
+  fail-on-unready:
+    description: "Fail the workflow unless the verdict is READY."
+    required: false
+    default: "true"
+outputs:
+  verdict:
+    description: "ShipVitals verdict"
+    value: ${{ steps.audit.outputs.verdict }}
+runs:
+  using: composite
+  steps:
+    - name: Run ShipVitals
+      id: audit
+      shell: bash
+      run: |
+        args=("${{ inputs.path }}" --ci --mode "${{ inputs.mode }}")
+        if [ -n "${{ inputs.runtime-proof }}" ]; then args+=(--runtime-proof "${{ inputs.runtime-proof }}"); fi
+        if [ -n "${{ inputs.visual-proof }}" ]; then args+=(--visual-proof "${{ inputs.visual-proof }}"); fi
+        ci_proof="${{ inputs.ci-proof }}"
+        if [ -z "$ci_proof" ]; then ci_proof="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; fi
+        args+=(--ci-proof "$ci_proof")
+        if [ -n "${{ inputs.independent-review }}" ]; then args+=(--independent-review "${{ inputs.independent-review }}"); fi
+        report="$RUNNER_TEMP/shipvitals-report.json"
+        python3 "$GITHUB_ACTION_PATH/skills/shipvitals/scripts/shipvitals_runner.py" "${args[@]}" | tee "$report"
+        verdict="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1], encoding='utf-8')).get('verdict','NOT VERIFIED'))" "$report")"
+        echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
+        if [ "${{ inputs.fail-on-unready }}" = "true" ] && [ "$verdict" != "READY" ]; then
+          echo "ShipVitals blocked release with verdict: $verdict" >&2
+          exit 1
+        fi

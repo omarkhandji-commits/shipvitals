@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest a new check, integration, or workflow.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What release risk should ShipVitals catch better?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: What should ShipVitals do?
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Product promise
+        - Tests/build
+        - Runtime proof
+        - Visual/mobile
+        - Security baseline
+        - Fake integration/falsification
+        - Client handoff
+        - Marketplace readiness
+        - CI/repeatability
+        - Other
+  - type: textarea
+    id: examples
+    attributes:
+      label: Real examples
+      description: Link to repos, reports, or anonymized cases if available.

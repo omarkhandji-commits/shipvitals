@@ -1,0 +1,24 @@
+{
+  "P0": [
+    "security secret exposed",
+    "critical flow broken",
+    "payment/auth/data loss risk",
+    "fake integration presented as real"
+  ],
+  "P1": [
+    "important flow unverified",
+    "mobile layout broken",
+    "build or test command fails",
+    "unclear onboarding for target user"
+  ],
+  "P2": [
+    "polish issue",
+    "weak copy",
+    "missing non-critical doc",
+    "minor accessibility issue"
+  ],
+  "P3": [
+    "nice-to-have improvement",
+    "future optimization"
+  ]
+}

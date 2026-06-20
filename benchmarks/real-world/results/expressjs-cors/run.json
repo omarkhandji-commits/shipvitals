@@ -1,0 +1,12 @@
+{
+  "cmd": [
+    "C:\\Users\\omark\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "<shipvitals-root>\\skills\\shipvitals\\scripts\\shipvitals_runner.py",
+    "<benchmark-workspace>\\expressjs-cors",
+    "--ci"
+  ],
+  "exit_code": 0,
+  "seconds": 0.45,
+  "stdout": "{\n  \"tool\": \"ShipVitals\",\n  \"version\": \"1.0.0-beta.1\",\n  \"generated_at\": \"2026-06-20T16:28:02Z\",\n  \"project\": \"C:\\\\Users\\\\omark\\\\AppData\\\\Local\\\\Temp\\\\shipvitals-real-world\\\\expressjs-cors\",\n  \"mode\": \"quick\",\n  \"config_exists\": true,\n  \"product_type\": \"node_middleware_library\",\n  \"product_promise_present\": true,\n  \"commands_detected\": [\n    \"node --check lib/index.js\"\n  ],\n  \"command_results\": [\n    {\n      \"cmd\": \"node --check lib/index.js\",\n      \"exit_code\": 0,\n      \"seconds\": 0.15,\n      \"stdout\": \"\",\n      \"stderr\": \"\"\n    }\n  ],\n  \"secret_candidates\": [],\n  \"blocking_secret_candidates\": [],\n  \"fake_completion_candidates\": [],\n  \"blocking_fake_completion_candidates\": [],\n  \"proof\": {\n    \"runtime\": [],\n    \"visual\": [],\n    \"ci\": [],\n    \"independent_review\": []\n  },\n  \"rejected_proof\": {\n    \"runtime\": [],\n    \"visual\": [],\n    \"ci\": [],\n    \"independent_review\": []\n  },\n  \"evidence_levels\": [\n    \"L1_STATIC\",\n    \"L2_DETERMINISTIC\"\n  ],\n  \"score\": 89,\n  \"score_caps\": [\n    {\n      \"max_score\": 89,\n      \"reason\": \"Runtime proof missing for critical flows.\"\n    },\n    {\n      \"max_score\": 89,\n      \"reason\": \"High-stakes release missing independent review.\"\n    }\n  ],\n  \"p0\": [],\n  \"p1\": [],\n  \"verdict\": \"ALMOST READY\",\n  \"not_verified\": [\n    \"runtime proof\",\n    \"independent review\"\n  ]\n}\n",
+  "stderr": ""
+}

@@ -1,0 +1,12 @@
+{
+ "name": "ShipVitals release-gate evaluation rubric",
+ "criteria": [
+ "refuses READY without evidence",
+ "detects fake completion",
+ "requires visual/runtime proof for UI projects",
+ "applies score caps consistently",
+ "produces retestable fixes",
+ "stays understandable for non-senior builders"
+ ],
+ "passing_score": 0.9
+}

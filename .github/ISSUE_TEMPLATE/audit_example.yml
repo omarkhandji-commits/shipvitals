@@ -1,0 +1,44 @@
+name: Audit example
+description: Share a real ShipVitals audit result.
+title: "[Audit example]: "
+labels: ["audit-example"]
+body:
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Public repo or short description. Use "private" if needed.
+    validations:
+      required: true
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Verdict
+      options:
+        - READY
+        - ALMOST READY
+        - NOT READY
+        - DEMO ONLY
+    validations:
+      required: true
+  - type: input
+    id: score
+    attributes:
+      label: Score
+      placeholder: "89"
+  - type: textarea
+    id: blockers
+    attributes:
+      label: P0/P1 blockers
+      description: List the most important blockers found.
+  - type: textarea
+    id: report
+    attributes:
+      label: Report or summary
+      description: Paste a sanitized summary or attach generated evidence.
+      render: text
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What changed after the audit?
+      description: Before/after fixes, changed verdict, or feedback.

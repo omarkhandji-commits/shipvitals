@@ -1,0 +1,90 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:07Z",
+  "project": "<benchmark-workspace>\\sindresorhus-query-string",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "node_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node --check index.js",
+    "node --check base.js"
+  ],
+  "command_results": [
+    {
+      "cmd": "node --check index.js",
+      "exit_code": 0,
+      "seconds": 0.11,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cmd": "node --check base.js",
+      "exit_code": 0,
+      "seconds": 0.15,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "base.d.ts",
+      "line": 629,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "base.js",
+      "line": 445,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "base.d.ts",
+      "line": 629,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "base.js",
+      "line": 445,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "areas": [
+    "product",
+    "technical",
+    "runtime",
+    "visual",
+    "security",
+    "falsification",
+    "client_delivery",
+    "marketplace",
+    "documentation"
+  ],
+  "required_fields": [
+    "title",
+    "area",
+    "severity",
+    "location",
+    "evidence",
+    "why_it_matters",
+    "smallest_fix",
+    "retest"
+  ]
+}

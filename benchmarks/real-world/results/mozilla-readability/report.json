@@ -1,0 +1,953 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:06Z",
+  "project": "<benchmark-workspace>\\mozilla-readability",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "node_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const Readability=require('./Readability.js'); if(typeof Readability !== 'function') process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const Readability=require('./Readability.js'); if(typeof Readability !== 'function') process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.24,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 994,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 751,
+      "pattern": "AIza[0-9A-Za-z\\-_]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 10,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 14,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 16,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 22,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 760,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 763,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 766,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 766,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\nytimes-5\\expected.html",
+      "line": 259,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\nytimes-5\\expected.html",
+      "line": 259,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\nytimes-5\\expected.html",
+      "line": 259,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "test\\test-pages\\theverge\\source.html",
+      "line": 729,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    }
+  ],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "Readability.js",
+      "line": 2109,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "Readability.js",
+      "line": 2469,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "Readability.js",
+      "line": 1920,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "Readability.js",
+      "line": 2387,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\002\\source.html",
+      "line": 92,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 101,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 104,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 120,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 1003,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 1006,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 1106,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aclu\\source.html",
+      "line": 1109,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 634,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 686,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 990,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 1346,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 550,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 1648,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\aktualne\\source.html",
+      "line": 1648,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\archive-of-our-own\\source.html",
+      "line": 900,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\archive-of-our-own\\source.html",
+      "line": 960,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ars-1\\source.html",
+      "line": 149,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ars-1\\source.html",
+      "line": 286,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ars-1\\source.html",
+      "line": 286,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 1173,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 1533,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 31,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\article-author-tag\\source.html",
+      "line": 1946,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 150,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 506,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 506,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 601,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 601,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 606,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 606,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 611,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 611,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 137,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 547,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bbc-1\\source.html",
+      "line": 581,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\blogger\\source.html",
+      "line": 22,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\bug-1255978\\source.html",
+      "line": 826,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bug-1255978\\source.html",
+      "line": 864,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bug-1255978\\source.html",
+      "line": 2525,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bug-1255978\\source.html",
+      "line": 2525,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\bug-1255978\\source.html",
+      "line": 2528,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 438,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3130,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3906,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3908,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3910,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3912,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3969,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3971,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3973,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 3975,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 5109,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 5112,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\buzzfeed-1\\source.html",
+      "line": 902,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 13,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 336,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\citylab-1\\source.html",
+      "line": 626,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnet\\source.html",
+      "line": 2258,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnet\\source.html",
+      "line": 2383,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnet\\source.html",
+      "line": 3482,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnet-svg-classes\\expected.html",
+      "line": 82,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "test\\test-pages\\cnet-svg-classes\\source.html",
+      "line": 509,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "test\\test-pages\\cnet-svg-classes\\source.html",
+      "line": 541,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "test\\test-pages\\cnet-svg-classes\\source.html",
+      "line": 330,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnet-svg-classes\\source.html",
+      "line": 638,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 1140,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 2666,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 2670,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 2885,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 2385,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 3050,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 3200,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 3256,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 3722,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 3859,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\cnn\\source.html",
+      "line": 4168,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 115,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\dropbox-blog\\source.html",
+      "line": 775,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ebb-org\\expected.html",
+      "line": 4,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ebb-org\\source.html",
+      "line": 411,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ehow-2\\source.html",
+      "line": 458,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\ehow-2\\source.html",
+      "line": 1150,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\engadget\\source.html",
+      "line": 471,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\engadget\\source.html",
+      "line": 689,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\engadget\\source.html",
+      "line": 3056,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\firefox-nightly-blog\\source.html",
+      "line": 548,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 414,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2343,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2461,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2463,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2463,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2463,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2463,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2463,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\folha\\source.html",
+      "line": 2463,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\gmw\\source.html",
+      "line": 278,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\heise\\source.html",
+      "line": 197,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\heise\\source.html",
+      "line": 513,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\iab-1\\source.html",
+      "line": 74,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\iab-1\\source.html",
+      "line": 140,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\iab-1\\source.html",
+      "line": 1098,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\iab-1\\source.html",
+      "line": 1098,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 49,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 49,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 49,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 224,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 241,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 267,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 305,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "test\\test-pages\\keep-images\\source.html",
+      "line": 325,
+      "pattern": "placeholder"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "Readability.js",
+      "line": 2109,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "Readability.js",
+      "line": 2469,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "Readability.js",
+      "line": 1920,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "Readability.js",
+      "line": 2387,
+      "pattern": "placeholder"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

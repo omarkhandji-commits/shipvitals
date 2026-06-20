@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "project": {
+    "name": "Mock Next",
+    "type": "web_app",
+    "audience": "tester",
+    "destination": "release",
+    "promise": "Users can view a dashboard.",
+    "critical_flows": [
+      "open dashboard"
+    ]
+  },
+  "commands": {
+    "build": "echo build ok",
+    "test": "echo test ok"
+  },
+  "exclude": []
+}

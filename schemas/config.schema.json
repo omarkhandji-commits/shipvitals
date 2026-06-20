@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShipVitals Project Config",
+  "type": "object",
+  "required": [
+    "version",
+    "project"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "name",
+        "type",
+        "audience",
+        "destination",
+        "promise"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "promise": {
+          "type": "string"
+        },
+        "critical_flows": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commands": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "runtime": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visual": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ci": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "independent_review": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "exclude": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "branding": {
+      "type": "object",
+      "properties": {
+        "agency_name": {
+          "type": "string"
+        },
+        "logo_path": {
+          "type": "string"
+        },
+        "accent_color": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

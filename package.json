@@ -1,0 +1,75 @@
+{
+  "name": "shipvitals",
+  "version": "1.0.0-beta.1",
+  "private": false,
+  "description": "Release readiness audit and go/no-go verdict for AI-built apps.",
+  "bin": {
+    "shipvitals": "cli/bin/shipvitals.js"
+  },
+  "scripts": {
+    "audit": "node cli/bin/shipvitals.js audit .",
+    "init": "node cli/bin/shipvitals.js init .",
+    "validate": "python3 skills/shipvitals/scripts/shipvitals_validate.py .",
+    "scorecard": "python3 skills/shipvitals/scripts/shipvitals_scorecard.py .",
+    "schema:check": "python3 skills/shipvitals/scripts/shipvitals_schema_check.py .",
+    "tone:check": "python3 skills/shipvitals/scripts/shipvitals_tone_check.py .",
+    "test": "python -m pytest tests -q && node --test tests/*.test.js",
+    "test:node": "node --test tests/*.test.js",
+    "test:python": "python -m pytest tests -q",
+    "test:package": "node scripts/npm-smoke.mjs",
+    "site:check": "node scripts/validate-site.mjs",
+    "test:compile": "python -m compileall -q skills/shipvitals/scripts shipvitals_cli",
+    "benchmark:golden": "python3 skills/shipvitals/scripts/shipvitals_golden_benchmark.py .",
+    "benchmark:real": "python skills/shipvitals/scripts/shipvitals_real_world_benchmark.py",
+    "competitor:matrix": "python3 skills/shipvitals/scripts/shipvitals_competitor_matrix.py ."
+  },
+  "files": [
+    "cli",
+    "shipvitals_cli",
+    "skills",
+    "schemas",
+    "docs",
+    "benchmarks",
+    "case-studies",
+    "marketing",
+    "scripts",
+    "website",
+    "registry",
+    "README.md",
+    "LICENSE",
+    "action.yml",
+    "!**/__pycache__/**",
+    "!**/*.pyc",
+    "!**/.pytest_cache/**"
+  ],
+  "keywords": [
+    "claude-skill",
+    "release-gate",
+    "quality-gate",
+    "vibe-coding",
+    "production-readiness",
+    "release-readiness",
+    "ship-ready",
+    "github-action",
+    "codex",
+    "claude-code",
+    "cursor",
+    "opencode",
+    "ai-built-apps",
+    "visual-qa",
+    "ai-coding"
+  ],
+  "license": "MIT",
+  "author": "ShipVitals maintainers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omarkhandji-commits/shipvitals.git"
+  },
+  "homepage": "https://omarkhandji-commits.github.io/shipvitals/",
+  "bugs": {
+    "url": "https://github.com/omarkhandji-commits/shipvitals/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

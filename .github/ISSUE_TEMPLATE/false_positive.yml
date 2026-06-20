@@ -1,0 +1,36 @@
+name: False positive
+description: Report a finding or verdict that seems too strict or wrong.
+title: "[False positive]: "
+labels: ["false-positive", "needs-triage"]
+body:
+  - type: textarea
+    id: finding
+    attributes:
+      label: Finding
+      description: Paste the finding that seems wrong.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it is a false positive
+      description: Explain what evidence ShipVitals missed.
+    validations:
+      required: true
+  - type: textarea
+    id: report
+    attributes:
+      label: Report excerpt
+      description: Paste the relevant part of `.shipvitals-evidence/report.json` if possible.
+      render: json
+  - type: input
+    id: project_type
+    attributes:
+      label: Project type
+      placeholder: CLI, Next.js app, SaaS, extension, landing page, agent automation
+  - type: textarea
+    id: retest
+    attributes:
+      label: Retest command
+      placeholder: shipvitals audit .

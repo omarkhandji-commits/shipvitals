@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "project": {
+    "name": "ShipVitals",
+    "type": "codex_skill_cli_release_gate",
+    "audience": "AI-assisted builders, freelancers, and small agencies",
+    "destination": "public release",
+    "promise": "Audit AI-assisted projects as an evidence-first release gate with deterministic checks, scoring caps, real benchmark evidence, and clear READY/ALMOST READY/NOT READY/DEMO ONLY verdicts.",
+    "critical_flows": [
+      "skill instructions load with evidence-first workflow",
+      "CLI audit command writes machine-readable evidence",
+      "packed npm CLI audits a clean Node project without Python",
+      "GitHub Pages site passes metadata and internal-link validation",
+      "test suite passes on Windows",
+      "real-world benchmark runs against cloned open-source repositories",
+      "case studies include real reports instead of placeholders"
+    ]
+  },
+  "commands": {
+    "validate": "npm run validate",
+    "test": "npm run test",
+    "compile": "npm run test:compile",
+    "scorecard": "npm run scorecard",
+    "schema": "npm run schema:check",
+    "tone": "npm run tone:check",
+    "real_benchmark": "npm run benchmark:real",
+    "npm_pack": "npm pack --dry-run"
+    ,"npm_package_smoke": "npm run test:package"
+    ,"site_check": "npm run site:check"
+  },
+  "exclude": [
+    ".git",
+    "node_modules",
+    ".shipvitals-evidence",
+    ".shipvitals-golden-benchmark",
+    "tests/fixtures",
+    "benchmarks/golden-suite",
+    "benchmarks/regression-test",
+    "skills/shipvitals/scripts/shipvitals_golden_benchmark.py",
+    "skills/shipvitals/scripts/shipvitals_falsification_scan.py",
+    "skills/shipvitals/scripts/shipvitals_runner.py"
+    ,"cli/lib/audit.js"
+  ]
+}

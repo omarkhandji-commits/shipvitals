@@ -1,0 +1,322 @@
+[
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\pypa-sampleproject",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "621e4974ca25ce531773def586ba3ed8e736b3fc"
+      ],
+      "exit_code": 0,
+      "seconds": 0.15,
+      "stdout": "",
+      "stderr": "HEAD is now at 621e497 pyproject: prep 4.0.0 (#219)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\tj-commander-js",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "ba6d13ddb4243e5913367734f8c159089ffe7834"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13,
+      "stdout": "",
+      "stderr": "HEAD is now at ba6d13d Fix release dates in changelog (#2523)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\jonschlinkert-is-number",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "98e8ff1da1a89f93d1397a24d7413ed15421c139"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "stdout": "",
+      "stderr": "HEAD is now at 98e8ff1 7.0.0\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\pallets-click",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "8a1b1a33d739be05b7e91251e3c0dde77c5e152f"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13,
+      "stdout": "",
+      "stderr": "HEAD is now at 8a1b1a3 Merge `stable` into `main` after `CHANGES` rST to Markdown conversion (#3563)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\pallets-itsdangerous",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "672971d66a2ef9f85151e53283113f33d642dabd"
+      ],
+      "exit_code": 0,
+      "seconds": 0.11,
+      "stdout": "",
+      "stderr": "HEAD is now at 672971d Merge branch 'stable'\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\pypa-packaging",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "b61e85eafa19e247fc8161a25cdcad5e30fc5b83"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "stdout": "",
+      "stderr": "HEAD is now at b61e85e docs(markers): add docstrings to Marker.__and__/__or__ (#1274)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\nodeca-js-yaml",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "42dea284430b1077f95a326f14db422b19bedecc"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "stdout": "",
+      "stderr": "HEAD is now at 42dea28 Support complex !!pairs keys with realMapTag\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\expressjs-cors",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "5317ebe670db2aaebc1d496eb5d33493deefb3ed"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "stdout": "",
+      "stderr": "HEAD is now at 5317ebe docs: app.del() with app.delete() in README example (#411)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\mozilla-readability",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "08be6b4bdb204dd333c9b7a0cfbc0e730b257252"
+      ],
+      "exit_code": 0,
+      "seconds": 0.11,
+      "stdout": "",
+      "stderr": "HEAD is now at 08be6b4 Bump js-yaml in the npm_and_yarn group across 1 directory\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\sindresorhus-query-string",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "f5daa07cc0c1bc91c00102426888fff2d17cedb6"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13,
+      "stdout": "",
+      "stderr": "HEAD is now at f5daa07 Create security.md\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\date-fns-date-fns",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "4098115cf705e3af7f663d8e5b0686e39a9f478a"
+      ],
+      "exit_code": 0,
+      "seconds": 0.17,
+      "stdout": "",
+      "stderr": "HEAD is now at 4098115 Migrate to Rolldown as the packages builder\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\h5bp-html5-boilerplate",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "31357fdb7c4c4da60a7c910e95440444c2ca7a6d"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "stdout": "",
+      "stderr": "HEAD is now at 31357fd ci: drop Node 20 from matrix, migrate publish to Node 22 (#3414)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\11ty-eleventy-base-blog",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "e37a55c4c4705d7881929de5242ec50448b5eb0b"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "stdout": "",
+      "stderr": "HEAD is now at e37a55c Fixes #249\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\vercel-nextgram",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "e74b34625b9da1d3c8edf3c33dca39986a95f038"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "stdout": "",
+      "stderr": "HEAD is now at e74b346 Upgrade Next.js\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\nextauthjs-next-auth-example",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "39ff2b7a375c240a4741866b3818d80fc8edaa5c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13,
+      "stdout": "",
+      "stderr": "HEAD is now at 39ff2b7 \u00f0\u0178\u201d\u201e Synced local '.' with remote 'apps/examples/nextjs'\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\mdn-webextensions-examples",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "ef4192ffa7f74f8bfd12b2808668e0fcc808a7d7"
+      ],
+      "exit_code": 0,
+      "seconds": 0.13,
+      "stdout": "",
+      "stderr": "HEAD is now at ef4192f ci(deps): bump actions/checkout from 6.0.2 to 6.0.3 (#637)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\mozilla-webextension-polyfill",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "ff0f24b2e3d816c76330ff931f7cc042c622c123"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "stdout": "",
+      "stderr": "HEAD is now at ff0f24b chore: update circleci/browser-tools orb to version 1.5.3 and chromedriver to version 134.0.5 (#722)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\googlechrome-chrome-extensions-samples",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "c4393862e164d74d1b6112ced19f2a2bbe26506c"
+      ],
+      "exit_code": 0,
+      "seconds": 0.12,
+      "stdout": "",
+      "stderr": "HEAD is now at c439386 update contribution guide to recommend creating issues first (#1630)\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\actions-github-script",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "3a2844b7e9c422d3c10d287c895573f7108da1b3"
+      ],
+      "exit_code": 0,
+      "seconds": 0.09,
+      "stdout": "",
+      "stderr": "HEAD is now at 3a2844b Merge pull request #700 from actions/salmanmkc/expose-getoctokit + prepare release for v9\n"
+    }
+  },
+  {
+    "status": "exists",
+    "path": "<benchmark-workspace>\\actions-starter-workflows",
+    "checkout": {
+      "cmd": [
+        "git",
+        "checkout",
+        "--detach",
+        "1035244887e26fbbd4f1017d919fb5995cc521c4"
+      ],
+      "exit_code": 0,
+      "seconds": 0.1,
+      "stdout": "",
+      "stderr": "HEAD is now at 1035244 Merge pull request #3326 from mnkiefer/revert-3270-mnkiefer/agentics-starter-workflows\n"
+    }
+  }
+]

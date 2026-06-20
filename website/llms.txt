@@ -1,0 +1,14 @@
+# ShipVitals
+
+ShipVitals is an open-source release-readiness audit for AI-built apps. It runs declared project checks, records static findings and missing evidence, and returns READY, ALMOST READY, NOT READY, or DEMO ONLY.
+
+## Primary sources
+
+- Product: https://omarkhandji-commits.github.io/shipvitals/
+- Installation: https://omarkhandji-commits.github.io/shipvitals/install/
+- Methodology: https://omarkhandji-commits.github.io/shipvitals/methodology/
+- Benchmarks: https://omarkhandji-commits.github.io/shipvitals/benchmarks/
+- Comparison: https://omarkhandji-commits.github.io/shipvitals/compare/
+- Source: https://github.com/omarkhandji-commits/shipvitals
+
+ShipVitals does not replace tests, browser automation, security scanners, or code review. It combines their evidence with product and release context.

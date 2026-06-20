@@ -1,0 +1,1333 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:23Z",
+  "project": "<benchmark-workspace>\\googlechrome-chrome-extensions-samples",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "browser_extension_collection",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const fs=require('fs'); if(!fs.existsSync('api-samples') || !fs.existsSync('functional-samples') || !fs.existsSync('package.json')) process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const fs=require('fs'); if(!fs.existsSync('api-samples') || !fs.existsSync('functional-samples') || !fs.existsSync('package.json')) process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.18,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [
+    {
+      "file": "_archive\\apps\\samples\\gcm-notifications\\register.js",
+      "line": 41,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\clojure_highlight_rules.js",
+      "line": 169,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\clojure_highlight_rules.js",
+      "line": 172,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\clojure_highlight_rules.js",
+      "line": 175,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\clojure_highlight_rules.js",
+      "line": 198,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 108,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 136,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 141,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 152,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 155,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 158,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 161,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 202,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 206,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\coffee_highlight_rules.js",
+      "line": 209,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 36,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 45,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 48,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 51,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 68,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 71,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 74,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\csharp_highlight_rules.js",
+      "line": 77,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\css_highlight_rules.js",
+      "line": 96,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\css_highlight_rules.js",
+      "line": 99,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\css_highlight_rules.js",
+      "line": 134,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\css_highlight_rules.js",
+      "line": 141,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\css_highlight_rules.js",
+      "line": 180,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\css_highlight_rules.js",
+      "line": 207,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\c_cpp_highlight_rules.js",
+      "line": 98,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\c_cpp_highlight_rules.js",
+      "line": 101,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\c_cpp_highlight_rules.js",
+      "line": 122,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\c_cpp_highlight_rules.js",
+      "line": 125,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\c_cpp_highlight_rules.js",
+      "line": 128,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\c_cpp_highlight_rules.js",
+      "line": 131,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\doc_comment_highlight_rules.js",
+      "line": 48,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\golang_highlight_rules.js",
+      "line": 48,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\golang_highlight_rules.js",
+      "line": 51,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\golang_highlight_rules.js",
+      "line": 72,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\golang_highlight_rules.js",
+      "line": 75,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\golang_highlight_rules.js",
+      "line": 78,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\golang_highlight_rules.js",
+      "line": 81,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\groovy_highlight_rules.js",
+      "line": 74,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\groovy_highlight_rules.js",
+      "line": 83,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\groovy_highlight_rules.js",
+      "line": 86,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\groovy_highlight_rules.js",
+      "line": 89,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\groovy_highlight_rules.js",
+      "line": 110,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 36,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 45,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 48,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 51,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 68,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 71,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 74,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\haxe_highlight_rules.js",
+      "line": 77,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\html_highlight_rules.js",
+      "line": 84,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 134,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 137,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 227,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 266,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 270,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 274,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 278,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 281,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 305,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 322,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 326,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 331,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 335,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 347,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 350,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 355,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 366,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 369,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 373,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 408,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\javascript_highlight_rules.js",
+      "line": 428,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\java_highlight_rules.js",
+      "line": 75,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\java_highlight_rules.js",
+      "line": 84,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    },
+    {
+      "file": "_archive\\apps\\samples\\text-editor\\lib\\ace\\mode\\java_highlight_rules.js",
+      "line": 87,
+      "pattern": "(?i)\\b(api[_-]?key|secret|token|password)\\b\\s*[:=]\\s*[\"\\'][A-Za-z0-9_./+=-]{12,}[\"\\']"
+    }
+  ],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\options.js",
+      "line": 859,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\js\\cr.js",
+      "line": 352,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\js\\cr\\ui\\overlay.js",
+      "line": 24,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\sandbox\\sandbox\\handlebars-1.0.0.beta.6.js",
+      "line": 1253,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\sandbox\\sandbox\\handlebars-1.0.0.beta.6.js",
+      "line": 2221,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\cookbook.permissions-addhostaccessrequest\\background.js",
+      "line": 46,
+      "pattern": "\\bFIXME\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 22,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 79,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 83,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 84,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 85,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 87,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 87,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\action\\third-party\\awsm\\awsm.css",
+      "line": 7,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\chrome_shared.css",
+      "line": 93,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\chrome_shared.css",
+      "line": 97,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\chrome_shared.css",
+      "line": 98,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\overlay.css",
+      "line": 24,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\overlay.css",
+      "line": 102,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\uber_shared.css",
+      "line": 16,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\css\\widgets.css",
+      "line": 86,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\history\\historyOverride\\history.html",
+      "line": 18,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\storage\\stylizr\\options.html",
+      "line": 42,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "api-samples\\userScripts\\options.html",
+      "line": 50,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\ai.gemini-in-the-cloud\\sidepanel\\index.html",
+      "line": 10,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\ai.gemini-on-device\\sidepanel\\index.html",
+      "line": 9,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\ai.gemini-on-device-audio-scribe\\demo-chat-app\\index.html",
+      "line": 43,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 810,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 824,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 2509,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 891,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 1466,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 3660,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 3799,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 4772,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 6371,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 7136,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 8666,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 10349,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-1.12.4.js",
+      "line": 10355,
+      "pattern": "catch\\s*\\([^)]*\\)\\s*\\{\\s*\\}"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 155,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 1773,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 3464,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 3685,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 3797,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 3907,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 4019,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 4399,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 4430,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 4800,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5419,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6124,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 7964,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 8769,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 9728,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 12502,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 12571,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 14365,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 14402,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 14612,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 14694,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 15612,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 16109,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 18363,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 1930,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 2805,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 2806,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 2807,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 2940,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 2941,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5233,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5240,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5443,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5444,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5602,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5605,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5608,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5617,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5618,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5667,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5725,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5727,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5729,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5730,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5730,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5912,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 5923,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6056,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6061,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6061,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6062,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6063,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6069,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6074,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6079,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6092,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6094,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6096,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6118,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6119,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6119,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6122,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6124,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6125,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6125,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6129,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6242,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6243,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6243,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6570,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6571,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6597,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6606,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6692,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6694,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6694,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6727,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 6727,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 17305,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 17306,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 17307,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\sample.bookmarks\\third-party\\jquery-ui-1.12.1.js",
+      "line": 17327,
+      "pattern": "placeholder"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\options.js",
+      "line": 859,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\js\\cr.js",
+      "line": 352,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\fontSettings\\fontSettings Advanced\\js\\cr\\ui\\overlay.js",
+      "line": 24,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\sandbox\\sandbox\\handlebars-1.0.0.beta.6.js",
+      "line": 1253,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "api-samples\\sandbox\\sandbox\\handlebars-1.0.0.beta.6.js",
+      "line": 2221,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "functional-samples\\cookbook.permissions-addhostaccessrequest\\background.js",
+      "line": 46,
+      "pattern": "\\bFIXME\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 22,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 79,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 83,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 84,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 85,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 87,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "functional-samples\\sample.optional_permissions\\newtab.js",
+      "line": 87,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 74,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 74,
+      "reason": "UI project missing visual proof."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "visual proof",
+    "independent review"
+  ]
+}

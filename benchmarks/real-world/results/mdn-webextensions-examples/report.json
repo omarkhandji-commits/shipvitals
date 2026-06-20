@@ -1,0 +1,217 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:15Z",
+  "project": "<benchmark-workspace>\\mdn-webextensions-examples",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "browser_extension_collection",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const fs=require('fs'); const examples=JSON.parse(fs.readFileSync('examples.json','utf8')); if(!Array.isArray(examples) || examples.length < 10) process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const fs=require('fs'); const examples=JSON.parse(fs.readFileSync('examples.json','utf8')); if(!Array.isArray(examples) || examples.length < 10) process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.27,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "store-collected-images\\webextension-plain\\deps\\idb-file-storage.js",
+      "line": 541,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "store-collected-images\\webextension-with-webpack\\src\\navigate-collection.js",
+      "line": 47,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "store-collected-images\\webextension-with-webpack\\src\\popup.js",
+      "line": 66,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "userScripts-mv3\\userscript_api.js",
+      "line": 46,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "cookie-bg-picker\\popup\\bgpicker.html",
+      "line": 14,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "find-across-tabs\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "find-across-tabs\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "find-across-tabs\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "find-across-tabs\\find.html",
+      "line": 15,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\de\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\en\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\fr_FR\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\ja\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\nb_NO\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\nl\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "notify-link-clicks-i18n\\_locales\\pt_BR\\messages.json",
+      "line": 20,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "permissions\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "permissions\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "permissions\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "store-collected-images\\webextension-plain\\navigate-collection.html",
+      "line": 10,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "store-collected-images\\webextension-plain\\popup.html",
+      "line": 11,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "store-collected-images\\webextension-plain\\deps\\idb-file-storage.js.map",
+      "line": 1,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "top-sites\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "top-sites\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "top-sites\\bootstrap.min.css",
+      "line": 5,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "userScripts-mv3\\userscript_manager_logic.mjs",
+      "line": 202,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "store-collected-images\\webextension-plain\\deps\\idb-file-storage.js",
+      "line": 541,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "store-collected-images\\webextension-with-webpack\\src\\navigate-collection.js",
+      "line": 47,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "store-collected-images\\webextension-with-webpack\\src\\popup.js",
+      "line": 66,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "userScripts-mv3\\userscript_api.js",
+      "line": 46,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 74,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 74,
+      "reason": "UI project missing visual proof."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "visual proof",
+    "independent review"
+  ]
+}

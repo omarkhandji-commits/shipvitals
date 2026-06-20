@@ -1,0 +1,6 @@
+- id: shipvitals-quick-audit
+  name: ShipVitals quick audit
+  entry: python3 skills/shipvitals/scripts/shipvitals_runner.py . --ci --mode quick
+  language: system
+  pass_filenames: false
+  always_run: true

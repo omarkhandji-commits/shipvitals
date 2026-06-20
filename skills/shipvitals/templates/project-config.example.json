@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "project": {
+    "name": "Example Project",
+    "type": "web_app",
+    "audience": "small business owner",
+    "destination": "client delivery",
+    "promise": "Users can submit a quote request and receive confirmation.",
+    "critical_flows": [
+      "open landing page",
+      "submit quote form",
+      "receive confirmation"
+    ]
+  },
+  "commands": {
+    "build": "npm run build",
+    "test": "npm test",
+    "lint": "npm run lint"
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ],
+  "branding": {
+    "agency_name": "Your Agency",
+    "accent_color": "#111111"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:27:57Z",
+  "project": "<benchmark-workspace>\\jonschlinkert-is-number",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "node_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const isNumber = require('./'); if (!isNumber('42') || isNumber('x')) process.exit(1);\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const isNumber = require('./'); if (!isNumber('42') || isNumber('x')) process.exit(1);\"",
+      "exit_code": 0,
+      "seconds": 0.15,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": ".gitignore",
+      "line": 29,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

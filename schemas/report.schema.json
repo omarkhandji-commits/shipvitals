@@ -1,0 +1,48 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "ShipVitals Final Report",
+ "type": "object",
+ "required": [
+ "verdict",
+ "score",
+ "blockers",
+ "required_fixes",
+ "evidence_summary"
+ ],
+ "properties": {
+ "verdict": {
+ "enum": [
+ "READY",
+ "ALMOST READY",
+ "NOT READY",
+ "DEMO ONLY"
+ ]
+ },
+ "score": {
+ "type": "number",
+ "minimum": 0,
+ "maximum": 100
+ },
+ "blockers": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ },
+ "required_fixes": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ },
+ "evidence_summary": {
+ "type": "string"
+ },
+ "next_retest": {
+ "type": "array",
+ "items": {
+ "type": "string"
+ }
+ }
+ }
+}

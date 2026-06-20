@@ -1,0 +1,68 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:27:56Z",
+  "project": "<benchmark-workspace>\\pypa-sampleproject",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "python_package",
+  "product_promise_present": true,
+  "commands_detected": [
+    "python -m py_compile src/sample/__init__.py src/sample/simple.py",
+    "python -c \"import sys; sys.path.insert(0, 'src'); from sample.simple import add_one; assert add_one(5) == 6\""
+  ],
+  "command_results": [
+    {
+      "cmd": "python -m py_compile src/sample/__init__.py src/sample/simple.py",
+      "exit_code": 0,
+      "seconds": 0.21,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); from sample.simple import add_one; assert add_one(5) == 6\"",
+      "exit_code": 0,
+      "seconds": 0.16,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [],
+  "blocking_fake_completion_candidates": [],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

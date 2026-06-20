@@ -1,0 +1,72 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:27:59Z",
+  "project": "<benchmark-workspace>\\pallets-itsdangerous",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "python_api_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "python -c \"import sys; sys.path.insert(0, 'src'); import itsdangerous; assert itsdangerous.URLSafeSerializer\""
+  ],
+  "command_results": [
+    {
+      "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); import itsdangerous; assert itsdangerous.URLSafeSerializer\"",
+      "exit_code": 0,
+      "seconds": 0.23,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "src\\itsdangerous\\timed.py",
+      "line": 182,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "src\\itsdangerous\\timed.py",
+      "line": 182,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

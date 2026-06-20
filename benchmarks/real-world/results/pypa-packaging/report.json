@@ -1,0 +1,153 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:00Z",
+  "project": "<benchmark-workspace>\\pypa-packaging",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "python_package_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "python -c \"import sys; sys.path.insert(0, 'src'); import packaging.version; assert str(packaging.version.Version('1.2.3')) == '1.2.3'\""
+  ],
+  "command_results": [
+    {
+      "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); import packaging.version; assert str(packaging.version.Version('1.2.3')) == '1.2.3'\"",
+      "exit_code": 0,
+      "seconds": 0.17,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [
+    {
+      "file": "src\\packaging\\licenses\\_spdx.py",
+      "line": 722,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    },
+    {
+      "file": "src\\packaging\\licenses\\_spdx.py",
+      "line": 722,
+      "pattern": "sk-[A-Za-z0-9_-]{20,}"
+    }
+  ],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "src\\packaging\\metadata.py",
+      "line": 208,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\metadata.py",
+      "line": 884,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\requirements.py",
+      "line": 57,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\requirements.py",
+      "line": 60,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\tags.py",
+      "line": 576,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\version.py",
+      "line": 422,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\licenses\\__init__.py",
+      "line": 124,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "pyproject.toml",
+      "line": 153,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "tests\\test_metadata.py",
+      "line": 160,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "src\\packaging\\metadata.py",
+      "line": 208,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\metadata.py",
+      "line": 884,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\requirements.py",
+      "line": 57,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\requirements.py",
+      "line": 60,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\tags.py",
+      "line": 576,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\version.py",
+      "line": 422,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "src\\packaging\\licenses\\__init__.py",
+      "line": 124,
+      "pattern": "placeholder"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

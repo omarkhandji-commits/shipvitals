@@ -1,0 +1,65 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:14Z",
+  "project": "<benchmark-workspace>\\vercel-nextgram",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "nextjs_app",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !pkg.scripts.build || !fs.existsSync('app')) process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !pkg.scripts.build || !fs.existsSync('app')) process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.12,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [],
+  "blocking_fake_completion_candidates": [],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 74,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 74,
+      "reason": "UI project missing visual proof."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "visual proof",
+    "independent review"
+  ]
+}

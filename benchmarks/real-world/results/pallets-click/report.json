@@ -1,0 +1,177 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:27:58Z",
+  "project": "<benchmark-workspace>\\pallets-click",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "python_cli_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "python -c \"import sys; sys.path.insert(0, 'src'); import click; assert click.Command\""
+  ],
+  "command_results": [
+    {
+      "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); import click; assert click.Command\"",
+      "exit_code": 0,
+      "seconds": 0.27,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 42,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 72,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 89,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 90,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 143,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 145,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 154,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 157,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 159,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "CHANGES.md",
+      "line": 655,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "docs\\documentation.md",
+      "line": 291,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "docs\\documentation.md",
+      "line": 293,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "docs\\documentation.md",
+      "line": 318,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "docs\\shell-completion.md",
+      "line": 228,
+      "pattern": "placeholder"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 42,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 72,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 89,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 90,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 143,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 145,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 154,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 157,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "src\\click\\_textwrap.py",
+      "line": 159,
+      "pattern": "placeholder"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

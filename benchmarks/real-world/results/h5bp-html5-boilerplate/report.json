@@ -1,0 +1,107 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:13Z",
+  "project": "<benchmark-workspace>\\h5bp-html5-boilerplate",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "landing_static_site_starter",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const fs=require('fs'); if(!fs.existsSync('src/index.html') || !fs.existsSync('package.json')) process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const fs=require('fs'); if(!fs.existsSync('src/index.html') || !fs.existsSync('package.json')) process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.13,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "src\\.gitattributes",
+      "line": 75,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "line": 273,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "line": 363,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "README.md",
+      "line": 86,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "README.md",
+      "line": 89,
+      "pattern": "placeholder"
+    },
+    {
+      "file": ".github\\ISSUE_TEMPLATE\\bug_report.yml",
+      "line": 59,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "docs\\html.md",
+      "line": 10,
+      "pattern": "placeholder"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "src\\.gitattributes",
+      "line": 75,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 74,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 74,
+      "reason": "UI project missing visual proof."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "visual proof",
+    "independent review"
+  ]
+}

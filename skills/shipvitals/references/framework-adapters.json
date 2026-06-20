@@ -1,0 +1,44 @@
+{
+  "nextjs": {
+    "detect": [
+      "next.config.js",
+      "next.config.mjs",
+      "app/",
+      "pages/"
+    ],
+    "commands": [
+      "npm run build",
+      "npm run lint"
+    ],
+    "load": "references/adapters/nextjs.md"
+  },
+  "shopify": {
+    "detect": [
+      "shopify.app.toml",
+      "extensions/"
+    ],
+    "commands": [
+      "npm run build"
+    ],
+    "load": "references/adapters/shopify.md"
+  },
+  "fastapi": {
+    "detect": [
+      "main.py",
+      "pyproject.toml"
+    ],
+    "commands": [
+      "python -m pytest"
+    ],
+    "load": "references/adapters/fastapi.md"
+  },
+  "django": {
+    "detect": [
+      "manage.py"
+    ],
+    "commands": [
+      "python manage.py check --deploy"
+    ],
+    "load": "references/adapters/django.md"
+  }
+}

@@ -1,0 +1,376 @@
+﻿{
+    "version":  1,
+    "projects":  [
+                     {
+                         "slug":  "pypa-sampleproject",
+                         "name":  "pypa/sampleproject",
+                         "repo":  "https://github.com/pypa/sampleproject.git",
+                         "category":  "CLI/API/library",
+                         "type":  "python_package",
+                         "audience":  "Python package authors",
+                         "destination":  "public open source package",
+                         "promise":  "Provide a minimal example Python package with importable sample code and packaging metadata.",
+                         "critical_flows":  [
+                                                "sample package imports from src",
+                                                "add_one returns the expected value",
+                                                "source files compile"
+                                            ],
+                         "commands":  {
+                                          "compile":  "python -m py_compile src/sample/__init__.py src/sample/simple.py",
+                                          "smoke":  "python -c \"import sys; sys.path.insert(0, \u0027src\u0027); from sample.simple import add_one; assert add_one(5) == 6\""
+                                      },
+                         "revision":  "621e4974ca25ce531773def586ba3ed8e736b3fc"
+                     },
+                     {
+                         "slug":  "tj-commander-js",
+                         "name":  "tj/commander.js",
+                         "repo":  "https://github.com/tj/commander.js.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_cli_library",
+                         "audience":  "Node.js CLI maintainers",
+                         "destination":  "public open source package",
+                         "promise":  "Expose Commander classes and helpers for building Node.js command-line programs.",
+                         "critical_flows":  [
+                                                "package entrypoint imports",
+                                                "Command export is available",
+                                                "program export is available"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "node -e \"import(\u0027./index.js\u0027).then(m =\u003e { if (!m.Command || !m.program) process.exit(1); })\""
+                                      },
+                         "revision":  "ba6d13ddb4243e5913367734f8c159089ffe7834"
+                     },
+                     {
+                         "slug":  "jonschlinkert-is-number",
+                         "name":  "jonschlinkert/is-number",
+                         "repo":  "https://github.com/jonschlinkert/is-number.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_library",
+                         "audience":  "JavaScript package users",
+                         "destination":  "public open source package",
+                         "promise":  "Return true for finite number-like values and false for non-number values.",
+                         "critical_flows":  [
+                                                "package entrypoint requires",
+                                                "numeric string returns true",
+                                                "non-number string returns false"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "node -e \"const isNumber = require(\u0027./\u0027); if (!isNumber(\u002742\u0027) || isNumber(\u0027x\u0027)) process.exit(1);\""
+                                      },
+                         "revision":  "98e8ff1da1a89f93d1397a24d7413ed15421c139"
+                     },
+                     {
+                         "slug":  "pallets-click",
+                         "name":  "pallets/click",
+                         "repo":  "https://github.com/pallets/click.git",
+                         "category":  "CLI/API/library",
+                         "type":  "python_cli_library",
+                         "audience":  "Python CLI maintainers",
+                         "destination":  "public open source package",
+                         "promise":  "Expose decorators and command abstractions for building Python command-line interfaces.",
+                         "critical_flows":  [
+                                                "package imports from src",
+                                                "Command class is available"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "python -c \"import sys; sys.path.insert(0, \u0027src\u0027); import click; assert click.Command\""
+                                      },
+                         "revision":  "8a1b1a33d739be05b7e91251e3c0dde77c5e152f"
+                     },
+                     {
+                         "slug":  "pallets-itsdangerous",
+                         "name":  "pallets/itsdangerous",
+                         "repo":  "https://github.com/pallets/itsdangerous.git",
+                         "category":  "CLI/API/library",
+                         "type":  "python_api_library",
+                         "audience":  "Python web application maintainers",
+                         "destination":  "public open source package",
+                         "promise":  "Provide signed serialization helpers for Python applications.",
+                         "critical_flows":  [
+                                                "package imports from src",
+                                                "URLSafeSerializer export is available"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "python -c \"import sys; sys.path.insert(0, \u0027src\u0027); import itsdangerous; assert itsdangerous.URLSafeSerializer\""
+                                      },
+                         "revision":  "672971d66a2ef9f85151e53283113f33d642dabd"
+                     },
+                     {
+                         "slug":  "pypa-packaging",
+                         "name":  "pypa/packaging",
+                         "repo":  "https://github.com/pypa/packaging.git",
+                         "category":  "CLI/API/library",
+                         "type":  "python_package_library",
+                         "audience":  "Python packaging maintainers",
+                         "destination":  "public open source package",
+                         "promise":  "Expose Python packaging utilities including version parsing.",
+                         "critical_flows":  [
+                                                "package imports from src",
+                                                "Version parser returns canonical string"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "python -c \"import sys; sys.path.insert(0, \u0027src\u0027); import packaging.version; assert str(packaging.version.Version(\u00271.2.3\u0027)) == \u00271.2.3\u0027\""
+                                      },
+                         "revision":  "b61e85eafa19e247fc8161a25cdcad5e30fc5b83"
+                     },
+                     {
+                         "slug":  "nodeca-js-yaml",
+                         "name":  "nodeca/js-yaml",
+                         "repo":  "https://github.com/nodeca/js-yaml.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_library",
+                         "audience":  "JavaScript package users",
+                         "destination":  "public open source package",
+                         "promise":  "Parse YAML strings into JavaScript values.",
+                         "critical_flows":  [
+                                                "package entrypoint requires",
+                                                "YAML string parses into object"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "node --check bin/js-yaml.mjs"
+                                      },
+                         "revision":  "42dea284430b1077f95a326f14db422b19bedecc"
+                     },
+                     {
+                         "slug":  "expressjs-cors",
+                         "name":  "expressjs/cors",
+                         "repo":  "https://github.com/expressjs/cors.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_middleware_library",
+                         "audience":  "Express middleware users",
+                         "destination":  "public open source package",
+                         "promise":  "Provide CORS middleware for Express applications.",
+                         "critical_flows":  [
+                                                "primary source file parses",
+                                                "package metadata is present"
+                                            ],
+                         "commands":  {
+                                          "syntax":  "node --check lib/index.js"
+                                      },
+                         "revision":  "5317ebe670db2aaebc1d496eb5d33493deefb3ed"
+                     },
+                     {
+                         "slug":  "mozilla-readability",
+                         "name":  "mozilla/readability",
+                         "repo":  "https://github.com/mozilla/readability.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_library",
+                         "audience":  "JavaScript content extraction users",
+                         "destination":  "public open source package",
+                         "promise":  "Expose a Readability parser for extracting article content.",
+                         "critical_flows":  [
+                                                "Readability module requires",
+                                                "Readability export is callable"
+                                            ],
+                         "commands":  {
+                                          "smoke":  "node -e \"const Readability=require(\u0027./Readability.js\u0027); if(typeof Readability !== \u0027function\u0027) process.exit(1)\""
+                                      },
+                         "revision":  "08be6b4bdb204dd333c9b7a0cfbc0e730b257252"
+                     },
+                     {
+                         "slug":  "sindresorhus-query-string",
+                         "name":  "sindresorhus/query-string",
+                         "repo":  "https://github.com/sindresorhus/query-string.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_library",
+                         "audience":  "JavaScript package users",
+                         "destination":  "public open source package",
+                         "promise":  "Parse and stringify URL query strings.",
+                         "critical_flows":  [
+                                                "ES module entrypoint parses",
+                                                "base module parses"
+                                            ],
+                         "commands":  {
+                                          "entrypoint_syntax":  "node --check index.js",
+                                          "base_syntax":  "node --check base.js"
+                                      },
+                         "revision":  "f5daa07cc0c1bc91c00102426888fff2d17cedb6"
+                     },
+                     {
+                         "slug":  "date-fns-date-fns",
+                         "name":  "date-fns/date-fns",
+                         "repo":  "https://github.com/date-fns/date-fns.git",
+                         "category":  "CLI/API/library",
+                         "type":  "node_library_monorepo",
+                         "audience":  "JavaScript date utility users",
+                         "destination":  "public open source package",
+                         "promise":  "Provide date utility packages from a maintained monorepo.",
+                         "critical_flows":  [
+                                                "package metadata is present",
+                                                "core package directory exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); const pkg=JSON.parse(fs.readFileSync(\u0027package.json\u0027,\u0027utf8\u0027)); if(!pkg.name || !fs.existsSync(\u0027pkgs/core\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "4098115cf705e3af7f663d8e5b0686e39a9f478a"
+                     },
+                     {
+                         "slug":  "h5bp-html5-boilerplate",
+                         "name":  "h5bp/html5-boilerplate",
+                         "repo":  "https://github.com/h5bp/html5-boilerplate.git",
+                         "category":  "Landing/content site",
+                         "type":  "landing_static_site_starter",
+                         "audience":  "Static site builders",
+                         "destination":  "public open source starter",
+                         "promise":  "Provide a front-end starter with an HTML entrypoint and package metadata.",
+                         "critical_flows":  [
+                                                "HTML entrypoint exists",
+                                                "package metadata exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); if(!fs.existsSync(\u0027src/index.html\u0027) || !fs.existsSync(\u0027package.json\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "31357fdb7c4c4da60a7c910e95440444c2ca7a6d"
+                     },
+                     {
+                         "slug":  "11ty-eleventy-base-blog",
+                         "name":  "11ty/eleventy-base-blog",
+                         "repo":  "https://github.com/11ty/eleventy-base-blog.git",
+                         "category":  "Landing/content site",
+                         "type":  "landing_content_site",
+                         "audience":  "Eleventy site builders",
+                         "destination":  "public open source starter",
+                         "promise":  "Provide an Eleventy blog starter with content, config, and package scripts.",
+                         "critical_flows":  [
+                                                "package metadata has scripts",
+                                                "Eleventy config exists",
+                                                "content directory exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); const pkg=JSON.parse(fs.readFileSync(\u0027package.json\u0027,\u0027utf8\u0027)); if(!pkg.scripts || !fs.existsSync(\u0027eleventy.config.js\u0027) || !fs.existsSync(\u0027content\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "e37a55c4c4705d7881929de5242ec50448b5eb0b"
+                     },
+                     {
+                         "slug":  "vercel-nextgram",
+                         "name":  "vercel/nextgram",
+                         "repo":  "https://github.com/vercel/nextgram.git",
+                         "category":  "SaaS/Next.js/web app",
+                         "type":  "nextjs_app",
+                         "audience":  "Next.js app builders",
+                         "destination":  "public example application",
+                         "promise":  "Provide a Next.js example app with build script and app directory.",
+                         "critical_flows":  [
+                                                "package metadata has build script",
+                                                "app directory exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); const pkg=JSON.parse(fs.readFileSync(\u0027package.json\u0027,\u0027utf8\u0027)); if(!pkg.scripts || !pkg.scripts.build || !fs.existsSync(\u0027app\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "e74b34625b9da1d3c8edf3c33dca39986a95f038"
+                     },
+                     {
+                         "slug":  "nextauthjs-next-auth-example",
+                         "name":  "nextauthjs/next-auth-example",
+                         "repo":  "https://github.com/nextauthjs/next-auth-example.git",
+                         "category":  "SaaS/Next.js/web app",
+                         "type":  "nextjs_auth_app",
+                         "audience":  "Next.js authentication builders",
+                         "destination":  "public example application",
+                         "promise":  "Provide a Next.js authentication example with app routes and auth configuration.",
+                         "critical_flows":  [
+                                                "package metadata has build script",
+                                                "app directory exists",
+                                                "auth configuration exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); const pkg=JSON.parse(fs.readFileSync(\u0027package.json\u0027,\u0027utf8\u0027)); if(!pkg.scripts || !pkg.scripts.build || !fs.existsSync(\u0027app\u0027) || !fs.existsSync(\u0027auth.ts\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "39ff2b7a375c240a4741866b3818d80fc8edaa5c"
+                     },
+                     {
+                         "slug":  "mdn-webextensions-examples",
+                         "name":  "mdn/webextensions-examples",
+                         "repo":  "https://github.com/mdn/webextensions-examples.git",
+                         "category":  "Marketplace/extension",
+                         "type":  "browser_extension_collection",
+                         "audience":  "Browser extension builders",
+                         "destination":  "public example collection",
+                         "promise":  "Provide a collection of browser extension examples with example metadata.",
+                         "critical_flows":  [
+                                                "examples metadata parses",
+                                                "multiple examples are listed"
+                                            ],
+                         "commands":  {
+                                          "metadata":  "node -e \"const fs=require(\u0027fs\u0027); const examples=JSON.parse(fs.readFileSync(\u0027examples.json\u0027,\u0027utf8\u0027)); if(!Array.isArray(examples) || examples.length \u003c 10) process.exit(1)\""
+                                      },
+                         "revision":  "ef4192ffa7f74f8bfd12b2808668e0fcc808a7d7"
+                     },
+                     {
+                         "slug":  "mozilla-webextension-polyfill",
+                         "name":  "mozilla/webextension-polyfill",
+                         "repo":  "https://github.com/mozilla/webextension-polyfill.git",
+                         "category":  "Marketplace/extension",
+                         "type":  "browser_extension_library",
+                         "audience":  "Browser extension builders",
+                         "destination":  "public open source package",
+                         "promise":  "Provide a browser extension API polyfill with source and metadata.",
+                         "critical_flows":  [
+                                                "package metadata exists",
+                                                "polyfill source exists",
+                                                "API metadata exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); const pkg=JSON.parse(fs.readFileSync(\u0027package.json\u0027,\u0027utf8\u0027)); if(!pkg.name || !fs.existsSync(\u0027src/browser-polyfill.js\u0027) || !fs.existsSync(\u0027api-metadata.json\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "ff0f24b2e3d816c76330ff931f7cc042c622c123"
+                     },
+                     {
+                         "slug":  "googlechrome-chrome-extensions-samples",
+                         "name":  "GoogleChrome/chrome-extensions-samples",
+                         "repo":  "https://github.com/GoogleChrome/chrome-extensions-samples.git",
+                         "category":  "Marketplace/extension",
+                         "type":  "browser_extension_collection",
+                         "audience":  "Chrome extension builders",
+                         "destination":  "public example collection",
+                         "promise":  "Provide Chrome extension samples across API and functional examples.",
+                         "critical_flows":  [
+                                                "API samples directory exists",
+                                                "functional samples directory exists",
+                                                "package metadata exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); if(!fs.existsSync(\u0027api-samples\u0027) || !fs.existsSync(\u0027functional-samples\u0027) || !fs.existsSync(\u0027package.json\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "c4393862e164d74d1b6112ced19f2a2bbe26506c"
+                     },
+                     {
+                         "slug":  "actions-github-script",
+                         "name":  "actions/github-script",
+                         "repo":  "https://github.com/actions/github-script.git",
+                         "category":  "Agent/automation",
+                         "type":  "github_action_automation",
+                         "audience":  "GitHub Actions users",
+                         "destination":  "public GitHub Action",
+                         "promise":  "Provide a GitHub Action for scripting against the GitHub API.",
+                         "critical_flows":  [
+                                                "action metadata exists",
+                                                "distribution directory exists",
+                                                "package metadata exists"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); const pkg=JSON.parse(fs.readFileSync(\u0027package.json\u0027,\u0027utf8\u0027)); if(!pkg.name || !fs.existsSync(\u0027action.yml\u0027) || !fs.existsSync(\u0027dist\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "3a2844b7e9c422d3c10d287c895573f7108da1b3"
+                     },
+                     {
+                         "slug":  "actions-starter-workflows",
+                         "name":  "actions/starter-workflows",
+                         "repo":  "https://github.com/actions/starter-workflows.git",
+                         "category":  "Agent/automation",
+                         "type":  "ci_automation_templates",
+                         "audience":  "GitHub Actions users",
+                         "destination":  "public workflow template collection",
+                         "promise":  "Provide starter workflow templates for CI, automation, and pages.",
+                         "critical_flows":  [
+                                                "CI templates exist",
+                                                "automation templates exist",
+                                                "pages templates exist"
+                                            ],
+                         "commands":  {
+                                          "structure":  "node -e \"const fs=require(\u0027fs\u0027); if(!fs.existsSync(\u0027ci\u0027) || !fs.existsSync(\u0027automation\u0027) || !fs.existsSync(\u0027pages\u0027)) process.exit(1)\""
+                                      },
+                         "revision":  "1035244887e26fbbd4f1017d919fb5995cc521c4"
+                     }
+                 ]
+}

@@ -1,0 +1,27 @@
+{
+  "rules": [
+    {
+      "if": "no_product_promise",
+      "then": "NOT READY",
+      "reason": "Cannot judge readiness without the promised outcome."
+    },
+    {
+      "if": "p0_count > 0",
+      "then": "NOT READY",
+      "reason": "A P0 blocks release."
+    },
+    {
+      "if": "demo_only_signal == true",
+      "then": "DEMO ONLY",
+      "reason": "Project is not ready for real users."
+    },
+    {
+      "if": "p1_count <= 3 and evidence_level >= L3_COMMANDS_EXECUTED",
+      "then": "ALMOST READY"
+    },
+    {
+      "if": "p0_count == 0 and p1_count == 0 and evidence_level >= L4_RUNTIME_VISUAL",
+      "then": "READY"
+    }
+  ]
+}

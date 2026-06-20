@@ -1,0 +1,347 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:12Z",
+  "project": "<benchmark-workspace>\\date-fns-date-fns",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "node_library_monorepo",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.name || !fs.existsSync('pkgs/core')) process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.name || !fs.existsSync('pkgs/core')) process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.2,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "pkgs\\core\\src\\closestIndexTo\\index.ts",
+      "line": 32,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\endOfDecade\\index.ts",
+      "line": 39,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\getDecade\\index.ts",
+      "line": 31,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\intlFormat\\index.ts",
+      "line": 8,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\isDate\\test.ts",
+      "line": 47,
+      "pattern": "\\.skip\\("
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\kn\\_lib\\formatDistance\\index.ts",
+      "line": 124,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\kn\\_lib\\formatDistance\\index.ts",
+      "line": 127,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\lv\\_lib\\formatDistance\\index.ts",
+      "line": 122,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildFormatLongFn\\index.ts",
+      "line": 16,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildMatchFn\\index.ts",
+      "line": 93,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildMatchFn\\index.ts",
+      "line": 101,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildMatchPatternFn\\index.ts",
+      "line": 22,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\setDefaultOptions\\index.ts",
+      "line": 58,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\setDefaultOptions\\index.ts",
+      "line": 67,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\setDefaultOptions\\index.ts",
+      "line": 70,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\startOfDecade\\index.ts",
+      "line": 39,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\toDate\\index.ts",
+      "line": 49,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 59,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 75,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 109,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 129,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": ".github\\workflows\\coverage.yaml",
+      "line": 17,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\mise.toml",
+      "line": 6,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\scripts\\release\\release.sh",
+      "line": 56,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\_lib\\test\\tzOffsetTransitions.ts",
+      "line": 118,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\dev\\config\\tsconfig.json",
+      "line": 7,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\dev\\config\\tsconfig.json",
+      "line": 31,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\dev\\config\\tsconfig.json",
+      "line": 36,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\scripts\\buildMds.ts",
+      "line": 26,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\scripts\\buildMds.ts",
+      "line": 120,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\src\\bin.ts",
+      "line": 5,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\src\\types.ts",
+      "line": 80,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\src\\types.ts",
+      "line": 93,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\src\\utils.ts",
+      "line": 19,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\docs\\src\\utils.ts",
+      "line": 219,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\tz\\scripts\\test\\engines.sh",
+      "line": 13,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "pkgs\\core\\src\\closestIndexTo\\index.ts",
+      "line": 32,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\endOfDecade\\index.ts",
+      "line": 39,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\getDecade\\index.ts",
+      "line": 31,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\intlFormat\\index.ts",
+      "line": 8,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\isDate\\test.ts",
+      "line": 47,
+      "pattern": "\\.skip\\("
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\kn\\_lib\\formatDistance\\index.ts",
+      "line": 124,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\kn\\_lib\\formatDistance\\index.ts",
+      "line": 127,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\lv\\_lib\\formatDistance\\index.ts",
+      "line": 122,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildFormatLongFn\\index.ts",
+      "line": 16,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildMatchFn\\index.ts",
+      "line": 93,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildMatchFn\\index.ts",
+      "line": 101,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\locale\\_lib\\buildMatchPatternFn\\index.ts",
+      "line": 22,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\setDefaultOptions\\index.ts",
+      "line": 58,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\setDefaultOptions\\index.ts",
+      "line": 67,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\setDefaultOptions\\index.ts",
+      "line": 70,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\startOfDecade\\index.ts",
+      "line": 39,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\core\\src\\toDate\\index.ts",
+      "line": 49,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 59,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 75,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 109,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "pkgs\\utc\\src\\date\\tests.ts",
+      "line": 129,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

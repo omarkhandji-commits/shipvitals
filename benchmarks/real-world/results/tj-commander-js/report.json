@@ -1,0 +1,132 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:27:57Z",
+  "project": "<benchmark-workspace>\\tj-commander-js",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "node_cli_library",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"import('./index.js').then(m => { if (!m.Command || !m.program) process.exit(1); })\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"import('./index.js').then(m => { if (!m.Command || !m.program) process.exit(1); })\"",
+      "exit_code": 0,
+      "seconds": 0.18,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "lib\\command.js",
+      "line": 2646,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "lib\\command.js",
+      "line": 2705,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "lib\\help.js",
+      "line": 35,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "lib\\help.js",
+      "line": 74,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "typings\\index.d.ts",
+      "line": 250,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "typings\\index.d.ts",
+      "line": 252,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "Readme.md",
+      "line": 360,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "tests\\command.executableSubcommand.lookup.test.js",
+      "line": 94,
+      "pattern": "\\.skip\\("
+    }
+  ],
+  "blocking_fake_completion_candidates": [
+    {
+      "file": "lib\\command.js",
+      "line": 2646,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "lib\\command.js",
+      "line": 2705,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "lib\\help.js",
+      "line": 35,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "lib\\help.js",
+      "line": 74,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "typings\\index.d.ts",
+      "line": 250,
+      "pattern": "placeholder"
+    },
+    {
+      "file": "typings\\index.d.ts",
+      "line": 252,
+      "pattern": "placeholder"
+    }
+  ],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

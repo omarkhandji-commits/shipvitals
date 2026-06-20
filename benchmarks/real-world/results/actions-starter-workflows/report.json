@@ -1,0 +1,186 @@
+{
+  "tool": "ShipVitals",
+  "version": "1.0.0-beta.1",
+  "generated_at": "2026-06-20T16:28:25Z",
+  "project": "<benchmark-workspace>\\actions-starter-workflows",
+  "mode": "quick",
+  "config_exists": true,
+  "product_type": "ci_automation_templates",
+  "product_promise_present": true,
+  "commands_detected": [
+    "node -e \"const fs=require('fs'); if(!fs.existsSync('ci') || !fs.existsSync('automation') || !fs.existsSync('pages')) process.exit(1)\""
+  ],
+  "command_results": [
+    {
+      "cmd": "node -e \"const fs=require('fs'); if(!fs.existsSync('ci') || !fs.existsSync('automation') || !fs.existsSync('pages')) process.exit(1)\"",
+      "exit_code": 0,
+      "seconds": 0.11,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "secret_candidates": [],
+  "blocking_secret_candidates": [],
+  "fake_completion_candidates": [
+    {
+      "file": "code-scanning\\crda.yml",
+      "line": 47,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-docker.yml",
+      "line": 38,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-docker.yml",
+      "line": 39,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-docker.yml",
+      "line": 40,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-docker.yml",
+      "line": 41,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-source.yml",
+      "line": 38,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-source.yml",
+      "line": 39,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-source.yml",
+      "line": 40,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google-cloudrun-source.yml",
+      "line": 62,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 42,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 43,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 44,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 45,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 46,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 47,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\google.yml",
+      "line": 49,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 45,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 46,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 47,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 85,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 86,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 87,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 88,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\octopusdeploy.yml",
+      "line": 89,
+      "pattern": "\\bTODO\\b"
+    },
+    {
+      "file": "deployments\\openshift.yml",
+      "line": 67,
+      "pattern": "\\bTODO\\b"
+    }
+  ],
+  "blocking_fake_completion_candidates": [],
+  "proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "rejected_proof": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "evidence_levels": [
+    "L1_STATIC",
+    "L2_DETERMINISTIC"
+  ],
+  "score": 89,
+  "score_caps": [
+    {
+      "max_score": 89,
+      "reason": "Runtime proof missing for critical flows."
+    },
+    {
+      "max_score": 89,
+      "reason": "High-stakes release missing independent review."
+    }
+  ],
+  "p0": [],
+  "p1": [],
+  "verdict": "ALMOST READY",
+  "not_verified": [
+    "runtime proof",
+    "independent review"
+  ]
+}

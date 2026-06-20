@@ -1,0 +1,16 @@
+{
+  "name": "shipvitals",
+  "version": "1.0.0-beta.1",
+  "description": "Release readiness audit and go/no-go verdict for AI-built apps.",
+  "bin": {
+    "shipvitals": "bin/shipvitals.js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omarkhandji-commits/shipvitals.git"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

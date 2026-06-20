@@ -1,0 +1,414 @@
+{
+  "generated_at": "2026-06-20T16:28:25Z",
+  "projects": [
+    {
+      "slug": "pypa-sampleproject",
+      "name": "pypa/sampleproject",
+      "repo": "https://github.com/pypa/sampleproject.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 2,
+      "command_names": [
+        "python -m py_compile src/sample/__init__.py src/sample/simple.py",
+        "python -c \"import sys; sys.path.insert(0, 'src'); from sample.simple import add_one; assert add_one(5) == 6\""
+      ],
+      "revision": "621e4974ca25ce531773def586ba3ed8e736b3fc",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\pypa-sampleproject"
+    },
+    {
+      "slug": "tj-commander-js",
+      "name": "tj/commander.js",
+      "repo": "https://github.com/tj/commander.js.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"import('./index.js').then(m => { if (!m.Command || !m.program) process.exit(1); })\""
+      ],
+      "revision": "ba6d13ddb4243e5913367734f8c159089ffe7834",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\tj-commander-js"
+    },
+    {
+      "slug": "jonschlinkert-is-number",
+      "name": "jonschlinkert/is-number",
+      "repo": "https://github.com/jonschlinkert/is-number.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const isNumber = require('./'); if (!isNumber('42') || isNumber('x')) process.exit(1);\""
+      ],
+      "revision": "98e8ff1da1a89f93d1397a24d7413ed15421c139",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\jonschlinkert-is-number"
+    },
+    {
+      "slug": "pallets-click",
+      "name": "pallets/click",
+      "repo": "https://github.com/pallets/click.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "python -c \"import sys; sys.path.insert(0, 'src'); import click; assert click.Command\""
+      ],
+      "revision": "8a1b1a33d739be05b7e91251e3c0dde77c5e152f",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\pallets-click"
+    },
+    {
+      "slug": "pallets-itsdangerous",
+      "name": "pallets/itsdangerous",
+      "repo": "https://github.com/pallets/itsdangerous.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "python -c \"import sys; sys.path.insert(0, 'src'); import itsdangerous; assert itsdangerous.URLSafeSerializer\""
+      ],
+      "revision": "672971d66a2ef9f85151e53283113f33d642dabd",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\pallets-itsdangerous"
+    },
+    {
+      "slug": "pypa-packaging",
+      "name": "pypa/packaging",
+      "repo": "https://github.com/pypa/packaging.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "python -c \"import sys; sys.path.insert(0, 'src'); import packaging.version; assert str(packaging.version.Version('1.2.3')) == '1.2.3'\""
+      ],
+      "revision": "b61e85eafa19e247fc8161a25cdcad5e30fc5b83",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\pypa-packaging"
+    },
+    {
+      "slug": "nodeca-js-yaml",
+      "name": "nodeca/js-yaml",
+      "repo": "https://github.com/nodeca/js-yaml.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node --check bin/js-yaml.mjs"
+      ],
+      "revision": "42dea284430b1077f95a326f14db422b19bedecc",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\nodeca-js-yaml"
+    },
+    {
+      "slug": "expressjs-cors",
+      "name": "expressjs/cors",
+      "repo": "https://github.com/expressjs/cors.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node --check lib/index.js"
+      ],
+      "revision": "5317ebe670db2aaebc1d496eb5d33493deefb3ed",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\expressjs-cors"
+    },
+    {
+      "slug": "mozilla-readability",
+      "name": "mozilla/readability",
+      "repo": "https://github.com/mozilla/readability.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const Readability=require('./Readability.js'); if(typeof Readability !== 'function') process.exit(1)\""
+      ],
+      "revision": "08be6b4bdb204dd333c9b7a0cfbc0e730b257252",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\mozilla-readability"
+    },
+    {
+      "slug": "sindresorhus-query-string",
+      "name": "sindresorhus/query-string",
+      "repo": "https://github.com/sindresorhus/query-string.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 2,
+      "command_names": [
+        "node --check index.js",
+        "node --check base.js"
+      ],
+      "revision": "f5daa07cc0c1bc91c00102426888fff2d17cedb6",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\sindresorhus-query-string"
+    },
+    {
+      "slug": "date-fns-date-fns",
+      "name": "date-fns/date-fns",
+      "repo": "https://github.com/date-fns/date-fns.git",
+      "category": "CLI/API/library",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.name || !fs.existsSync('pkgs/core')) process.exit(1)\""
+      ],
+      "revision": "4098115cf705e3af7f663d8e5b0686e39a9f478a",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\date-fns-date-fns"
+    },
+    {
+      "slug": "h5bp-html5-boilerplate",
+      "name": "h5bp/html5-boilerplate",
+      "repo": "https://github.com/h5bp/html5-boilerplate.git",
+      "category": "Landing/content site",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); if(!fs.existsSync('src/index.html') || !fs.existsSync('package.json')) process.exit(1)\""
+      ],
+      "revision": "31357fdb7c4c4da60a7c910e95440444c2ca7a6d",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\h5bp-html5-boilerplate"
+    },
+    {
+      "slug": "11ty-eleventy-base-blog",
+      "name": "11ty/eleventy-base-blog",
+      "repo": "https://github.com/11ty/eleventy-base-blog.git",
+      "category": "Landing/content site",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !fs.existsSync('eleventy.config.js') || !fs.existsSync('content')) process.exit(1)\""
+      ],
+      "revision": "e37a55c4c4705d7881929de5242ec50448b5eb0b",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\11ty-eleventy-base-blog"
+    },
+    {
+      "slug": "vercel-nextgram",
+      "name": "vercel/nextgram",
+      "repo": "https://github.com/vercel/nextgram.git",
+      "category": "SaaS/Next.js/web app",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !pkg.scripts.build || !fs.existsSync('app')) process.exit(1)\""
+      ],
+      "revision": "e74b34625b9da1d3c8edf3c33dca39986a95f038",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\vercel-nextgram"
+    },
+    {
+      "slug": "nextauthjs-next-auth-example",
+      "name": "nextauthjs/next-auth-example",
+      "repo": "https://github.com/nextauthjs/next-auth-example.git",
+      "category": "SaaS/Next.js/web app",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !pkg.scripts.build || !fs.existsSync('app') || !fs.existsSync('auth.ts')) process.exit(1)\""
+      ],
+      "revision": "39ff2b7a375c240a4741866b3818d80fc8edaa5c",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\nextauthjs-next-auth-example"
+    },
+    {
+      "slug": "mdn-webextensions-examples",
+      "name": "mdn/webextensions-examples",
+      "repo": "https://github.com/mdn/webextensions-examples.git",
+      "category": "Marketplace/extension",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const examples=JSON.parse(fs.readFileSync('examples.json','utf8')); if(!Array.isArray(examples) || examples.length < 10) process.exit(1)\""
+      ],
+      "revision": "ef4192ffa7f74f8bfd12b2808668e0fcc808a7d7",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\mdn-webextensions-examples"
+    },
+    {
+      "slug": "mozilla-webextension-polyfill",
+      "name": "mozilla/webextension-polyfill",
+      "repo": "https://github.com/mozilla/webextension-polyfill.git",
+      "category": "Marketplace/extension",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.name || !fs.existsSync('src/browser-polyfill.js') || !fs.existsSync('api-metadata.json')) process.exit(1)\""
+      ],
+      "revision": "ff0f24b2e3d816c76330ff931f7cc042c622c123",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\mozilla-webextension-polyfill"
+    },
+    {
+      "slug": "googlechrome-chrome-extensions-samples",
+      "name": "GoogleChrome/chrome-extensions-samples",
+      "repo": "https://github.com/GoogleChrome/chrome-extensions-samples.git",
+      "category": "Marketplace/extension",
+      "verdict": "ALMOST READY",
+      "score": 74,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); if(!fs.existsSync('api-samples') || !fs.existsSync('functional-samples') || !fs.existsSync('package.json')) process.exit(1)\""
+      ],
+      "revision": "c4393862e164d74d1b6112ced19f2a2bbe26506c",
+      "not_verified": [
+        "runtime proof",
+        "visual proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\googlechrome-chrome-extensions-samples"
+    },
+    {
+      "slug": "actions-github-script",
+      "name": "actions/github-script",
+      "repo": "https://github.com/actions/github-script.git",
+      "category": "Agent/automation",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.name || !fs.existsSync('action.yml') || !fs.existsSync('dist')) process.exit(1)\""
+      ],
+      "revision": "3a2844b7e9c422d3c10d287c895573f7108da1b3",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\actions-github-script"
+    },
+    {
+      "slug": "actions-starter-workflows",
+      "name": "actions/starter-workflows",
+      "repo": "https://github.com/actions/starter-workflows.git",
+      "category": "Agent/automation",
+      "verdict": "ALMOST READY",
+      "score": 89,
+      "p0": 0,
+      "p1": 0,
+      "commands": 1,
+      "command_names": [
+        "node -e \"const fs=require('fs'); if(!fs.existsSync('ci') || !fs.existsSync('automation') || !fs.existsSync('pages')) process.exit(1)\""
+      ],
+      "revision": "1035244887e26fbbd4f1017d919fb5995cc521c4",
+      "not_verified": [
+        "runtime proof",
+        "independent review"
+      ],
+      "result_dir": "benchmarks\\real-world\\results\\actions-starter-workflows"
+    }
+  ]
+}
