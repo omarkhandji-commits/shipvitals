@@ -14,10 +14,15 @@ The public, path-sanitized report is stored at `case-studies/shipvitals-self-aud
 
 Generated at 2026-06-23T02:49:24Z with:
 
+Generate fresh commit-bound evidence first:
+
+    python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --runtime-command "npm run test:package"
+    python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --visual-file case-studies/shipvitals-self-audit/visual/mobile.png
+
 ```bash
 python skills/shipvitals/scripts/shipvitals_runner.py . --mode deep --ci --timeout 600 \
-  --runtime-proof "case-studies/shipvitals-self-audit/runtime.shipvitals-evidence.json" \
-  --visual-proof "case-studies/shipvitals-self-audit/visual.shipvitals-evidence.json"
+  --runtime-proof ".shipvitals-evidence/runtime.shipvitals-evidence.json" \
+  --visual-proof ".shipvitals-evidence/visual.shipvitals-evidence.json"
 ```
 
 Ten deterministic commands passed:
@@ -37,8 +42,8 @@ Ten deterministic commands passed:
 
 - Python: wheel and sdist built successfully as `shipvitals_cli-1.0.0b1`.
 - npm: packed tarball installed into a temporary project and audited successfully.
-- Node CLI: eight tests pass, including timeout, saturation, and invalid-proof regressions.
-- Python suite: 19 tests pass, including matching adversarial coverage.
+- Node CLI: ten tests pass, including timeout, saturation, and invalid-proof regressions.
+- Python suite: 21 tests pass, including matching adversarial coverage.
 - GitHub Action: local metadata validates; remote execution and L5 evidence require the public repository.
 
 ## Website Evidence

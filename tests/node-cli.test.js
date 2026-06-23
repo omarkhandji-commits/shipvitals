@@ -34,8 +34,8 @@ function fixture(type = 'cli') {
     commands: {}, evidence: {}, exclude: ['node_modules'],
   }));
   fs.writeFileSync(path.join(root, 'src', 'index.js'), 'module.exports = true;\n');
-  fs.writeFileSync(path.join(root, 'runtime-proof.txt'), 'fixture command observed\n');
-  evidence(root, 'runtime', 'runtime-proof.txt');
+  fs.writeFileSync(path.join(root, 'runtime-proof.json'), JSON.stringify({ shipvitals_runtime: 1, exit_code: 0, observations: ['fixture command observed'] }));
+  evidence(root, 'runtime', 'runtime-proof.json');
   return root;
 }
 
@@ -124,4 +124,43 @@ test('npm CLI exits nonzero when the verdict blocks release', () => {
   const result = spawnSync(process.execPath, [CLI, 'audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json'], { encoding: 'utf8' });
   assert.equal(result.status, 1);
   assert.equal(JSON.parse(result.stdout).verdict, 'NOT READY');
+});
+test('npm CLI rejects forged remote evidence and fake visual bytes', () => {
+  const root = fixture('saas web app');
+  fs.writeFileSync(path.join(root, 'fake.png'), 'not an image');
+  evidence(root, 'visual', 'fake.png');
+  fs.writeFileSync(path.join(root, 'remote.shipvitals-evidence.json'), JSON.stringify({
+    shipvitals_evidence: 1,
+    kind: 'runtime',
+    observed_at: '2026-06-22T12:00:00Z',
+    source: 'attacker',
+    summary: 'A remote URL with a declared but unverified digest.',
+    artifacts: [{ url: 'https://example.com/fake.zip', sha256: 'a'.repeat(64) }],
+  }));
+  const result = run([
+    'audit', root,
+    '--runtime-proof', 'remote.shipvitals-evidence.json',
+    '--visual-proof', 'visual.shipvitals-evidence.json',
+  ]);
+  const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
+  assert.equal(result.verdict, 'ALMOST READY');
+  assert.ok(!report.evidence_levels.includes('L3_RUNTIME'));
+  assert.ok(!report.evidence_levels.includes('L4_VISUAL_FLOW'));
+  assert.match(report.rejected_proof_details.runtime[0].reason, /Remote artifacts are not accepted/);
+  assert.match(report.rejected_proof_details.visual[0].reason, /recognized/);
+});
+
+test('npm CLI handles BOM config and rejects impossible timestamps', () => {
+  const root = fixture();
+  const configPath = path.join(root, '.shipvitals-config.json');
+  fs.writeFileSync(configPath, '\ufeff' + fs.readFileSync(configPath, 'utf8'));
+  const manifestPath = path.join(root, 'runtime.shipvitals-evidence.json');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath));
+  manifest.observed_at = '2026-99-99T99:99:99Z';
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest));
+  const result = run(['audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json']);
+  const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
+  assert.equal(result.verdict, 'ALMOST READY');
+  assert.ok(!report.evidence_levels.includes('L3_RUNTIME'));
+  assert.match(report.rejected_proof_details.runtime[0].reason, /valid UTC timestamp/);
 });

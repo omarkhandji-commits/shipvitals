@@ -48,7 +48,7 @@ function loadConfig(root) {
   const configPath = path.join(root, '.shipvitals-config.json');
   const config = clone(DEFAULT_CONFIG);
   if (!fs.existsSync(configPath)) return { config, exists: false };
-  const loaded = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const loaded = JSON.parse(fs.readFileSync(configPath, 'utf8').replace(/^\uFEFF/, ''));
   for (const [key, value] of Object.entries(loaded)) {
     config[key] = value && typeof value === 'object' && !Array.isArray(value) && config[key]
       ? { ...config[key], ...value }
@@ -166,65 +166,147 @@ function gitHead(root) {
   return result.status === 0 ? result.stdout.trim().toLowerCase() : '';
 }
 
+function gitRepository(root) {
+  const result = spawnSync('git', ['-C', root, 'remote', 'get-url', 'origin'], { encoding: 'utf8' });
+  if (result.status !== 0) return '';
+  const match = result.stdout.trim().match(/github\.com[/:]([^/]+)\/([^/\s]+?)(?:\.git)?$/i);
+  return match ? (match[1] + '/' + match[2]).toLowerCase() : '';
+}
+
 function inside(root, candidate) {
   const relative = path.relative(path.resolve(root), path.resolve(candidate));
   return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
 }
 
-function validateManifest(root, value, kind) {
+function validVisualFile(file) {
+  const bytes = fs.readFileSync(file);
+  const signatures = [
+    Buffer.from([0x89, 0x50, 0x4e, 0x47]),
+    Buffer.from([0xff, 0xd8, 0xff]),
+    Buffer.from('GIF8'),
+    Buffer.from('RIFF'),
+    Buffer.from('PK\x03\x04'),
+  ];
+  if (signatures.some(signature => bytes.subarray(0, signature.length).equals(signature))) return true;
+  return bytes.length > 12 && bytes.subarray(4, 8).toString('ascii') === 'ftyp';
+}
+
+async function githubJson(apiPath) {
+  try {
+    const response = await fetch('https://api.github.com' + apiPath, {
+      headers: {
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'shipvitals-' + VERSION,
+        ...(process.env.SHIPVITALS_GITHUB_TOKEN ? { Authorization: 'Bearer ' + process.env.SHIPVITALS_GITHUB_TOKEN } : {}),
+      },
+    });
+    return response.ok ? response.json() : null;
+  } catch {
+    return null;
+  }
+}
+
+async function verifyCiProvenance(root, manifest) {
+  const match = String(manifest.run_url || '').match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/actions\/runs\/(\d+)$/);
+  if (!match) return 'CI evidence requires a GitHub Actions run URL.';
+  const repository = (match[1] + '/' + match[2]).toLowerCase();
+  const expectedRepository = gitRepository(root);
+  if (expectedRepository && repository !== expectedRepository) return 'CI run belongs to a different repository.';
+  const run = await githubJson('/repos/' + match[1] + '/' + match[2] + '/actions/runs/' + match[3]);
+  if (!run || String(run.html_url) !== String(manifest.run_url)) return 'GitHub could not verify the CI run.';
+  const head = gitHead(root);
+  if (!head || String(run.head_sha || '').toLowerCase() !== head || String(manifest.commit || '').toLowerCase() !== head) return 'CI evidence commit does not match the audited HEAD.';
+  const currentRun = process.env.GITHUB_ACTIONS === 'true'
+    && String(process.env.GITHUB_RUN_ID || '') === match[3]
+    && String(process.env.GITHUB_SHA || '').toLowerCase() === head;
+  if (run.conclusion !== 'success' && !(currentRun && ['queued', 'in_progress'].includes(run.status))) return 'The verified CI run did not complete successfully.';
+  return '';
+}
+
+async function verifyIndependentProvenance(root, manifest) {
+  const match = String(manifest.review_url || '').match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)\/(?:issues|pull)\/\d+#issuecomment-(\d+)$/);
+  if (!match) return 'Independent review requires a GitHub issue or pull-request comment URL.';
+  const repository = (match[1] + '/' + match[2]).toLowerCase();
+  const expectedRepository = gitRepository(root);
+  if (!expectedRepository || repository !== expectedRepository) return 'Independent review must be published on the audited repository.';
+  const comment = await githubJson('/repos/' + match[1] + '/' + match[2] + '/issues/comments/' + match[3]);
+  if (!comment || String(comment.html_url) !== String(manifest.review_url)) return 'GitHub could not verify the review comment.';
+  const reviewer = String(comment.user?.login || '');
+  if (!reviewer || reviewer.toLowerCase() !== String(manifest.reviewer || '').toLowerCase() || reviewer.toLowerCase() === match[1].toLowerCase()) return 'Reviewer identity is not independent of the repository owner.';
+  if (!new Set(['NONE', 'CONTRIBUTOR', 'FIRST_TIMER', 'FIRST_TIME_CONTRIBUTOR']).has(comment.author_association)) return 'Reviewer is an owner, member, or collaborator.';
+  const head = gitHead(root);
+  if (!head || String(manifest.reviewed_commit || '').toLowerCase() !== head) return 'Independent review does not cover the audited HEAD.';
+  if (!String(comment.body || '').includes('SHIPVITALS-L6 ACCEPT ' + head)) return 'Review comment does not contain the required acceptance statement.';
+  const user = await githubJson('/users/' + encodeURIComponent(reviewer));
+  if (!user || !user.created_at || Date.now() - Date.parse(user.created_at) < 90 * 24 * 60 * 60 * 1000) return 'Reviewer account must be at least 90 days old.';
+  return '';
+}
+
+async function validateManifest(root, value, kind) {
   const fail = reason => ({ accepted: false, reason });
   const manifestPath = path.isAbsolute(value) ? value : path.resolve(root, value);
   if (!value.endsWith('.shipvitals-evidence.json')) return fail('Expected a .shipvitals-evidence.json manifest.');
   if (!fs.existsSync(manifestPath) || !fs.statSync(manifestPath).isFile()) return fail('Manifest file not found.');
   let manifest;
   try {
-    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8').replace(/^\uFEFF/, ''));
   } catch {
     return fail('Manifest is not valid JSON.');
   }
   if (manifest.shipvitals_evidence !== 1 || manifest.kind !== kind) return fail('Manifest kind must be ' + kind + '.');
-  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(manifest.observed_at || '') || Number.isNaN(Date.parse(manifest.observed_at))) return fail('observed_at must be a valid UTC timestamp.');
+  const observed = Date.parse(manifest.observed_at || '');
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(manifest.observed_at || '') || Number.isNaN(observed)) return fail('observed_at must be a valid UTC timestamp.');
+  if (observed > Date.now() + 5 * 60 * 1000 || Date.now() - observed > 30 * 24 * 60 * 60 * 1000) return fail('Evidence timestamp must be within the last 30 days.');
   if (typeof manifest.source !== 'string' || manifest.source.trim().length < 3) return fail('source is required.');
   if (typeof manifest.summary !== 'string' || manifest.summary.trim().length < 20) return fail('summary must contain at least 20 characters.');
   if (!Array.isArray(manifest.artifacts) || !manifest.artifacts.length) return fail('At least one artifact is required.');
 
-  const visualExtensions = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.mp4', '.mov', '.zip', '.har', '.trace']);
+  const head = gitHead(root);
+  if (['runtime', 'visual'].includes(kind) && head && String(manifest.commit || '').toLowerCase() !== head) return fail('Evidence commit does not match the audited HEAD.');
+  const runtimeExtensions = new Set(['.json', '.xml', '.zip', '.har', '.trace', '.mp4', '.mov']);
   for (const artifact of manifest.artifacts) {
     if (!artifact || typeof artifact !== 'object') return fail('Invalid artifact entry.');
     if (artifact.path) {
-      const artifactPath = path.resolve(path.dirname(manifestPath), String(artifact.path));
-      if (!inside(root, artifactPath)) return fail('Local artifacts must stay inside the audited project.');
-      if (!fs.existsSync(artifactPath) || !fs.statSync(artifactPath).isFile() || fs.statSync(artifactPath).size === 0) return fail('Local artifact is missing or empty.');
+      const unresolved = path.resolve(path.dirname(manifestPath), String(artifact.path));
+      if (!inside(root, unresolved) || !fs.existsSync(unresolved)) return fail('Local artifacts must stay inside the audited project.');
+      const artifactPath = fs.realpathSync(unresolved);
+      if (!inside(root, artifactPath) || !fs.statSync(artifactPath).isFile() || fs.statSync(artifactPath).size === 0) return fail('Local artifact is missing, empty, or escapes through a symlink.');
       if (!/^[a-f0-9]{64}$/i.test(artifact.sha256 || '') || sha256(artifactPath) !== artifact.sha256.toLowerCase()) return fail('Local artifact SHA-256 mismatch.');
-      if (kind === 'visual' && !visualExtensions.has(path.extname(artifactPath).toLowerCase())) return fail('Visual evidence must reference an image, video, trace, HAR, or archive.');
+      if (kind === 'visual' && !validVisualFile(artifactPath)) return fail('Visual artifact has no recognized image, video, trace, or archive signature.');
+      if (kind === 'runtime') {
+        if (!runtimeExtensions.has(path.extname(artifactPath).toLowerCase())) return fail('Runtime evidence must be a structured test, trace, HAR, video, or JSON artifact.');
+        if (path.extname(artifactPath).toLowerCase() === '.json') {
+          let runtime;
+          try { runtime = JSON.parse(fs.readFileSync(artifactPath, 'utf8').replace(/^\uFEFF/, '')); } catch { return fail('Runtime JSON artifact is invalid.'); }
+          if (runtime.shipvitals_runtime !== 1 || runtime.exit_code !== 0 || (head && String(runtime.commit || '').toLowerCase() !== head)) return fail('Runtime JSON is not a passing commit-bound execution record.');
+        }
+      }
     } else if (artifact.url) {
-      let parsed;
-      try { parsed = new URL(artifact.url); } catch { return fail('Artifact URL is invalid.'); }
-      if (parsed.protocol !== 'https:') return fail('Artifact URLs must use HTTPS.');
-      if (kind !== 'ci' && !/^[a-f0-9]{64}$/i.test(artifact.sha256 || '')) return fail('Remote non-CI artifacts require a SHA-256.');
+      if (kind !== 'ci') return fail('Remote artifacts are not accepted without local digest verification.');
+      if (String(artifact.url) !== String(manifest.run_url)) return fail('CI artifact URL must equal run_url.');
     } else {
       return fail('Each artifact requires path or url.');
     }
   }
 
-  const head = gitHead(root);
   if (kind === 'ci') {
-    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+\/actions\/runs\/\d+$/.test(manifest.run_url || '')) return fail('CI evidence requires a GitHub Actions run URL.');
-    if (!head || String(manifest.commit || '').toLowerCase() !== head) return fail('CI evidence commit does not match the audited HEAD.');
+    const reason = await verifyCiProvenance(root, manifest);
+    if (reason) return fail(reason);
   }
   if (kind === 'independent_review') {
     if (manifest.decision !== 'accept' || typeof manifest.reviewer !== 'string' || manifest.reviewer.trim().length < 3) return fail('Independent evidence requires an identified reviewer and accept decision.');
-    if (!head || String(manifest.reviewed_commit || '').toLowerCase() !== head) return fail('Independent review does not cover the audited HEAD.');
+    const reason = await verifyIndependentProvenance(root, manifest);
+    if (reason) return fail(reason);
   }
   return { accepted: true };
 }
 
-function validateEvidence(root, values, kind) {
+async function validateEvidence(root, values, kind) {
   const valid = [];
   const rejected = [];
   const details = [];
   for (const value of asList(values)) {
-    const result = validateManifest(root, value, kind);
+    const result = await validateManifest(root, value, kind);
     (result.accepted ? valid : rejected).push(value);
     if (!result.accepted) details.push({ value, reason: result.reason });
   }
@@ -275,7 +357,7 @@ function writeReport(root, report, ci) {
   return ci ? report : { status: 'ok', verdict: report.verdict, out: output, p0: report.p0.length, p1: report.p1.length };
 }
 
-function audit(options) {
+async function audit(options) {
   const root = path.resolve(options.project || '.');
   const { config, exists: configExists } = loadConfig(root);
   let commands = Object.values(config.commands || {});
@@ -293,7 +375,10 @@ function audit(options) {
     ci: [...asList(config.evidence?.ci), ...asList(options.ciProof)],
     independent_review: [...asList(config.evidence?.independent_review), ...asList(options.independentReview)],
   };
-  const checkedProof = Object.fromEntries(Object.entries(suppliedProof).map(([key, values]) => [key, validateEvidence(root, values, key)]));
+  const checkedProof = {};
+  for (const [key, values] of Object.entries(suppliedProof)) {
+    checkedProof[key] = await validateEvidence(root, values, key);
+  }
   const proof = Object.fromEntries(Object.entries(checkedProof).map(([key, value]) => [key, value.valid]));
   const rejectedProof = Object.fromEntries(Object.entries(checkedProof).map(([key, value]) => [key, value.rejected]));
   const evidenceLevels = ['L1_STATIC'];

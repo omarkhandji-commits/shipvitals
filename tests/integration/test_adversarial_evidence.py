@@ -8,7 +8,7 @@ ROOT = Path(__file__).parents[2]
 RUNNER = ROOT / 'skills/shipvitals/scripts/shipvitals_runner.py'
 
 
-def write_evidence(project, kind, artifact='runtime.txt'):
+def write_evidence(project, kind, artifact='runtime.json'):
     artifact_path = project / artifact
     manifest = {
         'shipvitals_evidence': 1,
@@ -40,7 +40,7 @@ def write_project(project, destination='internal use', command=None):
         'exclude': [],
     }
     (project / '.shipvitals-config.json').write_text(json.dumps(config), encoding='utf-8')
-    (project / 'runtime.txt').write_text('runtime artifact', encoding='utf-8')
+    (project / 'runtime.json').write_text(json.dumps({'shipvitals_runtime': 1, 'exit_code': 0, 'observations': ['fixture command observed']}), encoding='utf-8')
     (project / 'package.json').write_text('{}', encoding='utf-8')
     write_evidence(project, 'runtime')
 
@@ -100,3 +100,45 @@ def test_python_runner_exits_nonzero_on_blocking_verdict(tmp_path):
     )
     assert result.returncode == 1
     assert json.loads(result.stdout)['verdict'] == 'NOT READY'
+
+def test_python_runner_rejects_remote_digest_and_fake_visual_bytes(tmp_path):
+    write_project(tmp_path)
+    config_path = tmp_path / '.shipvitals-config.json'
+    config = json.loads(config_path.read_text())
+    config['project']['type'] = 'saas web app'
+    config_path.write_text(json.dumps(config), encoding='utf-8')
+    (tmp_path / 'fake.png').write_text('not an image', encoding='utf-8')
+    write_evidence(tmp_path, 'visual', 'fake.png')
+    remote = {
+        'shipvitals_evidence': 1,
+        'kind': 'runtime',
+        'observed_at': '2026-06-22T12:00:00Z',
+        'source': 'attacker',
+        'summary': 'A remote URL with a declared but unverified digest.',
+        'artifacts': [{'url': 'https://example.com/fake.zip', 'sha256': 'a' * 64}],
+    }
+    remote_path = tmp_path / 'remote.shipvitals-evidence.json'
+    remote_path.write_text(json.dumps(remote), encoding='utf-8')
+    report = run(
+        tmp_path,
+        '--runtime-proof', str(remote_path),
+        '--visual-proof', str(tmp_path / 'visual.shipvitals-evidence.json'),
+    )
+    assert 'L3_RUNTIME' not in report['evidence_levels']
+    assert 'L4_VISUAL_FLOW' not in report['evidence_levels']
+    assert 'Remote artifacts are not accepted' in report['rejected_proof_details']['runtime'][0]['reason']
+    assert 'recognized' in report['rejected_proof_details']['visual'][0]['reason']
+
+
+def test_python_runner_handles_bom_and_rejects_impossible_timestamp(tmp_path):
+    write_project(tmp_path)
+    config_path = tmp_path / '.shipvitals-config.json'
+    config_path.write_text(config_path.read_text(encoding='utf-8'), encoding='utf-8-sig')
+    manifest_path = tmp_path / 'runtime.shipvitals-evidence.json'
+    manifest = json.loads(manifest_path.read_text())
+    manifest['observed_at'] = '2026-99-99T99:99:99Z'
+    manifest_path.write_text(json.dumps(manifest), encoding='utf-8')
+    report = run(tmp_path, '--runtime-proof', str(manifest_path))
+    assert report['verdict'] == 'ALMOST READY'
+    assert 'L3_RUNTIME' not in report['evidence_levels']
+    assert 'valid UTC timestamp' in report['rejected_proof_details']['runtime'][0]['reason']

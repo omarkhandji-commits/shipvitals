@@ -1,22 +1,28 @@
 # Evidence Manifests
 
-ShipVitals does not treat a filename, note, or arbitrary URL as proof. Each proof flag accepts a JSON manifest ending in .shipvitals-evidence.json.
+ShipVitals rejects notes, arbitrary files, unverified remote hashes, stale evidence, and evidence from another commit.
 
-## Required fields
+## Local runtime and visual evidence
 
-    {
-      "shipvitals_evidence": 1,
-      "kind": "runtime",
-      "observed_at": "2026-06-22T12:00:00Z",
-      "source": "playwright-checkout",
-      "summary": "Checkout completed against the release candidate.",
-      "artifacts": [{"path": "checkout-trace.zip", "sha256": "64 lowercase hex characters"}]
-    }
+Generate commit-bound evidence after checkout:
 
-Supported kinds are runtime, visual, ci, and independent_review.
+    python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --runtime-command "npm run test:package"
+    python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --visual-file case-studies/shipvitals-self-audit/visual/mobile.png
 
-Local artifacts must remain inside the audited project, be non-empty, and match their SHA-256. Visual artifacts must be an image, video, trace, HAR, or archive.
+The files are written under .shipvitals-evidence and expire after 30 days. Runtime JSON must record a passing command for the current HEAD. Visual files are checked by binary signature, not extension alone. Local paths are resolved through symlinks and cannot leave the project.
 
-CI manifests also require a GitHub Actions run_url and a commit equal to the audited Git HEAD. Independent-review manifests require reviewer, decision set to accept, and reviewed_commit equal to the audited Git HEAD.
+## CI provenance
 
-The machine-readable schema is schemas/evidence-manifest.schema.json.
+A CI manifest needs run_url and commit. ShipVitals resolves the run through the GitHub API and checks repository, head SHA, URL, and successful conclusion. During the same GitHub Actions run, queued or in-progress status is accepted only when GITHUB_RUN_ID and GITHUB_SHA match the process environment.
+
+## Independent review provenance
+
+L6 requires a GitHub issue or pull-request comment on the audited repository. The comment must contain:
+
+    SHIPVITALS-L6 ACCEPT <full-commit-sha>
+
+The manifest supplies review_url, reviewer, reviewed_commit, and decision set to accept. ShipVitals verifies the comment and account through GitHub. The reviewer must differ from the repository owner, must not be an owner, member, or collaborator, and the account must be at least 90 days old.
+
+Use SHIPVITALS_GITHUB_TOKEN for private repositories or higher GitHub API limits. The GitHub Action passes its scoped token automatically.
+
+The machine-readable format is schemas/evidence-manifest.schema.json.

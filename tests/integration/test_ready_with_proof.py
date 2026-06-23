@@ -25,9 +25,9 @@ def test_full_audit_can_return_ready_with_required_proof(tmp_path):
     source = Path(__file__).parents[1] / 'fixtures' / 'mock-nextjs'
     root = tmp_path / 'mock-nextjs'
     shutil.copytree(source, root)
-    (root / 'runtime.txt').write_text('dashboard observed', encoding='utf-8')
-    (root / 'visual.png').write_bytes(b'visual-proof')
-    runtime_proof = manifest(root, 'runtime', 'runtime.txt')
+    (root / 'runtime.json').write_text(json.dumps({'shipvitals_runtime': 1, 'exit_code': 0, 'observations': ['dashboard observed']}), encoding='utf-8')
+    (root / 'visual.png').write_bytes(b'\x89PNG\r\n\x1a\nfixture')
+    runtime_proof = manifest(root, 'runtime', 'runtime.json')
     visual_proof = manifest(root, 'visual', 'visual.png')
     result = subprocess.run(
         [

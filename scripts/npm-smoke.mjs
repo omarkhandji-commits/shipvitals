@@ -45,7 +45,11 @@ fs.writeFileSync(path.join(project, '.shipvitals-config.json'), JSON.stringify({
   exclude: ['node_modules'],
 }, null, 2));
 fs.writeFileSync(path.join(project, 'index.js'), 'module.exports = true;\n');
-fs.writeFileSync(path.join(project, 'runtime-proof.txt'), 'packed CLI smoke test\n');
+fs.writeFileSync(path.join(project, 'runtime-proof.json'), JSON.stringify({
+  shipvitals_runtime: 1,
+  exit_code: 0,
+  observations: ['packed CLI smoke test'],
+}, null, 2));
 fs.writeFileSync(path.join(project, 'runtime.shipvitals-evidence.json'), JSON.stringify({
   shipvitals_evidence: 1,
   kind: 'runtime',
@@ -53,8 +57,8 @@ fs.writeFileSync(path.join(project, 'runtime.shipvitals-evidence.json'), JSON.st
   source: 'npm-package-smoke',
   summary: 'The packed npm command completed against a clean fixture.',
   artifacts: [{
-    path: 'runtime-proof.txt',
-    sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(project, 'runtime-proof.txt'))).digest('hex'),
+    path: 'runtime-proof.json',
+    sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(project, 'runtime-proof.json'))).digest('hex'),
   }],
 }, null, 2));
 

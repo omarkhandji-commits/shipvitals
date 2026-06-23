@@ -119,64 +119,8 @@ def scan(root, patterns, exclude, is_priority=None):
                 elif len(findings) < 300: findings.append(finding)
     return {'findings':priority_findings + findings,'priority_count':priority_count,'priority_patterns':list(priority_patterns)}
 
-def git_head(root):
-    result=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'], text=True, capture_output=True)
-    return result.stdout.strip().lower() if result.returncode == 0 else ''
-
-def inside(root, candidate):
-    try:
-        candidate.resolve().relative_to(root.resolve())
-        return True
-    except ValueError:
-        return False
-
-def validate_manifest(root, value, kind):
-    def fail(reason): return False, reason
-    manifest_path=Path(value).expanduser()
-    if not manifest_path.is_absolute(): manifest_path=root/manifest_path
-    if not str(value).endswith('.shipvitals-evidence.json'): return fail('Expected a .shipvitals-evidence.json manifest.')
-    if not manifest_path.is_file(): return fail('Manifest file not found.')
-    try: manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
-    except Exception: return fail('Manifest is not valid JSON.')
-    if manifest.get('shipvitals_evidence') != 1 or manifest.get('kind') != kind: return fail(f'Manifest kind must be {kind}.')
-    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z', str(manifest.get('observed_at',''))): return fail('observed_at must be a UTC timestamp.')
-    if len(str(manifest.get('source','')).strip()) < 3: return fail('source is required.')
-    if len(str(manifest.get('summary','')).strip()) < 20: return fail('summary must contain at least 20 characters.')
-    artifacts=manifest.get('artifacts')
-    if not isinstance(artifacts,list) or not artifacts: return fail('At least one artifact is required.')
-    visual_ext={'.png','.jpg','.jpeg','.gif','.webp','.mp4','.mov','.zip','.har','.trace'}
-    for artifact in artifacts:
-        if not isinstance(artifact,dict): return fail('Invalid artifact entry.')
-        if artifact.get('path'):
-            artifact_path=(manifest_path.parent/str(artifact['path'])).resolve()
-            if not inside(root, artifact_path): return fail('Local artifacts must stay inside the audited project.')
-            if not artifact_path.is_file() or artifact_path.stat().st_size == 0: return fail('Local artifact is missing or empty.')
-            digest=hashlib.sha256(artifact_path.read_bytes()).hexdigest()
-            if not re.fullmatch(r'[a-fA-F0-9]{64}',str(artifact.get('sha256',''))) or digest != str(artifact['sha256']).lower(): return fail('Local artifact SHA-256 mismatch.')
-            if kind == 'visual' and artifact_path.suffix.lower() not in visual_ext: return fail('Visual evidence must reference an image, video, trace, HAR, or archive.')
-        elif artifact.get('url'):
-            parsed=urlparse(str(artifact['url']))
-            if parsed.scheme != 'https' or not parsed.netloc: return fail('Artifact URLs must use HTTPS.')
-            if kind != 'ci' and not re.fullmatch(r'[a-fA-F0-9]{64}',str(artifact.get('sha256',''))): return fail('Remote non-CI artifacts require a SHA-256.')
-        else: return fail('Each artifact requires path or url.')
-    head=git_head(root)
-    if kind == 'ci':
-        if not re.fullmatch(r'https://github\.com/[^/]+/[^/]+/actions/runs/\d+',str(manifest.get('run_url',''))): return fail('CI evidence requires a GitHub Actions run URL.')
-        if not head or str(manifest.get('commit','')).lower() != head: return fail('CI evidence commit does not match the audited HEAD.')
-    if kind == 'independent_review':
-        if manifest.get('decision') != 'accept' or len(str(manifest.get('reviewer','')).strip()) < 3: return fail('Independent evidence requires an identified reviewer and accept decision.')
-        if not head or str(manifest.get('reviewed_commit','')).lower() != head: return fail('Independent review does not cover the audited HEAD.')
-    return True, ''
-
-def validate_evidence(root, values, kind):
-    valid=[]; rejected=[]; details=[]
-    for value in as_list(values):
-        accepted,reason=validate_manifest(root,value,kind)
-        (valid if accepted else rejected).append(value)
-        if not accepted: details.append({'value':value,'reason':reason})
-    return {'valid':valid,'rejected':rejected,'details':details}
-
 def main():
+    from shipvitals_evidence import validate_evidence
     ap=argparse.ArgumentParser()
     ap.add_argument('project', nargs='?', default='.')
     ap.add_argument('--ci', action='store_true')
@@ -201,10 +145,10 @@ def main():
     fake=fake_scan['findings']
     failed=[r for r in results if r.get('exit_code') != 0]
     checked_proof={
-        'runtime':validate_evidence(root, evidence_values(config, 'runtime', args.runtime_proof), 'runtime'),
-        'visual':validate_evidence(root, evidence_values(config, 'visual', args.visual_proof), 'visual'),
-        'ci':validate_evidence(root, evidence_values(config, 'ci', args.ci_proof), 'ci'),
-        'independent_review':validate_evidence(root, evidence_values(config, 'independent_review', args.independent_review), 'independent_review'),
+        'runtime':validate_evidence(root, evidence_values(config, 'runtime', args.runtime_proof), 'runtime', as_list),
+        'visual':validate_evidence(root, evidence_values(config, 'visual', args.visual_proof), 'visual', as_list),
+        'ci':validate_evidence(root, evidence_values(config, 'ci', args.ci_proof), 'ci', as_list),
+        'independent_review':validate_evidence(root, evidence_values(config, 'independent_review', args.independent_review), 'independent_review', as_list),
     }
     runtime_proof=checked_proof['runtime']['valid']; visual_proof=checked_proof['visual']['valid']
     ci_proof=checked_proof['ci']['valid']; independent_review=checked_proof['independent_review']['valid']

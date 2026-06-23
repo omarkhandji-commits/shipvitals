@@ -91,7 +91,7 @@ async function main() {
   }
   const options = parse(argv);
   if (options.command === 'audit') {
-    const result = audit(options);
+    const result = await audit(options);
     process.stdout.write(JSON.stringify(result, null, 2) + '\n');
     if (!options.noFail && result.verdict !== 'READY') process.exitCode = 1;
   }

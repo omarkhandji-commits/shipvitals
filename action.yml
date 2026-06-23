@@ -53,6 +53,7 @@ runs:
         INPUT_FAIL_ON_UNREADY: ${{ inputs.fail-on-unready }}
         SHIPVITALS_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         SHIPVITALS_COMMIT: ${{ github.sha }}
+        SHIPVITALS_GITHUB_TOKEN: ${{ github.token }}
       run: |
         ci_manifest="$RUNNER_TEMP/ci.shipvitals-evidence.json"
         python3 "$GITHUB_ACTION_PATH/skills/shipvitals/scripts/shipvitals_create_ci_evidence.py" "$ci_manifest"

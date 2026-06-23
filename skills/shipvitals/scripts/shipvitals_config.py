@@ -18,7 +18,7 @@ def load_config(project):
     path = config_path(project)
     if not path.exists():
         return None
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding='utf-8-sig'))
 
 def save_config(project, config):
     path = config_path(project)
