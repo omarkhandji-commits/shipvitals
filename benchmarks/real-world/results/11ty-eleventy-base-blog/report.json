@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:13Z",
+  "generated_at": "2026-06-23T02:48:57Z",
   "project": "<benchmark-workspace>\\11ty-eleventy-base-blog",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.scripts || !fs.existsSync('eleventy.config.js') || !fs.existsSync('content')) process.exit(1)\"",
       "exit_code": 0,
-      "seconds": 0.16,
+      "seconds": 0.11,
       "stdout": "",
       "stderr": ""
     }
@@ -40,6 +40,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 0
   },
   "evidence_levels": [
     "L1_STATIC",

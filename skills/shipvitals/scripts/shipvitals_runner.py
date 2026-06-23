@@ -3,7 +3,7 @@
 
 This runner is conservative: it records what it can prove and labels missing proof as NOT VERIFIED.
 """
-import argparse, json, os, re, subprocess, sys, time
+import argparse, hashlib, json, os, re, subprocess, sys, time
 from pathlib import Path
 from urllib.parse import urlparse
 try:
@@ -105,34 +105,82 @@ def is_core_fake_path(value):
     return bool(parts & CORE_FAKE_PARTS) or suffix in {'.js','.jsx','.ts','.tsx','.py','.php','.rb','.go','.rs','.java','.cs'}
 
 def scan(root, patterns, exclude, is_priority=None):
-    findings=[]; priority_findings=[]
+    findings=[]; priority_findings=[]; priority_patterns=set(); priority_count=0
     for p in iter_files(root, exclude):
         txt=p.read_text(errors='ignore')
         for pat in patterns:
             for m in re.finditer(pat, txt, re.I|re.S):
                 finding={'file':str(p.relative_to(root)),'line':txt[:m.start()].count('\n')+1,'pattern':pat}
                 if is_priority and is_priority(finding):
+                    priority_count += 1
                     if len(priority_findings) < 300: priority_findings.append(finding)
+                    elif pat not in priority_patterns: priority_findings.insert(0, finding)
+                    priority_patterns.add(pat)
                 elif len(findings) < 300: findings.append(finding)
-    return priority_findings + findings
+    return {'findings':priority_findings + findings,'priority_count':priority_count,'priority_patterns':list(priority_patterns)}
 
-def validate_evidence(root, values):
-    valid=[]; rejected=[]
+def git_head(root):
+    result=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'], text=True, capture_output=True)
+    return result.stdout.strip().lower() if result.returncode == 0 else ''
+
+def inside(root, candidate):
+    try:
+        candidate.resolve().relative_to(root.resolve())
+        return True
+    except ValueError:
+        return False
+
+def validate_manifest(root, value, kind):
+    def fail(reason): return False, reason
+    manifest_path=Path(value).expanduser()
+    if not manifest_path.is_absolute(): manifest_path=root/manifest_path
+    if not str(value).endswith('.shipvitals-evidence.json'): return fail('Expected a .shipvitals-evidence.json manifest.')
+    if not manifest_path.is_file(): return fail('Manifest file not found.')
+    try: manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+    except Exception: return fail('Manifest is not valid JSON.')
+    if manifest.get('shipvitals_evidence') != 1 or manifest.get('kind') != kind: return fail(f'Manifest kind must be {kind}.')
+    if not re.fullmatch(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z', str(manifest.get('observed_at',''))): return fail('observed_at must be a UTC timestamp.')
+    if len(str(manifest.get('source','')).strip()) < 3: return fail('source is required.')
+    if len(str(manifest.get('summary','')).strip()) < 20: return fail('summary must contain at least 20 characters.')
+    artifacts=manifest.get('artifacts')
+    if not isinstance(artifacts,list) or not artifacts: return fail('At least one artifact is required.')
+    visual_ext={'.png','.jpg','.jpeg','.gif','.webp','.mp4','.mov','.zip','.har','.trace'}
+    for artifact in artifacts:
+        if not isinstance(artifact,dict): return fail('Invalid artifact entry.')
+        if artifact.get('path'):
+            artifact_path=(manifest_path.parent/str(artifact['path'])).resolve()
+            if not inside(root, artifact_path): return fail('Local artifacts must stay inside the audited project.')
+            if not artifact_path.is_file() or artifact_path.stat().st_size == 0: return fail('Local artifact is missing or empty.')
+            digest=hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            if not re.fullmatch(r'[a-fA-F0-9]{64}',str(artifact.get('sha256',''))) or digest != str(artifact['sha256']).lower(): return fail('Local artifact SHA-256 mismatch.')
+            if kind == 'visual' and artifact_path.suffix.lower() not in visual_ext: return fail('Visual evidence must reference an image, video, trace, HAR, or archive.')
+        elif artifact.get('url'):
+            parsed=urlparse(str(artifact['url']))
+            if parsed.scheme != 'https' or not parsed.netloc: return fail('Artifact URLs must use HTTPS.')
+            if kind != 'ci' and not re.fullmatch(r'[a-fA-F0-9]{64}',str(artifact.get('sha256',''))): return fail('Remote non-CI artifacts require a SHA-256.')
+        else: return fail('Each artifact requires path or url.')
+    head=git_head(root)
+    if kind == 'ci':
+        if not re.fullmatch(r'https://github\.com/[^/]+/[^/]+/actions/runs/\d+',str(manifest.get('run_url',''))): return fail('CI evidence requires a GitHub Actions run URL.')
+        if not head or str(manifest.get('commit','')).lower() != head: return fail('CI evidence commit does not match the audited HEAD.')
+    if kind == 'independent_review':
+        if manifest.get('decision') != 'accept' or len(str(manifest.get('reviewer','')).strip()) < 3: return fail('Independent evidence requires an identified reviewer and accept decision.')
+        if not head or str(manifest.get('reviewed_commit','')).lower() != head: return fail('Independent review does not cover the audited HEAD.')
+    return True, ''
+
+def validate_evidence(root, values, kind):
+    valid=[]; rejected=[]; details=[]
     for value in as_list(values):
-        parsed=urlparse(value)
-        accepted=parsed.scheme in {'http','https'} and bool(parsed.netloc)
-        if not accepted:
-            candidate=Path(value).expanduser()
-            if not candidate.is_absolute(): candidate=root/candidate
-            if candidate.is_file(): accepted=candidate.stat().st_size > 0
-            elif candidate.is_dir(): accepted=any(candidate.iterdir())
+        accepted,reason=validate_manifest(root,value,kind)
         (valid if accepted else rejected).append(value)
-    return {'valid':valid,'rejected':rejected}
+        if not accepted: details.append({'value':value,'reason':reason})
+    return {'valid':valid,'rejected':rejected,'details':details}
 
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('project', nargs='?', default='.')
     ap.add_argument('--ci', action='store_true')
+    ap.add_argument('--no-fail', action='store_true')
     ap.add_argument('--verbose', action='store_true')
     ap.add_argument('--mode', choices=['quick','deep'], default='quick')
     ap.add_argument('--timeout', type=int, default=120)
@@ -147,14 +195,16 @@ def main():
     commands=list(config.get('commands',{}).values()) or detect_commands(root)
     if args.mode=='quick': commands=commands[:4]
     results=[run(c, root, args.timeout, args.verbose) for c in commands]
-    secrets=scan(root, SECRET_PATTERNS, config.get('exclude'), lambda item: not is_non_blocking_secret_path(item['file']))
-    fake=scan(root, FAKE_PATTERNS, config.get('exclude'), lambda item: is_core_fake_path(item['file']))
+    secret_scan=scan(root, SECRET_PATTERNS, config.get('exclude'), lambda item: not is_non_blocking_secret_path(item['file']))
+    secrets=secret_scan['findings']
+    fake_scan=scan(root, FAKE_PATTERNS, config.get('exclude'), lambda item: is_core_fake_path(item['file']))
+    fake=fake_scan['findings']
     failed=[r for r in results if r.get('exit_code') != 0]
     checked_proof={
-        'runtime':validate_evidence(root, evidence_values(config, 'runtime', args.runtime_proof)),
-        'visual':validate_evidence(root, evidence_values(config, 'visual', args.visual_proof)),
-        'ci':validate_evidence(root, evidence_values(config, 'ci', args.ci_proof)),
-        'independent_review':validate_evidence(root, evidence_values(config, 'independent_review', args.independent_review)),
+        'runtime':validate_evidence(root, evidence_values(config, 'runtime', args.runtime_proof), 'runtime'),
+        'visual':validate_evidence(root, evidence_values(config, 'visual', args.visual_proof), 'visual'),
+        'ci':validate_evidence(root, evidence_values(config, 'ci', args.ci_proof), 'ci'),
+        'independent_review':validate_evidence(root, evidence_values(config, 'independent_review', args.independent_review), 'independent_review'),
     }
     runtime_proof=checked_proof['runtime']['valid']; visual_proof=checked_proof['visual']['valid']
     ci_proof=checked_proof['ci']['valid']; independent_review=checked_proof['independent_review']['valid']
@@ -193,7 +243,7 @@ def main():
         not_verified.append('independent review')
         if needs_independent:
             cap_score(caps, 89, 'High-stakes release missing independent review.')
-    demo_only=any('demo only' in str(x).lower() or 'mock data' in str(x).lower() for x in blocking_fake)
+    demo_only=any('demo only' in pat.lower() or 'mock data' in pat.lower() for pat in fake_scan['priority_patterns'])
     if demo_only:
         cap_score(caps, 69, 'Demo-only or mock-data signal found.')
     if p0:
@@ -203,7 +253,7 @@ def main():
     elif p1 or not results or (needs_runtime and not runtime_proof) or (needs_visual and not visual_proof) or (needs_independent and not independent_review): verdict='ALMOST READY'
     else: verdict='READY'
     score=min([100]+[c['max_score'] for c in caps])
-    report={'tool':'ShipVitals','version':'1.0.0-beta.1','generated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),'project':str(root),'mode':args.mode,'config_exists':config_exists,'product_type':project_type(config),'product_promise_present':has_product_promise(config),'commands_detected':commands,'command_results':results,'secret_candidates':secrets[:80],'blocking_secret_candidates':blocking_secrets[:80],'fake_completion_candidates':fake[:160],'blocking_fake_completion_candidates':blocking_fake[:80],'proof':{'runtime':runtime_proof,'visual':visual_proof,'ci':ci_proof,'independent_review':independent_review},'rejected_proof':{key:value['rejected'] for key,value in checked_proof.items()},'evidence_levels':evidence,'score':score,'score_caps':caps,'p0':p0,'p1':p1,'verdict':verdict,'not_verified':not_verified}
+    report={'tool':'ShipVitals','version':'1.0.0-beta.1','generated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),'project':str(root),'mode':args.mode,'config_exists':config_exists,'product_type':project_type(config),'product_promise_present':has_product_promise(config),'commands_detected':commands,'command_results':results,'secret_candidates':secrets[:80],'blocking_secret_candidates':blocking_secrets[:80],'fake_completion_candidates':fake[:160],'blocking_fake_completion_candidates':blocking_fake[:80],'proof':{'runtime':runtime_proof,'visual':visual_proof,'ci':ci_proof,'independent_review':independent_review},'rejected_proof':{key:value['rejected'] for key,value in checked_proof.items()},'rejected_proof_details':{key:value['details'] for key,value in checked_proof.items()},'scan_stats':{'secret_priority_count':secret_scan['priority_count'],'fake_priority_count':fake_scan['priority_count']},'evidence_levels':evidence,'score':score,'score_caps':caps,'p0':p0,'p1':p1,'verdict':verdict,'not_verified':not_verified}
     report_text=json.dumps(report, indent=2)
     (out/'report.json').write_text(report_text, encoding='utf-8')
     (out/'shipvitals-report.json').write_text(report_text, encoding='utf-8')
@@ -211,4 +261,5 @@ def main():
     (out/'summary.md').write_text(summary, encoding='utf-8')
     (out/'shipvitals-summary.md').write_text(summary, encoding='utf-8')
     print(json.dumps(report if args.ci else {'status':'ok','verdict':verdict,'out':str(out),'p0':len(p0),'p1':len(p1)}, indent=2))
+    if not args.no_fail and verdict != 'READY': raise SystemExit(1)
 if __name__=='__main__': main()

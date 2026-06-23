@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/omarkhandji-commits/shipvitals/blob/main/schemas/evidence-manifest.schema.json",
+  "title": "ShipVitals evidence manifest",
+  "type": "object",
+  "required": ["shipvitals_evidence", "kind", "observed_at", "source", "summary", "artifacts"],
+  "properties": {
+    "shipvitals_evidence": { "const": 1 },
+    "kind": { "enum": ["runtime", "visual", "ci", "independent_review"] },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "source": { "type": "string", "minLength": 3 },
+    "summary": { "type": "string", "minLength": 20 },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "oneOf": [
+          {
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": { "type": "string", "minLength": 1 },
+              "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+            }
+          },
+          {
+            "required": ["url"],
+            "properties": {
+              "url": { "type": "string", "pattern": "^https://" },
+              "sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" }
+            }
+          }
+        ]
+      }
+    },
+    "run_url": { "type": "string" },
+    "commit": { "type": "string", "pattern": "^[a-fA-F0-9]{40}$" },
+    "reviewed_commit": { "type": "string", "pattern": "^[a-fA-F0-9]{40}$" },
+    "decision": { "enum": ["accept", "reject"] },
+    "reviewer": { "type": "string", "minLength": 3 }
+  },
+  "additionalProperties": true
+}

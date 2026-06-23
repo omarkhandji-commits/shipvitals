@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:15Z",
+  "generated_at": "2026-06-23T02:48:59Z",
   "project": "<benchmark-workspace>\\mdn-webextensions-examples",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"const fs=require('fs'); const examples=JSON.parse(fs.readFileSync('examples.json','utf8')); if(!Array.isArray(examples) || examples.length < 10) process.exit(1)\"",
       "exit_code": 0,
-      "seconds": 0.27,
+      "seconds": 0.08,
       "stdout": "",
       "stderr": ""
     }
@@ -186,6 +186,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 4
   },
   "evidence_levels": [
     "L1_STATIC",

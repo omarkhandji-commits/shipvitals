@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:23Z",
+  "generated_at": "2026-06-23T02:49:05Z",
   "project": "<benchmark-workspace>\\googlechrome-chrome-extensions-samples",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"const fs=require('fs'); if(!fs.existsSync('api-samples') || !fs.existsSync('functional-samples') || !fs.existsSync('package.json')) process.exit(1)\"",
       "exit_code": 0,
-      "seconds": 0.18,
+      "seconds": 0.12,
       "stdout": "",
       "stderr": ""
     }
@@ -1302,6 +1302,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 13
   },
   "evidence_levels": [
     "L1_STATIC",

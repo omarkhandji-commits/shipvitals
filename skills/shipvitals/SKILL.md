@@ -85,7 +85,7 @@ python3 skills/shipvitals/scripts/shipvitals_link_check.py .
 With the runner, pass proof explicitly:
 
 ```bash
-python3 skills/shipvitals/scripts/shipvitals_runner.py . --runtime-proof "artifacts/runtime-trace.zip" --visual-proof "artifacts/mobile.png"
+python3 skills/shipvitals/scripts/shipvitals_runner.py . --runtime-proof "artifacts/runtime.shipvitals-evidence.json" --visual-proof "artifacts/visual.shipvitals-evidence.json"
 ```
 
 ## Verdicts

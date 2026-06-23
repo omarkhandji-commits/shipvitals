@@ -36,7 +36,7 @@ Real improvement evidence from local ShipVitals validation on 2026-06-12.
 | Windows `npm run test` | fail | pass |
 | Windows `npm run test:compile` | fail | pass |
 | `tj/commander.js` false P0 | yes | no |
-| Full test suite | not passing through npm | 18 Python + 7 Node tests passed |
+| Full test suite | not passing through npm | 19 Python + 8 Node tests passed |
 | Packed npm install | not tested | clean temporary install passed |
 | Node CLI Python dependency | required | removed for audit/init/diagnostics |
 | Indexable project site | one thin HTML page | 5 validated public pages |

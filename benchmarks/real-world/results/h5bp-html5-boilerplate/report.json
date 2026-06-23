@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:13Z",
+  "generated_at": "2026-06-23T02:48:56Z",
   "project": "<benchmark-workspace>\\h5bp-html5-boilerplate",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"const fs=require('fs'); if(!fs.existsSync('src/index.html') || !fs.existsSync('package.json')) process.exit(1)\"",
       "exit_code": 0,
-      "seconds": 0.13,
+      "seconds": 0.19,
       "stdout": "",
       "stderr": ""
     }
@@ -76,6 +76,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 1
   },
   "evidence_levels": [
     "L1_STATIC",

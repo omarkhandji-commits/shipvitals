@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:25Z",
+  "generated_at": "2026-06-23T02:49:07Z",
   "project": "<benchmark-workspace>\\actions-starter-workflows",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"const fs=require('fs'); if(!fs.existsSync('ci') || !fs.existsSync('automation') || !fs.existsSync('pages')) process.exit(1)\"",
       "exit_code": 0,
-      "seconds": 0.11,
+      "seconds": 0.15,
       "stdout": "",
       "stderr": ""
     }
@@ -160,6 +160,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 0
   },
   "evidence_levels": [
     "L1_STATIC",

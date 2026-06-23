@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:27:58Z",
+  "generated_at": "2026-06-23T02:48:43Z",
   "project": "<benchmark-workspace>\\pallets-click",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); import click; assert click.Command\"",
       "exit_code": 0,
-      "seconds": 0.27,
+      "seconds": 0.12,
       "stdout": "",
       "stderr": ""
     }
@@ -151,6 +151,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 9
   },
   "evidence_levels": [
     "L1_STATIC",

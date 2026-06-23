@@ -14,19 +14,19 @@ inputs:
     required: false
     default: quick
   runtime-proof:
-    description: "Existing runtime artifact path or HTTPS URL."
+    description: "Path to a runtime.shipvitals-evidence.json manifest."
     required: false
     default: ""
   visual-proof:
-    description: "Existing screenshot, video, trace path, or HTTPS URL."
+    description: "Path to a visual.shipvitals-evidence.json manifest."
     required: false
     default: ""
   ci-proof:
-    description: "CI or hook reproducibility proof."
+    description: "Path to a commit-bound CI evidence manifest; generated automatically when omitted."
     required: false
     default: ""
   independent-review:
-    description: "Independent review proof for high-stakes releases."
+    description: "Path to an independent_review.shipvitals-evidence.json manifest."
     required: false
     default: ""
   fail-on-unready:
@@ -43,19 +43,30 @@ runs:
     - name: Run ShipVitals
       id: audit
       shell: bash
+      env:
+        INPUT_PATH: ${{ inputs.path }}
+        INPUT_MODE: ${{ inputs.mode }}
+        INPUT_RUNTIME_PROOF: ${{ inputs.runtime-proof }}
+        INPUT_VISUAL_PROOF: ${{ inputs.visual-proof }}
+        INPUT_CI_PROOF: ${{ inputs.ci-proof }}
+        INPUT_INDEPENDENT_REVIEW: ${{ inputs.independent-review }}
+        INPUT_FAIL_ON_UNREADY: ${{ inputs.fail-on-unready }}
+        SHIPVITALS_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        SHIPVITALS_COMMIT: ${{ github.sha }}
       run: |
-        args=("${{ inputs.path }}" --ci --mode "${{ inputs.mode }}")
-        if [ -n "${{ inputs.runtime-proof }}" ]; then args+=(--runtime-proof "${{ inputs.runtime-proof }}"); fi
-        if [ -n "${{ inputs.visual-proof }}" ]; then args+=(--visual-proof "${{ inputs.visual-proof }}"); fi
-        ci_proof="${{ inputs.ci-proof }}"
-        if [ -z "$ci_proof" ]; then ci_proof="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"; fi
-        args+=(--ci-proof "$ci_proof")
-        if [ -n "${{ inputs.independent-review }}" ]; then args+=(--independent-review "${{ inputs.independent-review }}"); fi
+        ci_manifest="$RUNNER_TEMP/ci.shipvitals-evidence.json"
+        python3 "$GITHUB_ACTION_PATH/skills/shipvitals/scripts/shipvitals_create_ci_evidence.py" "$ci_manifest"
+        args=("$INPUT_PATH" --ci --no-fail --mode "$INPUT_MODE")
+        if [ -n "$INPUT_RUNTIME_PROOF" ]; then args+=(--runtime-proof "$INPUT_RUNTIME_PROOF"); fi
+        if [ -n "$INPUT_VISUAL_PROOF" ]; then args+=(--visual-proof "$INPUT_VISUAL_PROOF"); fi
+        if [ -n "$INPUT_CI_PROOF" ]; then ci_manifest="$INPUT_CI_PROOF"; fi
+        args+=(--ci-proof "$ci_manifest")
+        if [ -n "$INPUT_INDEPENDENT_REVIEW" ]; then args+=(--independent-review "$INPUT_INDEPENDENT_REVIEW"); fi
         report="$RUNNER_TEMP/shipvitals-report.json"
         python3 "$GITHUB_ACTION_PATH/skills/shipvitals/scripts/shipvitals_runner.py" "${args[@]}" | tee "$report"
         verdict="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1], encoding='utf-8')).get('verdict','NOT VERIFIED'))" "$report")"
         echo "verdict=$verdict" >> "$GITHUB_OUTPUT"
-        if [ "${{ inputs.fail-on-unready }}" = "true" ] && [ "$verdict" != "READY" ]; then
+        if [ "$INPUT_FAIL_ON_UNREADY" = "true" ] && [ "$verdict" != "READY" ]; then
           echo "ShipVitals blocked release with verdict: $verdict" >&2
           exit 1
         fi

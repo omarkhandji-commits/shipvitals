@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import argparse, json, shutil, subprocess, sys, tempfile, time
+import argparse, json, re, shutil, subprocess, sys, tempfile, time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -9,14 +9,21 @@ RUNNER = ROOT / 'skills' / 'shipvitals' / 'scripts' / 'shipvitals_runner.py'
 
 
 def sanitize_public_artifact(value, workspace):
-    replacements = ((str(workspace), '<benchmark-workspace>'), (str(ROOT), '<shipvitals-root>'))
+    replacements = (
+        (str(workspace), '<benchmark-workspace>'),
+        (str(ROOT), '<shipvitals-root>'),
+        (str(Path(sys.executable).resolve()), '<python>'),
+    )
     if isinstance(value, dict):
         return {key: sanitize_public_artifact(item, workspace) for key, item in value.items()}
     if isinstance(value, list):
         return [sanitize_public_artifact(item, workspace) for item in value]
     if isinstance(value, str):
         for source, target in replacements:
-            value = value.replace(source, target).replace(source.replace('\\', '/'), target)
+            for variant in {source, source.replace('\\', '/'), json.dumps(source)[1:-1]}:
+                value = value.replace(variant, target)
+        value = re.sub(r'(?i)[A-Z]:\\\\Users\\\\[^\\s"]+', '<redacted-user-path>', value)
+        value = re.sub(r'(?i)[A-Z]:\\Users\\[^\s"]+', '<redacted-user-path>', value)
     return value
 
 
@@ -89,6 +96,7 @@ def audit_project(workspace, item):
         str(RUNNER),
         str(project_dir),
         '--ci',
+        '--no-fail',
     ]
     result = run(cmd, cwd=ROOT, timeout=240)
     report_path = project_dir / '.shipvitals-evidence' / 'report.json'

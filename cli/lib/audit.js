@@ -1,4 +1,5 @@
 const { spawnSync } = require('node:child_process');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -84,6 +85,8 @@ function walkFiles(root, exclusions) {
 function scan(root, patterns, exclusions, isPriority) {
   const findings = [];
   const priorityFindings = [];
+  const priorityPatterns = new Set();
+  let priorityCount = 0;
   for (const file of walkFiles(root, exclusions)) {
     let text;
     try {
@@ -100,14 +103,17 @@ function scan(root, patterns, exclusions, isPriority) {
           pattern: pattern.source,
         };
         if (isPriority?.(finding)) {
+          priorityCount += 1;
           if (priorityFindings.length < 300) priorityFindings.push(finding);
+          else if (!priorityPatterns.has(finding.pattern)) priorityFindings.unshift(finding);
+          priorityPatterns.add(finding.pattern);
         } else if (findings.length < 300) {
           findings.push(finding);
         }
       }
     }
   }
-  return [...priorityFindings, ...findings];
+  return { findings: [...priorityFindings, ...findings], priorityCount, priorityPatterns: [...priorityPatterns] };
 }
 
 function detectCommands(root) {
@@ -151,24 +157,78 @@ function asList(value) {
   return (Array.isArray(value) ? value : [value]).map(String).filter(item => item.trim());
 }
 
-function validateEvidence(root, values) {
+function sha256(file) {
+  return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+}
+
+function gitHead(root) {
+  const result = spawnSync('git', ['-C', root, 'rev-parse', 'HEAD'], { encoding: 'utf8' });
+  return result.status === 0 ? result.stdout.trim().toLowerCase() : '';
+}
+
+function inside(root, candidate) {
+  const relative = path.relative(path.resolve(root), path.resolve(candidate));
+  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+}
+
+function validateManifest(root, value, kind) {
+  const fail = reason => ({ accepted: false, reason });
+  const manifestPath = path.isAbsolute(value) ? value : path.resolve(root, value);
+  if (!value.endsWith('.shipvitals-evidence.json')) return fail('Expected a .shipvitals-evidence.json manifest.');
+  if (!fs.existsSync(manifestPath) || !fs.statSync(manifestPath).isFile()) return fail('Manifest file not found.');
+  let manifest;
+  try {
+    manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  } catch {
+    return fail('Manifest is not valid JSON.');
+  }
+  if (manifest.shipvitals_evidence !== 1 || manifest.kind !== kind) return fail('Manifest kind must be ' + kind + '.');
+  if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(manifest.observed_at || '') || Number.isNaN(Date.parse(manifest.observed_at))) return fail('observed_at must be a valid UTC timestamp.');
+  if (typeof manifest.source !== 'string' || manifest.source.trim().length < 3) return fail('source is required.');
+  if (typeof manifest.summary !== 'string' || manifest.summary.trim().length < 20) return fail('summary must contain at least 20 characters.');
+  if (!Array.isArray(manifest.artifacts) || !manifest.artifacts.length) return fail('At least one artifact is required.');
+
+  const visualExtensions = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.mp4', '.mov', '.zip', '.har', '.trace']);
+  for (const artifact of manifest.artifacts) {
+    if (!artifact || typeof artifact !== 'object') return fail('Invalid artifact entry.');
+    if (artifact.path) {
+      const artifactPath = path.resolve(path.dirname(manifestPath), String(artifact.path));
+      if (!inside(root, artifactPath)) return fail('Local artifacts must stay inside the audited project.');
+      if (!fs.existsSync(artifactPath) || !fs.statSync(artifactPath).isFile() || fs.statSync(artifactPath).size === 0) return fail('Local artifact is missing or empty.');
+      if (!/^[a-f0-9]{64}$/i.test(artifact.sha256 || '') || sha256(artifactPath) !== artifact.sha256.toLowerCase()) return fail('Local artifact SHA-256 mismatch.');
+      if (kind === 'visual' && !visualExtensions.has(path.extname(artifactPath).toLowerCase())) return fail('Visual evidence must reference an image, video, trace, HAR, or archive.');
+    } else if (artifact.url) {
+      let parsed;
+      try { parsed = new URL(artifact.url); } catch { return fail('Artifact URL is invalid.'); }
+      if (parsed.protocol !== 'https:') return fail('Artifact URLs must use HTTPS.');
+      if (kind !== 'ci' && !/^[a-f0-9]{64}$/i.test(artifact.sha256 || '')) return fail('Remote non-CI artifacts require a SHA-256.');
+    } else {
+      return fail('Each artifact requires path or url.');
+    }
+  }
+
+  const head = gitHead(root);
+  if (kind === 'ci') {
+    if (!/^https:\/\/github\.com\/[^/]+\/[^/]+\/actions\/runs\/\d+$/.test(manifest.run_url || '')) return fail('CI evidence requires a GitHub Actions run URL.');
+    if (!head || String(manifest.commit || '').toLowerCase() !== head) return fail('CI evidence commit does not match the audited HEAD.');
+  }
+  if (kind === 'independent_review') {
+    if (manifest.decision !== 'accept' || typeof manifest.reviewer !== 'string' || manifest.reviewer.trim().length < 3) return fail('Independent evidence requires an identified reviewer and accept decision.');
+    if (!head || String(manifest.reviewed_commit || '').toLowerCase() !== head) return fail('Independent review does not cover the audited HEAD.');
+  }
+  return { accepted: true };
+}
+
+function validateEvidence(root, values, kind) {
   const valid = [];
   const rejected = [];
+  const details = [];
   for (const value of asList(values)) {
-    let accepted = false;
-    try {
-      const url = new URL(value);
-      accepted = ['http:', 'https:'].includes(url.protocol) && Boolean(url.hostname);
-    } catch {
-      const candidate = path.isAbsolute(value) ? value : path.resolve(root, value);
-      if (fs.existsSync(candidate)) {
-        const stat = fs.statSync(candidate);
-        accepted = stat.isFile() ? stat.size > 0 : stat.isDirectory() && fs.readdirSync(candidate).length > 0;
-      }
-    }
-    (accepted ? valid : rejected).push(value);
+    const result = validateManifest(root, value, kind);
+    (result.accepted ? valid : rejected).push(value);
+    if (!result.accepted) details.push({ value, reason: result.reason });
   }
-  return { valid, rejected };
+  return { valid, rejected, details };
 }
 
 function pathParts(value) {
@@ -222,8 +282,10 @@ function audit(options) {
   if (!commands.length) commands = detectCommands(root);
   if (options.mode !== 'deep') commands = commands.slice(0, 4);
   const results = commands.map(command => runCommand(command, root, options.timeout || 120, options.verbose));
-  const secrets = scan(root, SECRET_PATTERNS, config.exclude, item => !isNonBlockingSecret(item.file));
-  const fake = scan(root, FAKE_PATTERNS, config.exclude, item => isCoreFake(item.file));
+  const secretScan = scan(root, SECRET_PATTERNS, config.exclude, item => !isNonBlockingSecret(item.file));
+  const secrets = secretScan.findings;
+  const fakeScan = scan(root, FAKE_PATTERNS, config.exclude, item => isCoreFake(item.file));
+  const fake = fakeScan.findings;
   const failed = results.filter(result => result.exit_code !== 0);
   const suppliedProof = {
     runtime: [...asList(config.evidence?.runtime), ...asList(options.runtimeProof)],
@@ -231,7 +293,7 @@ function audit(options) {
     ci: [...asList(config.evidence?.ci), ...asList(options.ciProof)],
     independent_review: [...asList(config.evidence?.independent_review), ...asList(options.independentReview)],
   };
-  const checkedProof = Object.fromEntries(Object.entries(suppliedProof).map(([key, values]) => [key, validateEvidence(root, values)]));
+  const checkedProof = Object.fromEntries(Object.entries(suppliedProof).map(([key, values]) => [key, validateEvidence(root, values, key)]));
   const proof = Object.fromEntries(Object.entries(checkedProof).map(([key, value]) => [key, value.valid]));
   const rejectedProof = Object.fromEntries(Object.entries(checkedProof).map(([key, value]) => [key, value.rejected]));
   const evidenceLevels = ['L1_STATIC'];
@@ -276,7 +338,7 @@ function audit(options) {
     notVerified.push('independent review');
     if (needsIndependent) cap(89, 'High-stakes release missing independent review.');
   }
-  const demoOnly = blockingFake.some(item => ['demo only', 'mock data'].some(signal => item.pattern.toLowerCase().includes(signal)));
+  const demoOnly = fakeScan.priorityPatterns.some(pattern => ['demo only', 'mock data'].some(signal => pattern.toLowerCase().includes(signal)));
   if (demoOnly) cap(69, 'Demo-only or mock-data signal found.');
   const verdict = p0.length
     ? 'NOT READY'
@@ -292,7 +354,9 @@ function audit(options) {
     product_type: String(config.project?.type || '').toLowerCase(), product_promise_present: hasProductPromise(config),
     commands_detected: commands, command_results: results, secret_candidates: secrets.slice(0, 80),
     blocking_secret_candidates: blockingSecrets.slice(0, 80), fake_completion_candidates: fake.slice(0, 160),
-    blocking_fake_completion_candidates: blockingFake.slice(0, 80), proof, rejected_proof: rejectedProof, evidence_levels: evidenceLevels,
+    blocking_fake_completion_candidates: blockingFake.slice(0, 80), proof, rejected_proof: rejectedProof,
+    rejected_proof_details: Object.fromEntries(Object.entries(checkedProof).map(([key, value]) => [key, value.details])),
+    scan_stats: { secret_priority_count: secretScan.priorityCount, fake_priority_count: fakeScan.priorityCount }, evidence_levels: evidenceLevels,
     score, score_caps: caps, p0, p1, verdict, not_verified: notVerified,
   };
   return writeReport(root, report, options.ci);

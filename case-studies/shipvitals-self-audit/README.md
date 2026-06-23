@@ -38,6 +38,6 @@ ShipVitals is configured for public release. The policy caps its self-audit at 8
 
 ## Current Interpretation
 
-ShipVitals is suitable for beta review. A stable release still requires accepted independent review. The current report was generated on 2026-06-20 with P0/P1 `0/0`; remote CI evidence remains pending until the first public workflow run.
+ShipVitals is suitable for beta review. A stable release still requires accepted independent review. The current report was generated on 2026-06-22 with P0/P1 `0/0`; remote CI evidence remains pending until the first public workflow run.
 
 The latest benchmark expansion reached 20 executed real open-source audits with 0 P0/P1 across the generated results. The remaining score cap is independent review, not local test failure.

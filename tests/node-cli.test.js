@@ -1,11 +1,29 @@
 const assert = require('node:assert/strict');
-const { execFileSync } = require('node:child_process');
+const { execFileSync, spawnSync } = require('node:child_process');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 const test = require('node:test');
 
 const CLI = path.resolve(__dirname, '..', 'cli', 'bin', 'shipvitals.js');
+
+function evidence(root, kind, artifactName) {
+  const artifact = path.join(root, artifactName);
+  const manifestName = kind + '.shipvitals-evidence.json';
+  fs.writeFileSync(path.join(root, manifestName), JSON.stringify({
+    shipvitals_evidence: 1,
+    kind,
+    observed_at: '2026-06-22T12:00:00Z',
+    source: 'node-test',
+    summary: 'Deterministic fixture evidence observed by the Node integration test.',
+    artifacts: [{
+      path: artifactName,
+      sha256: crypto.createHash('sha256').update(fs.readFileSync(artifact)).digest('hex'),
+    }],
+  }));
+  return manifestName;
+}
 
 function fixture(type = 'cli') {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'shipvitals-node-'));
@@ -17,16 +35,17 @@ function fixture(type = 'cli') {
   }));
   fs.writeFileSync(path.join(root, 'src', 'index.js'), 'module.exports = true;\n');
   fs.writeFileSync(path.join(root, 'runtime-proof.txt'), 'fixture command observed\n');
+  evidence(root, 'runtime', 'runtime-proof.txt');
   return root;
 }
 
 function run(args) {
-  return JSON.parse(execFileSync(process.execPath, [CLI, ...args], { encoding: 'utf8' }));
+  return JSON.parse(execFileSync(process.execPath, [CLI, ...args, '--no-fail'], { encoding: 'utf8' }));
 }
 
 test('npm CLI audits a Node project without invoking Python', () => {
   const root = fixture();
-  const result = run(['audit', root, '--runtime-proof', 'runtime-proof.txt']);
+  const result = run(['audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json']);
   const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
   assert.equal(result.verdict, 'READY');
   assert.equal(report.score, 100);
@@ -37,7 +56,7 @@ test('npm CLI audits a Node project without invoking Python', () => {
 test('npm CLI blocks a secret candidate in source', () => {
   const root = fixture();
   fs.writeFileSync(path.join(root, 'src', 'index.js'), 'const apiKey = "sk-abcdefghijklmnopqrstuvwxyz";\n');
-  const result = run(['audit', root, '--runtime-proof', 'runtime-proof.txt']);
+  const result = run(['audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json']);
   const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
   assert.equal(result.verdict, 'NOT READY');
   assert.equal(report.score, 59);
@@ -46,7 +65,7 @@ test('npm CLI blocks a secret candidate in source', () => {
 
 test('npm CLI requires visual proof for UI projects', () => {
   const root = fixture('saas web app');
-  const result = run(['audit', root, '--runtime-proof', 'runtime-proof.txt']);
+  const result = run(['audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json']);
   const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
   assert.equal(result.verdict, 'ALMOST READY');
   assert.equal(report.score, 74);
@@ -67,7 +86,7 @@ test('npm CLI treats a command timeout as a failed deterministic check', () => {
   const config = JSON.parse(fs.readFileSync(configPath));
   config.commands = { timeout: 'node -e "setTimeout(() => {}, 1000)"' };
   fs.writeFileSync(configPath, JSON.stringify(config));
-  const result = run(['audit', root, '--timeout', '0.05', '--runtime-proof', 'runtime-proof.txt']);
+  const result = run(['audit', root, '--timeout', '0.05', '--runtime-proof', 'runtime.shipvitals-evidence.json']);
   const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
   assert.equal(result.verdict, 'ALMOST READY');
   assert.equal(report.p1.length, 1);
@@ -75,28 +94,34 @@ test('npm CLI treats a command timeout as a failed deterministic check', () => {
   assert.ok(!report.evidence_levels.includes('L2_DETERMINISTIC'));
 });
 
-test('npm CLI retains core blockers after low-priority scan saturation', () => {
+test('npm CLI retains a distinct core blocker after 300 core findings', () => {
   const root = fixture();
-  fs.mkdirSync(path.join(root, 'docs'));
-  fs.writeFileSync(path.join(root, 'docs', 'notes.md'), 'TODO\n'.repeat(350));
-  fs.writeFileSync(path.join(root, 'src', 'index.js'), 'module.exports = "mock data";\n');
-  const result = run(['audit', root, '--runtime-proof', 'runtime-proof.txt']);
+  fs.writeFileSync(path.join(root, 'src', 'a-noise.js'), '// TODO\n'.repeat(350));
+  fs.writeFileSync(path.join(root, 'src', 'z-blocker.js'), 'module.exports = "mock data";\n');
+  const result = run(['audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json']);
   const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
   assert.equal(result.verdict, 'DEMO ONLY');
-  assert.ok(report.blocking_fake_completion_candidates.some(item => item.file.endsWith('src\\index.js') || item.file.endsWith('src/index.js')));
+  assert.ok(report.scan_stats.fake_priority_count > 300);
+  assert.ok(report.blocking_fake_completion_candidates.some(item => item.file.replaceAll('\\', '/') === 'src/z-blocker.js'));
 });
 
-test('npm CLI rejects free-form proof strings', () => {
+test('npm CLI rejects existing arbitrary files as every proof level', () => {
   const root = fixture();
   const configPath = path.join(root, '.shipvitals-config.json');
   const config = JSON.parse(fs.readFileSync(configPath));
   config.project.destination = 'public release';
   fs.writeFileSync(configPath, JSON.stringify(config));
-  const result = run(['audit', root, '--runtime-proof', 'x', '--ci-proof', 'x', '--independent-review', 'x']);
+  const result = run(['audit', root, '--runtime-proof', 'package.json', '--visual-proof', 'package.json', '--ci-proof', 'package.json', '--independent-review', 'package.json']);
   const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
   assert.equal(result.verdict, 'ALMOST READY');
-  assert.deepEqual(report.rejected_proof.runtime, ['x']);
-  assert.ok(!report.evidence_levels.includes('L3_RUNTIME'));
-  assert.ok(!report.evidence_levels.includes('L5_CI_REPRODUCIBLE'));
-  assert.ok(!report.evidence_levels.includes('L6_INDEPENDENT'));
+  assert.deepEqual(report.rejected_proof.runtime, ['package.json']);
+  for (const level of ['L3_RUNTIME', 'L4_VISUAL_FLOW', 'L5_CI_REPRODUCIBLE', 'L6_INDEPENDENT']) assert.ok(!report.evidence_levels.includes(level));
+});
+
+test('npm CLI exits nonzero when the verdict blocks release', () => {
+  const root = fixture();
+  fs.writeFileSync(path.join(root, 'src', 'index.js'), 'const token = "sk-abcdefghijklmnopqrstuvwxyz";\n');
+  const result = spawnSync(process.execPath, [CLI, 'audit', root, '--runtime-proof', 'runtime.shipvitals-evidence.json'], { encoding: 'utf8' });
+  assert.equal(result.status, 1);
+  assert.equal(JSON.parse(result.stdout).verdict, 'NOT READY');
 });

@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:27:57Z",
+  "generated_at": "2026-06-23T02:48:42Z",
   "project": "<benchmark-workspace>\\tj-commander-js",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"import('./index.js').then(m => { if (!m.Command || !m.program) process.exit(1); })\"",
       "exit_code": 0,
-      "seconds": 0.18,
+      "seconds": 0.13,
       "stdout": "",
       "stderr": ""
     }
@@ -106,6 +106,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 6
   },
   "evidence_levels": [
     "L1_STATIC",

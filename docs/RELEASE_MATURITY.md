@@ -6,7 +6,7 @@ This scorecard separates local verification from public distribution and externa
 
 | Area | Status | Evidence |
 |---|---|---|
-| Tests | 25 passing | 18 Python and 7 Node tests via `npm run test` |
+| Tests | 27 passing | 19 Python and 8 Node tests via `npm run test` |
 | Repository validation | Passing | `npm run validate` |
 | Schema validation | Passing | `npm run schema:check` |
 | Tone check | Passing | `npm run tone:check` |

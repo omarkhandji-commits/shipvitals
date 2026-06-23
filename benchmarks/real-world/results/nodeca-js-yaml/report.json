@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:01Z",
+  "generated_at": "2026-06-23T02:48:45Z",
   "project": "<benchmark-workspace>\\nodeca-js-yaml",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node --check bin/js-yaml.mjs",
       "exit_code": 0,
-      "seconds": 0.24,
+      "seconds": 0.13,
       "stdout": "",
       "stderr": ""
     }
@@ -40,6 +40,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 0
   },
   "evidence_levels": [
     "L1_STATIC",

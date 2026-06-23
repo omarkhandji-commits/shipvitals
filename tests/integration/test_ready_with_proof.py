@@ -1,16 +1,34 @@
+import hashlib
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 
+def manifest(root, kind, artifact):
+    artifact_path = root / artifact
+    path = root / f'{kind}.shipvitals-evidence.json'
+    path.write_text(json.dumps({
+        'shipvitals_evidence': 1,
+        'kind': kind,
+        'observed_at': '2026-06-22T12:00:00Z',
+        'source': 'pytest',
+        'summary': 'The required release flow was observed in the integration fixture.',
+        'artifacts': [{'path': artifact, 'sha256': hashlib.sha256(artifact_path.read_bytes()).hexdigest()}],
+    }), encoding='utf-8')
+    return path
+
+
 def test_full_audit_can_return_ready_with_required_proof(tmp_path):
     repo = Path(__file__).parents[2]
-    root = Path(__file__).parents[1] / 'fixtures' / 'mock-nextjs'
-    runtime_proof = tmp_path / 'runtime.txt'
-    visual_proof = tmp_path / 'visual.png'
-    runtime_proof.write_text('dashboard observed', encoding='utf-8')
-    visual_proof.write_bytes(b'visual-proof')
+    source = Path(__file__).parents[1] / 'fixtures' / 'mock-nextjs'
+    root = tmp_path / 'mock-nextjs'
+    shutil.copytree(source, root)
+    (root / 'runtime.txt').write_text('dashboard observed', encoding='utf-8')
+    (root / 'visual.png').write_bytes(b'visual-proof')
+    runtime_proof = manifest(root, 'runtime', 'runtime.txt')
+    visual_proof = manifest(root, 'visual', 'visual.png')
     result = subprocess.run(
         [
             sys.executable,

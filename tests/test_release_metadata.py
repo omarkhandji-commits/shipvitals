@@ -58,5 +58,8 @@ def test_action_is_a_gate_and_exposes_verdict():
     assert "value: ${{ steps.audit.outputs.verdict }}" in action
     assert "id: audit" in action
     assert 'default: "true"' in action
-    assert 'if [ "${{ inputs.fail-on-unready }}" = "true" ]' in action
+    assert "INPUT_FAIL_ON_UNREADY:" in action
+    assert 'if [ "$INPUT_FAIL_ON_UNREADY" = "true" ]' in action
+    run_block = action.split("      run: |", 1)[1]
+    assert "inputs." not in run_block
     assert '[ "$verdict" != "READY" ]' in action

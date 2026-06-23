@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:07Z",
+  "generated_at": "2026-06-23T02:48:50Z",
   "project": "<benchmark-workspace>\\sindresorhus-query-string",
   "mode": "quick",
   "config_exists": true,
@@ -15,14 +15,14 @@
     {
       "cmd": "node --check index.js",
       "exit_code": 0,
-      "seconds": 0.11,
+      "seconds": 0.12,
       "stdout": "",
       "stderr": ""
     },
     {
       "cmd": "node --check base.js",
       "exit_code": 0,
-      "seconds": 0.15,
+      "seconds": 0.11,
       "stdout": "",
       "stderr": ""
     }
@@ -64,6 +64,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 2
   },
   "evidence_levels": [
     "L1_STATIC",

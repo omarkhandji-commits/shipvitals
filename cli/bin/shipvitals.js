@@ -8,15 +8,15 @@ const { audit, DEFAULT_CONFIG, VERSION } = require('../lib/audit');
 const HELP = `ShipVitals ${VERSION}
 
 Usage:
-  shipvitals audit [project] [--ci] [--mode quick|deep]
+  shipvitals audit [project] [--ci] [--no-fail] [--mode quick|deep]
   shipvitals init [project] [--non-interactive]
   shipvitals diagnostics [project]
 
 Audit proof flags:
-  --runtime-proof "note, URL, path, or artifact"
-  --visual-proof "screenshot, video, trace, or responsive proof"
-  --ci-proof "CI run URL, hook output, or reproducibility artifact"
-  --independent-review "second-auditor report or reviewer signoff"
+  --runtime-proof "runtime.shipvitals-evidence.json"
+  --visual-proof "visual.shipvitals-evidence.json"
+  --ci-proof "ci.shipvitals-evidence.json"
+  --independent-review "review.shipvitals-evidence.json"
 `;
 
 function parse(argv) {
@@ -33,6 +33,7 @@ function parse(argv) {
     const arg = argv[index];
     if (arg === '--ci') options.ci = true;
     else if (arg === '--verbose') options.verbose = true;
+    else if (arg === '--no-fail') options.noFail = true;
     else if (arg === '--non-interactive') options.nonInteractive = true;
     else if (valueFlags.has(arg)) {
       const key = valueFlags.get(arg);
@@ -89,7 +90,11 @@ async function main() {
     return;
   }
   const options = parse(argv);
-  if (options.command === 'audit') process.stdout.write(`${JSON.stringify(audit(options), null, 2)}\n`);
+  if (options.command === 'audit') {
+    const result = audit(options);
+    process.stdout.write(JSON.stringify(result, null, 2) + '\n');
+    if (!options.noFail && result.verdict !== 'READY') process.exitCode = 1;
+  }
   else if (['init', 'interview'].includes(options.command)) await init(options);
   else if (options.command === 'diagnostics') diagnostics(options);
   else throw new Error(`Unknown command: ${options.command}\n\n${HELP}`);

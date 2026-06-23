@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:27:56Z",
+  "generated_at": "2026-06-23T02:48:41Z",
   "project": "<benchmark-workspace>\\pypa-sampleproject",
   "mode": "quick",
   "config_exists": true,
@@ -15,14 +15,14 @@
     {
       "cmd": "python -m py_compile src/sample/__init__.py src/sample/simple.py",
       "exit_code": 0,
-      "seconds": 0.21,
+      "seconds": 0.16,
       "stdout": "",
       "stderr": ""
     },
     {
       "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); from sample.simple import add_one; assert add_one(5) == 6\"",
       "exit_code": 0,
-      "seconds": 0.16,
+      "seconds": 0.17,
       "stdout": "",
       "stderr": ""
     }
@@ -42,6 +42,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 0
   },
   "evidence_levels": [
     "L1_STATIC",

@@ -81,10 +81,10 @@ Static analysis cannot prove a browser flow, payment, authentication boundary, o
 
 ```bash
 shipvitals audit . \
-  --runtime-proof "artifacts/checkout-trace.zip" \
-  --visual-proof "artifacts/mobile-checkout.png" \
-  --ci-proof "https://github.com/omarkhandji-commits/shipvitals/actions/runs/123" \
-  --independent-review "https://github.com/omarkhandji-commits/shipvitals/issues/42"
+  --runtime-proof "artifacts/runtime.shipvitals-evidence.json" \
+  --visual-proof "artifacts/visual.shipvitals-evidence.json" \
+  --ci-proof "artifacts/ci.shipvitals-evidence.json" \
+  --independent-review "artifacts/independent_review.shipvitals-evidence.json"
 ```
 
 Reports are written to:
@@ -94,7 +94,7 @@ Reports are written to:
 .shipvitals-evidence/summary.md
 ```
 
-Proof values must resolve to a non-empty local artifact or an HTTP(S) URL. Free-form notes are recorded as rejected proof and do not increase the evidence level.
+Proof flags accept typed .shipvitals-evidence.json manifests. Local artifacts require a matching SHA-256; CI and independent-review manifests must match the audited commit. See docs/EVIDENCE.md.
 
 ## GitHub Action
 

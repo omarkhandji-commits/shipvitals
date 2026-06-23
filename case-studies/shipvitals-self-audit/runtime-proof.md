@@ -1,6 +1,6 @@
 # Runtime Proof
 
-Observed on 2026-06-19 before the first public push.
+Observed on 2026-06-22 before the first public push.
 
 - `npm run test:package` packed `shipvitals-1.0.0-beta.1.tgz`.
 - The tarball was installed into a new temporary Node project.

@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:28:12Z",
+  "generated_at": "2026-06-23T02:48:55Z",
   "project": "<benchmark-workspace>\\date-fns-date-fns",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "node -e \"const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); if(!pkg.name || !fs.existsSync('pkgs/core')) process.exit(1)\"",
       "exit_code": 0,
-      "seconds": 0.2,
+      "seconds": 0.19,
       "stdout": "",
       "stderr": ""
     }
@@ -321,6 +321,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 21
   },
   "evidence_levels": [
     "L1_STATIC",

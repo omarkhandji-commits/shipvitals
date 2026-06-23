@@ -1,7 +1,7 @@
 {
   "tool": "ShipVitals",
   "version": "1.0.0-beta.1",
-  "generated_at": "2026-06-20T16:27:59Z",
+  "generated_at": "2026-06-23T02:48:44Z",
   "project": "<benchmark-workspace>\\pallets-itsdangerous",
   "mode": "quick",
   "config_exists": true,
@@ -14,7 +14,7 @@
     {
       "cmd": "python -c \"import sys; sys.path.insert(0, 'src'); import itsdangerous; assert itsdangerous.URLSafeSerializer\"",
       "exit_code": 0,
-      "seconds": 0.23,
+      "seconds": 0.14,
       "stdout": "",
       "stderr": ""
     }
@@ -46,6 +46,16 @@
     "visual": [],
     "ci": [],
     "independent_review": []
+  },
+  "rejected_proof_details": {
+    "runtime": [],
+    "visual": [],
+    "ci": [],
+    "independent_review": []
+  },
+  "scan_stats": {
+    "secret_priority_count": 0,
+    "fake_priority_count": 1
   },
   "evidence_levels": [
     "L1_STATIC",

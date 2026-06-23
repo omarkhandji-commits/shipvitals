@@ -7,7 +7,7 @@ shipvitals audit .</code></pre><h2 id="action">GitHub Action</h2><pre><code>- us
     path: .
     mode: deep
     ci-proof: "GitHub Actions run"</code></pre><p>The Action exposes a verdict output. The complete reasoning remains in <code>.shipvitals-evidence/report.json</code>.</p><h2 id="skill">Agent skill</h2><p>Copy the repository folder <code>skills/shipvitals/</code> into the skills directory used by Codex, Claude Code, or another compatible agent. The skill instructs the agent to gather evidence before changing the verdict.</p><h2 id="proof">Attach observed proof</h2><pre><code>shipvitals audit . \
-  --runtime-proof "artifacts/checkout-trace.zip" \
-  --visual-proof "artifacts/mobile-checkout.png" \
-  --ci-proof "https://github.com/omarkhandji-commits/shipvitals/actions/runs/123" \
-  --independent-review "https://github.com/omarkhandji-commits/shipvitals/issues/42"</code></pre><p class="note">Proof must resolve to a non-empty local artifact or an HTTP(S) URL. Free-form notes do not increase the evidence level.</p></article></section></main><footer class="site-footer"><div class="shell footer-grid"><span>ShipVitals is MIT licensed.</span><div class="footer-links"><a href="/shipvitals/">Home</a><a href="/shipvitals/compare/">Compare</a></div></div></footer></body></html>
+  --runtime-proof "artifacts/runtime.shipvitals-evidence.json" \
+  --visual-proof "artifacts/visual.shipvitals-evidence.json" \
+  --ci-proof "artifacts/ci.shipvitals-evidence.json" \
+  --independent-review "artifacts/independent_review.shipvitals-evidence.json"</code></pre><p class="note">Proof flags require typed evidence manifests with artifact hashes and commit binding. Arbitrary files and free-form URLs are rejected.</p></article></section></main><footer class="site-footer"><div class="shell footer-grid"><span>ShipVitals is MIT licensed.</span><div class="footer-links"><a href="/shipvitals/">Home</a><a href="/shipvitals/compare/">Compare</a></div></div></footer></body></html>
