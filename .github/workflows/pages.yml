@@ -40,7 +40,7 @@ jobs:
           else
             git switch --orphan gh-pages
           fi
-          git rm -rf .
+          git rm -rf . || true
           cp -R /tmp/shipvitals-pages/. .
           git add -A
           git commit -m "Deploy website" || exit 0
