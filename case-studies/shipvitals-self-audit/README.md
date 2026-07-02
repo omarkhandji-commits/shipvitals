@@ -1,12 +1,12 @@
 # ShipVitals Self-Audit
 
-Real audit of ShipVitals against its own release gate.
+Historical public sample from a real ShipVitals self-audit. Current HEAD proof must be regenerated locally or verified by CI because committed reports cannot prove the commit that contains them.
 
 ## Source
 
 - Project: `ShipVitals`
 - Config: `.shipvitals-config.json`
-- Public report: `case-studies/shipvitals-self-audit/report.public.json`
+- Public report: `case-studies/shipvitals-self-audit/report.public.json` (historical sample, not current-HEAD proof)
 - Local raw report: `.shipvitals-evidence/report.json` (gitignored because it contains machine paths and raw output)
 
 ## Result
@@ -38,6 +38,6 @@ ShipVitals is configured for public release. The policy caps its self-audit at 8
 
 ## Current Interpretation
 
-ShipVitals is suitable for beta review. A stable release still requires accepted independent review. The current report was generated on 2026-06-22 with P0/P1 `0/0`; remote CI evidence remains pending until the first public workflow run.
+ShipVitals is suitable for beta review. A stable release still requires accepted independent review. The public report was generated before first public push with P0/P1 `0/0`; remote CI evidence remains pending until the first public workflow run.
 
 The latest benchmark expansion reached 20 executed real open-source audits with 0 P0/P1 across the generated results. The remaining score cap is independent review, not local test failure.

@@ -1,7 +1,9 @@
+import datetime
 import hashlib
 import json
 import subprocess
 import sys
+import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).parents[2]
@@ -142,3 +144,111 @@ def test_python_runner_handles_bom_and_rejects_impossible_timestamp(tmp_path):
     assert report['verdict'] == 'ALMOST READY'
     assert 'L3_RUNTIME' not in report['evidence_levels']
     assert 'valid UTC timestamp' in report['rejected_proof_details']['runtime'][0]['reason']
+
+def test_python_runner_rejects_fake_zip_visual_and_non_json_runtime(tmp_path):
+    write_project(tmp_path)
+    config_path = tmp_path / '.shipvitals-config.json'
+    config = json.loads(config_path.read_text())
+    config['project']['type'] = 'saas web app'
+    config_path.write_text(json.dumps(config), encoding='utf-8')
+    (tmp_path / 'visual.zip').write_bytes(b'PK\x03\x04fake visual archive')
+    write_evidence(tmp_path, 'visual', 'visual.zip')
+    (tmp_path / 'runtime.zip').write_bytes(b'PK\x03\x04fake runtime archive')
+    write_evidence(tmp_path, 'runtime', 'runtime.zip')
+    report = run(
+        tmp_path,
+        '--runtime-proof', str(tmp_path / 'runtime.shipvitals-evidence.json'),
+        '--visual-proof', str(tmp_path / 'visual.shipvitals-evidence.json'),
+    )
+    assert 'L3_RUNTIME' not in report['evidence_levels']
+    assert 'L4_VISUAL_FLOW' not in report['evidence_levels']
+    assert 'ShipVitals runtime JSON' in report['rejected_proof_details']['runtime'][0]['reason']
+    assert 'Playwright trace' in report['rejected_proof_details']['visual'][0]['reason']
+
+
+
+def test_python_runner_accepts_playwright_trace_visual(tmp_path):
+    write_project(tmp_path)
+    config_path = tmp_path / '.shipvitals-config.json'
+    config = json.loads(config_path.read_text())
+    config['project']['type'] = 'saas web app'
+    config_path.write_text(json.dumps(config), encoding='utf-8')
+    trace_path = tmp_path / 'flow.trace'
+    with zipfile.ZipFile(trace_path, 'w') as archive:
+        archive.writestr('trace.trace', '{}\n')
+        archive.writestr('trace.network', '{}\n')
+    write_evidence(tmp_path, 'visual', 'flow.trace')
+    report = run(
+        tmp_path,
+        '--runtime-proof', str(tmp_path / 'runtime.shipvitals-evidence.json'),
+        '--visual-proof', str(tmp_path / 'visual.shipvitals-evidence.json'),
+    )
+    assert report['verdict'] == 'READY'
+    assert 'L4_VISUAL_FLOW' in report['evidence_levels']
+
+def test_python_evidence_accepts_verified_ci_and_independent_l6(tmp_path, monkeypatch):
+    sys.path.append(str(ROOT / 'skills/shipvitals/scripts'))
+    import shipvitals_evidence
+
+    write_project(tmp_path, destination='public release')
+
+    def git(*args):
+        result = subprocess.run(['git', *args], cwd=tmp_path, text=True, capture_output=True)
+        assert result.returncode == 0, result.stderr
+        return result.stdout.strip()
+
+    git('init')
+    git('config', 'user.email', 'shipvitals@example.com')
+    git('config', 'user.name', 'ShipVitals Test')
+    git('remote', 'add', 'origin', 'https://github.com/acme/shipvitals-fixture.git')
+    git('add', 'package.json', '.shipvitals-config.json', 'src/index.py')
+    git('commit', '-m', 'fixture')
+    head = git('rev-parse', 'HEAD').lower()
+    observed_at = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
+    run_url = 'https://github.com/acme/shipvitals-fixture/actions/runs/123'
+    review_url = 'https://github.com/acme/shipvitals-fixture/issues/1#issuecomment-456'
+
+    ci_path = tmp_path / 'ci.shipvitals-evidence.json'
+    ci_path.write_text(json.dumps({
+        'shipvitals_evidence': 1,
+        'kind': 'ci',
+        'observed_at': observed_at,
+        'source': 'github-actions',
+        'summary': 'Verified GitHub Actions run for the current test commit.',
+        'commit': head,
+        'run_url': run_url,
+        'artifacts': [{'url': run_url}],
+    }), encoding='utf-8')
+    (tmp_path / 'review-note.md').write_text('Independent acceptance note.\n', encoding='utf-8')
+    independent_path = tmp_path / 'independent.shipvitals-evidence.json'
+    independent_path.write_text(json.dumps({
+        'shipvitals_evidence': 1,
+        'kind': 'independent_review',
+        'observed_at': observed_at,
+        'source': 'github-review',
+        'summary': 'Verified independent GitHub issue comment for the current test commit.',
+        'reviewer': 'review-account',
+        'decision': 'accept',
+        'reviewed_commit': head,
+        'review_url': review_url,
+        'artifacts': [{
+            'path': 'review-note.md',
+            'sha256': hashlib.sha256((tmp_path / 'review-note.md').read_bytes()).hexdigest(),
+        }],
+    }), encoding='utf-8')
+
+    def fake_github_json(api_path):
+        if api_path.endswith('/actions/runs/123'):
+            return {'html_url': run_url, 'head_sha': head, 'conclusion': 'success', 'status': 'completed'}
+        if api_path.endswith('/issues/comments/456'):
+            return {'html_url': review_url, 'user': {'login': 'review-account'}, 'author_association': 'NONE', 'body': f'SHIPVITALS-L6 ACCEPT {head}'}
+        if api_path.endswith('/users/review-account'):
+            return {'created_at': '2020-01-01T00:00:00Z'}
+        return None
+
+    monkeypatch.setattr(shipvitals_evidence, 'github_json', fake_github_json)
+    as_list = lambda value: [str(item) for item in (value if isinstance(value, list) else [value]) if str(item).strip()]
+    ci = shipvitals_evidence.validate_evidence(tmp_path, [str(ci_path)], 'ci', as_list)
+    independent = shipvitals_evidence.validate_evidence(tmp_path, [str(independent_path)], 'independent_review', as_list)
+    assert ci['valid'] == [str(ci_path)]
+    assert independent['valid'] == [str(independent_path)]

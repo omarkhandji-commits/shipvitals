@@ -178,19 +178,39 @@ function inside(root, candidate) {
   return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
 }
 
-function validVisualFile(file) {
-  const bytes = fs.readFileSync(file);
-  const signatures = [
-    Buffer.from([0x89, 0x50, 0x4e, 0x47]),
-    Buffer.from([0xff, 0xd8, 0xff]),
-    Buffer.from('GIF8'),
-    Buffer.from('RIFF'),
-    Buffer.from('PK\x03\x04'),
-  ];
-  if (signatures.some(signature => bytes.subarray(0, signature.length).equals(signature))) return true;
-  return bytes.length > 12 && bytes.subarray(4, 8).toString('ascii') === 'ftyp';
+function zipEntryNames(bytes) {
+  const names = [];
+  for (let offset = 0; offset + 46 <= bytes.length && names.length < 5000; offset += 1) {
+    if (bytes.readUInt32LE(offset) !== 0x02014b50) continue;
+    const nameLength = bytes.readUInt16LE(offset + 28);
+    const extraLength = bytes.readUInt16LE(offset + 30);
+    const commentLength = bytes.readUInt16LE(offset + 32);
+    const nameStart = offset + 46;
+    const nameEnd = nameStart + nameLength;
+    if (nameEnd > bytes.length) break;
+    names.push(bytes.subarray(nameStart, nameEnd).toString('utf8').replaceAll('\\', '/'));
+    offset = nameEnd + extraLength + commentLength - 1;
+  }
+  return names;
 }
 
+function validPlaywrightTrace(bytes) {
+  const names = zipEntryNames(bytes);
+  return names.includes('trace.trace') && (names.includes('trace.network') || names.some(name => name.startsWith('resources/')));
+}
+
+function validVisualFile(file) {
+  const bytes = fs.readFileSync(file);
+  const name = path.basename(file).toLowerCase();
+  const ext = path.extname(file).toLowerCase();
+  if (ext === '.png') return bytes.subarray(0, 4).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47]));
+  if (['.jpg', '.jpeg'].includes(ext)) return bytes.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]));
+  if (ext === '.gif') return bytes.subarray(0, 4).toString('ascii') === 'GIF8';
+  if (ext === '.webp') return bytes.length > 12 && bytes.subarray(0, 4).toString('ascii') === 'RIFF' && bytes.subarray(8, 12).toString('ascii') === 'WEBP';
+  if (['.mp4', '.mov'].includes(ext)) return bytes.length > 12 && bytes.subarray(4, 8).toString('ascii') === 'ftyp';
+  if (name.endsWith('.trace')) return validPlaywrightTrace(bytes);
+  return false;
+}
 async function githubJson(apiPath) {
   try {
     const response = await fetch('https://api.github.com' + apiPath, {
@@ -272,14 +292,12 @@ async function validateManifest(root, value, kind) {
       const artifactPath = fs.realpathSync(unresolved);
       if (!inside(root, artifactPath) || !fs.statSync(artifactPath).isFile() || fs.statSync(artifactPath).size === 0) return fail('Local artifact is missing, empty, or escapes through a symlink.');
       if (!/^[a-f0-9]{64}$/i.test(artifact.sha256 || '') || sha256(artifactPath) !== artifact.sha256.toLowerCase()) return fail('Local artifact SHA-256 mismatch.');
-      if (kind === 'visual' && !validVisualFile(artifactPath)) return fail('Visual artifact has no recognized image, video, trace, or archive signature.');
+      if (kind === 'visual' && !validVisualFile(artifactPath)) return fail('Visual artifact has no recognized image, video, or Playwright trace structure.');
       if (kind === 'runtime') {
-        if (!runtimeExtensions.has(path.extname(artifactPath).toLowerCase())) return fail('Runtime evidence must be a structured test, trace, HAR, video, or JSON artifact.');
-        if (path.extname(artifactPath).toLowerCase() === '.json') {
-          let runtime;
-          try { runtime = JSON.parse(fs.readFileSync(artifactPath, 'utf8').replace(/^\uFEFF/, '')); } catch { return fail('Runtime JSON artifact is invalid.'); }
-          if (runtime.shipvitals_runtime !== 1 || runtime.exit_code !== 0 || (head && String(runtime.commit || '').toLowerCase() !== head)) return fail('Runtime JSON is not a passing commit-bound execution record.');
-        }
+        if (path.extname(artifactPath).toLowerCase() !== '.json') return fail('Runtime evidence must be a ShipVitals runtime JSON record.');
+        let runtime;
+        try { runtime = JSON.parse(fs.readFileSync(artifactPath, 'utf8').replace(/^\uFEFF/, '')); } catch { return fail('Runtime JSON artifact is invalid.'); }
+        if (runtime.shipvitals_runtime !== 1 || runtime.exit_code !== 0 || (head && String(runtime.commit || '').toLowerCase() !== head)) return fail('Runtime JSON is not a passing commit-bound execution record.');
       }
     } else if (artifact.url) {
       if (kind !== 'ci') return fail('Remote artifacts are not accepted without local digest verification.');

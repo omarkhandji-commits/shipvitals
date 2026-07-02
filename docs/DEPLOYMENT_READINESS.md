@@ -1,6 +1,6 @@
 # Deployment Readiness
 
-Last local verification: 2026-06-22.
+Last local verification: 2026-07-02.
 
 ## Current Verdict
 
@@ -8,13 +8,11 @@ Last local verification: 2026-06-22.
 
 The only current score cap is independent L6 review. Remote CI, registry publication, and external feedback remain separate release requirements.
 
-The public, path-sanitized report is stored at `case-studies/shipvitals-self-audit/report.public.json`.
+The public, path-sanitized report at `case-studies/shipvitals-self-audit/report.public.json` is a historical beta-readiness sample. It is not treated as proof for the current HEAD; current proof must be regenerated into `.shipvitals-evidence` after checkout or verified through CI/L6.
 
 ## Fresh Self-Audit
 
-Generated at 2026-06-23T02:49:24Z with:
-
-Generate fresh commit-bound evidence first:
+Generate fresh current-HEAD evidence first:
 
     python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --runtime-command "npm run test:package"
     python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --visual-file case-studies/shipvitals-self-audit/visual/mobile.png
@@ -42,8 +40,8 @@ Ten deterministic commands passed:
 
 - Python: wheel and sdist built successfully as `shipvitals_cli-1.0.0b1`.
 - npm: packed tarball installed into a temporary project and audited successfully.
-- Node CLI: ten tests pass, including timeout, saturation, and invalid-proof regressions.
-- Python suite: 21 tests pass, including matching adversarial coverage.
+- Node CLI: 12 tests pass, including timeout, saturation, provenance, and invalid-proof regressions.
+- Python suite: 24 tests pass, including matching adversarial, trace, and provenance coverage.
 - GitHub Action: local metadata validates; remote execution and L5 evidence require the public repository.
 
 ## Website Evidence

@@ -17,11 +17,15 @@ def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     cmd = argv[0] if argv else 'audit'
     if cmd in {'-h', '--help', 'help'} or cmd not in COMMANDS:
-        print('Usage: shipvitals audit [project] [--ci] [--verbose] [--runtime-proof TEXT] [--visual-proof TEXT] | shipvitals init [project] | shipvitals diagnostics [project]')
+        print('Usage: shipvitals audit [project] [--ci] [--verbose] [--runtime-proof FILE] [--visual-proof FILE] [--ci-proof FILE] [--independent-review FILE] | shipvitals init [project] | shipvitals diagnostics [project]')
         return 0 if cmd in {'-h', '--help', 'help'} else 1
     rest = argv[1:]
-    target = next((a for a in rest if not a.startswith('--')), '.')
-    flags = [a for a in rest if a != target]
+    if rest and not rest[0].startswith('--'):
+        target = rest[0]
+        flags = rest[1:]
+    else:
+        target = '.'
+        flags = rest
     if cmd in {'init', 'interview'} and '--write-config' not in flags:
         flags.append('--write-config')
     script = SCRIPTS / COMMANDS[cmd]

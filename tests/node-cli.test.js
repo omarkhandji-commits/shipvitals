@@ -164,3 +164,97 @@ test('npm CLI handles BOM config and rejects impossible timestamps', () => {
   assert.ok(!report.evidence_levels.includes('L3_RUNTIME'));
   assert.match(report.rejected_proof_details.runtime[0].reason, /valid UTC timestamp/);
 });
+
+test('npm CLI rejects fake ZIP visual proof and non-JSON runtime proof', () => {
+  const root = fixture('saas web app');
+  fs.writeFileSync(path.join(root, 'visual.zip'), Buffer.from('PK\x03\x04fake visual archive'));
+  evidence(root, 'visual', 'visual.zip');
+  fs.writeFileSync(path.join(root, 'runtime-proof.zip'), Buffer.from('PK\x03\x04fake runtime archive'));
+  evidence(root, 'runtime', 'runtime-proof.zip');
+  const result = run([
+    'audit', root,
+    '--runtime-proof', 'runtime.shipvitals-evidence.json',
+    '--visual-proof', 'visual.shipvitals-evidence.json',
+  ]);
+  const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
+  assert.equal(result.verdict, 'ALMOST READY');
+  assert.ok(!report.evidence_levels.includes('L3_RUNTIME'));
+  assert.ok(!report.evidence_levels.includes('L4_VISUAL_FLOW'));
+  assert.match(report.rejected_proof_details.runtime[0].reason, /ShipVitals runtime JSON/);
+  assert.match(report.rejected_proof_details.visual[0].reason, /Playwright trace/);
+});
+
+test('npm library accepts verified GitHub CI and independent L6 provenance', async () => {
+  const { audit } = require('../cli/lib/audit.js');
+  const root = fixture();
+  const git = (...args) => spawnSync('git', args, { cwd: root, encoding: 'utf8' });
+  git('init');
+  git('config', 'user.email', 'shipvitals@example.com');
+  git('config', 'user.name', 'ShipVitals Test');
+  git('remote', 'add', 'origin', 'https://github.com/acme/shipvitals-fixture.git');
+  git('add', 'package.json', '.shipvitals-config.json', 'src/index.js');
+  assert.equal(git('commit', '-m', 'fixture').status, 0);
+  const head = git('rev-parse', 'HEAD').stdout.trim().toLowerCase();
+  const observedAt = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+  fs.writeFileSync(path.join(root, 'runtime-proof.json'), JSON.stringify({ shipvitals_runtime: 1, exit_code: 0, commit: head }));
+  fs.writeFileSync(path.join(root, 'runtime.shipvitals-evidence.json'), JSON.stringify({
+    shipvitals_evidence: 1,
+    kind: 'runtime',
+    observed_at: observedAt,
+    source: 'node-test',
+    summary: 'Commit-bound runtime execution record for the provenance success test.',
+    commit: head,
+    artifacts: [{
+      path: 'runtime-proof.json',
+      sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'runtime-proof.json'))).digest('hex'),
+    }],
+  }));
+  const runUrl = 'https://github.com/acme/shipvitals-fixture/actions/runs/123';
+  fs.writeFileSync(path.join(root, 'ci.shipvitals-evidence.json'), JSON.stringify({
+    shipvitals_evidence: 1,
+    kind: 'ci',
+    observed_at: observedAt,
+    source: 'github-actions',
+    summary: 'Verified GitHub Actions run for the current test commit.',
+    commit: head,
+    run_url: runUrl,
+    artifacts: [{ url: runUrl }],
+  }));
+  fs.writeFileSync(path.join(root, 'review-note.md'), 'Independent acceptance note.\n');
+  const reviewUrl = 'https://github.com/acme/shipvitals-fixture/issues/1#issuecomment-456';
+  fs.writeFileSync(path.join(root, 'independent.shipvitals-evidence.json'), JSON.stringify({
+    shipvitals_evidence: 1,
+    kind: 'independent_review',
+    observed_at: observedAt,
+    source: 'github-review',
+    summary: 'Verified independent GitHub issue comment for the current test commit.',
+    reviewer: 'review-account',
+    decision: 'accept',
+    reviewed_commit: head,
+    review_url: reviewUrl,
+    artifacts: [{
+      path: 'review-note.md',
+      sha256: crypto.createHash('sha256').update(fs.readFileSync(path.join(root, 'review-note.md'))).digest('hex'),
+    }],
+  }));
+  const originalFetch = global.fetch;
+  global.fetch = async url => ({
+    ok: true,
+    json: async () => {
+      const text = String(url);
+      if (text.includes('/actions/runs/123')) return { html_url: runUrl, head_sha: head, conclusion: 'success', status: 'completed' };
+      if (text.includes('/issues/comments/456')) return { html_url: reviewUrl, user: { login: 'review-account' }, author_association: 'NONE', body: 'SHIPVITALS-L6 ACCEPT ' + head };
+      if (text.includes('/users/review-account')) return { created_at: '2020-01-01T00:00:00Z' };
+      return {};
+    },
+  });
+  try {
+    const report = await audit({ project: root, ci: true, runtimeProof: 'runtime.shipvitals-evidence.json', ciProof: 'ci.shipvitals-evidence.json', independentReview: 'independent.shipvitals-evidence.json' });
+    assert.equal(report.verdict, 'READY');
+    assert.equal(report.score, 100);
+    assert.ok(report.evidence_levels.includes('L5_CI_REPRODUCIBLE'));
+    assert.ok(report.evidence_levels.includes('L6_INDEPENDENT'));
+  } finally {
+    global.fetch = originalFetch;
+  }
+});

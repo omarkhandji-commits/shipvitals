@@ -9,7 +9,7 @@ Generate commit-bound evidence after checkout:
     python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --runtime-command "npm run test:package"
     python skills/shipvitals/scripts/shipvitals_create_local_evidence.py . --visual-file case-studies/shipvitals-self-audit/visual/mobile.png
 
-The files are written under .shipvitals-evidence and expire after 30 days. Runtime JSON must record a passing command for the current HEAD. Visual files are checked by binary signature, not extension alone. Local paths are resolved through symlinks and cannot leave the project.
+The files are written under .shipvitals-evidence and expire after 30 days. Runtime proof must be a ShipVitals JSON execution record for the current HEAD. Visual proof must be a real image/video signature or a Playwright trace with trace entries; arbitrary ZIP/HAR/files are rejected. Local paths are resolved through symlinks and cannot leave the project.
 
 ## CI provenance
 

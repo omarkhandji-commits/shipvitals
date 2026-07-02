@@ -6,6 +6,7 @@ import os
 import re
 import subprocess
 import urllib.request
+import zipfile
 from pathlib import Path
 
 
@@ -30,11 +31,32 @@ def inside(root, candidate):
         return False
 
 
+def valid_playwright_trace(path):
+    try:
+        with zipfile.ZipFile(path) as archive:
+            names = {name.replace('\\', '/') for name in archive.namelist()}
+    except zipfile.BadZipFile:
+        return False
+    return 'trace.trace' in names and ('trace.network' in names or any(name.startswith('resources/') for name in names))
+
+
 def valid_visual_file(path):
     data = path.read_bytes()
-    signatures = (b'\x89PNG', b'\xff\xd8\xff', b'GIF8', b'RIFF', b'PK\x03\x04')
-    return any(data.startswith(item) for item in signatures) or (len(data) > 12 and data[4:8] == b'ftyp')
-
+    suffix = path.suffix.lower()
+    name = path.name.lower()
+    if suffix == '.png':
+        return data.startswith(b'\x89PNG')
+    if suffix in {'.jpg', '.jpeg'}:
+        return data.startswith(b'\xff\xd8\xff')
+    if suffix == '.gif':
+        return data.startswith(b'GIF8')
+    if suffix == '.webp':
+        return len(data) > 12 and data[:4] == b'RIFF' and data[8:12] == b'WEBP'
+    if suffix in {'.mp4', '.mov'}:
+        return len(data) > 12 and data[4:8] == b'ftyp'
+    if name.endswith('.trace'):
+        return valid_playwright_trace(path)
+    return False
 
 def github_json(api_path):
     try:
@@ -169,21 +191,20 @@ def validate_manifest(root, value, kind):
             if not re.fullmatch(r'[a-fA-F0-9]{64}', str(artifact.get('sha256', ''))) or digest != str(artifact['sha256']).lower():
                 return fail('Local artifact SHA-256 mismatch.')
             if kind == 'visual' and not valid_visual_file(artifact_path):
-                return fail('Visual artifact has no recognized image, video, trace, or archive signature.')
+                return fail('Visual artifact has no recognized image, video, or Playwright trace structure.')
             if kind == 'runtime':
-                if artifact_path.suffix.lower() not in runtime_ext:
-                    return fail('Runtime evidence must be a structured test, trace, HAR, video, or JSON artifact.')
-                if artifact_path.suffix.lower() == '.json':
-                    try:
-                        runtime = json.loads(artifact_path.read_text(encoding='utf-8-sig'))
-                    except Exception:
-                        return fail('Runtime JSON artifact is invalid.')
-                    if (
-                        runtime.get('shipvitals_runtime') != 1
-                        or runtime.get('exit_code') != 0
-                        or (head and str(runtime.get('commit', '')).lower() != head)
-                    ):
-                        return fail('Runtime JSON is not a passing commit-bound execution record.')
+                if artifact_path.suffix.lower() != '.json':
+                    return fail('Runtime evidence must be a ShipVitals runtime JSON record.')
+                try:
+                    runtime = json.loads(artifact_path.read_text(encoding='utf-8-sig'))
+                except Exception:
+                    return fail('Runtime JSON artifact is invalid.')
+                if (
+                    runtime.get('shipvitals_runtime') != 1
+                    or runtime.get('exit_code') != 0
+                    or (head and str(runtime.get('commit', '')).lower() != head)
+                ):
+                    return fail('Runtime JSON is not a passing commit-bound execution record.')
         elif artifact.get('url'):
             if kind != 'ci':
                 return fail('Remote artifacts are not accepted without local digest verification.')
