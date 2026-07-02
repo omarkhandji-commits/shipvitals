@@ -9,29 +9,39 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
         with:
-          path: website
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          timeout: 1800000
-          reporting_interval: 30000
+          node-version: 22
+      - name: Verify static site
+        run: npm run site:check
+      - name: Publish static site branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf /tmp/shipvitals-pages
+          mkdir -p /tmp/shipvitals-pages
+          cp -R website/. /tmp/shipvitals-pages/
+          touch /tmp/shipvitals-pages/.nojekyll
+          git fetch origin gh-pages || true
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git switch --track -c gh-pages origin/gh-pages
+          else
+            git switch --orphan gh-pages
+          fi
+          git rm -rf .
+          cp -R /tmp/shipvitals-pages/. .
+          git add -A
+          git commit -m "Deploy website" || exit 0
+          git push origin gh-pages
