@@ -258,3 +258,76 @@ test('npm library accepts verified GitHub CI and independent L6 provenance', asy
     global.fetch = originalFetch;
   }
 });
+function zipWithEmptyEntries(names) {
+  const locals = [];
+  const centrals = [];
+  let offset = 0;
+  for (const name of names) {
+    const nameBytes = Buffer.from(name);
+    const local = Buffer.alloc(30 + nameBytes.length);
+    local.writeUInt32LE(0x04034b50, 0);
+    local.writeUInt16LE(20, 4);
+    local.writeUInt16LE(nameBytes.length, 26);
+    nameBytes.copy(local, 30);
+
+    const central = Buffer.alloc(46 + nameBytes.length);
+    central.writeUInt32LE(0x02014b50, 0);
+    central.writeUInt16LE(20, 4);
+    central.writeUInt16LE(20, 6);
+    central.writeUInt16LE(nameBytes.length, 28);
+    central.writeUInt32LE(offset, 42);
+    nameBytes.copy(central, 46);
+
+    locals.push(local);
+    centrals.push(central);
+    offset += local.length;
+  }
+  const centralOffset = offset;
+  const central = Buffer.concat(centrals);
+  const end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0);
+  end.writeUInt16LE(names.length, 8);
+  end.writeUInt16LE(names.length, 10);
+  end.writeUInt32LE(central.length, 12);
+  end.writeUInt32LE(centralOffset, 16);
+  return Buffer.concat([...locals, central, end]);
+}
+
+function fakeCentralDirectoryBytes(names) {
+  return Buffer.concat(names.map(name => {
+    const nameBytes = Buffer.from(name);
+    const entry = Buffer.alloc(46 + nameBytes.length);
+    entry.writeUInt32LE(0x02014b50, 0);
+    entry.writeUInt16LE(nameBytes.length, 28);
+    nameBytes.copy(entry, 46);
+    return entry;
+  }));
+}
+test('npm CLI accepts a structured Playwright trace visual proof', () => {
+  const root = fixture('saas web app');
+  fs.writeFileSync(path.join(root, 'flow.trace'), zipWithEmptyEntries(['trace.trace', 'trace.network']));
+  evidence(root, 'visual', 'flow.trace');
+  const result = run([
+    'audit', root,
+    '--runtime-proof', 'runtime.shipvitals-evidence.json',
+    '--visual-proof', 'visual.shipvitals-evidence.json',
+  ]);
+  const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
+  assert.equal(result.verdict, 'READY');
+  assert.ok(report.evidence_levels.includes('L4_VISUAL_FLOW'));
+});
+
+test('npm CLI rejects forged Playwright trace central-directory bytes', () => {
+  const root = fixture('saas web app');
+  fs.writeFileSync(path.join(root, 'flow.trace'), fakeCentralDirectoryBytes(['trace.trace', 'trace.network']));
+  evidence(root, 'visual', 'flow.trace');
+  const result = run([
+    'audit', root,
+    '--runtime-proof', 'runtime.shipvitals-evidence.json',
+    '--visual-proof', 'visual.shipvitals-evidence.json',
+  ]);
+  const report = JSON.parse(fs.readFileSync(path.join(root, '.shipvitals-evidence', 'report.json')));
+  assert.equal(result.verdict, 'ALMOST READY');
+  assert.ok(!report.evidence_levels.includes('L4_VISUAL_FLOW'));
+  assert.match(report.rejected_proof_details.visual[0].reason, /Playwright trace/);
+});

@@ -20,12 +20,25 @@ def main(argv=None):
         print('Usage: shipvitals audit [project] [--ci] [--verbose] [--runtime-proof FILE] [--visual-proof FILE] [--ci-proof FILE] [--independent-review FILE] | shipvitals init [project] | shipvitals diagnostics [project]')
         return 0 if cmd in {'-h', '--help', 'help'} else 1
     rest = argv[1:]
-    if rest and not rest[0].startswith('--'):
-        target = rest[0]
-        flags = rest[1:]
-    else:
-        target = '.'
-        flags = rest
+    value_flags = {'--mode', '--timeout', '--runtime-proof', '--visual-proof', '--ci-proof', '--independent-review'}
+    target = '.'
+    flags = []
+    index = 0
+    while index < len(rest):
+        arg = rest[index]
+        if arg.startswith('--'):
+            flags.append(arg)
+            if arg in value_flags and index + 1 < len(rest):
+                flags.append(rest[index + 1])
+                index += 2
+            else:
+                index += 1
+        elif target == '.':
+            target = arg
+            index += 1
+        else:
+            flags.append(arg)
+            index += 1
     if cmd in {'init', 'interview'} and '--write-config' not in flags:
         flags.append('--write-config')
     script = SCRIPTS / COMMANDS[cmd]

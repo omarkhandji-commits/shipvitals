@@ -1,48 +1,76 @@
 {
- "$schema": "https://json-schema.org/draft/2020-12/schema",
- "title": "ShipVitals Final Report",
- "type": "object",
- "required": [
- "verdict",
- "score",
- "blockers",
- "required_fixes",
- "evidence_summary"
- ],
- "properties": {
- "verdict": {
- "enum": [
- "READY",
- "ALMOST READY",
- "NOT READY",
- "DEMO ONLY"
- ]
- },
- "score": {
- "type": "number",
- "minimum": 0,
- "maximum": 100
- },
- "blockers": {
- "type": "array",
- "items": {
- "type": "string"
- }
- },
- "required_fixes": {
- "type": "array",
- "items": {
- "type": "string"
- }
- },
- "evidence_summary": {
- "type": "string"
- },
- "next_retest": {
- "type": "array",
- "items": {
- "type": "string"
- }
- }
- }
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShipVitals machine report",
+  "type": "object",
+  "required": [
+    "tool",
+    "version",
+    "generated_at",
+    "project",
+    "mode",
+    "verdict",
+    "score",
+    "p0",
+    "p1",
+    "commands_detected",
+    "command_results",
+    "evidence_levels",
+    "score_caps",
+    "not_verified",
+    "proof",
+    "rejected_proof",
+    "rejected_proof_details"
+  ],
+  "properties": {
+    "tool": { "const": "ShipVitals" },
+    "version": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": "string", "minLength": 20 },
+    "project": { "type": "string", "minLength": 1 },
+    "mode": { "enum": ["quick", "deep"] },
+    "config_exists": { "type": "boolean" },
+    "product_type": { "type": "string" },
+    "product_promise_present": { "type": "boolean" },
+    "verdict": { "enum": ["READY", "ALMOST READY", "NOT READY", "DEMO ONLY"] },
+    "score": { "type": "number", "minimum": 0, "maximum": 100 },
+    "p0": { "type": "array", "items": { "type": "string" } },
+    "p1": { "type": "array", "items": { "type": "string" } },
+    "commands_detected": { "type": "array", "items": { "type": "string" } },
+    "command_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["cmd", "seconds"],
+        "properties": {
+          "cmd": { "type": "string" },
+          "exit_code": { "type": ["number", "null"] },
+          "seconds": { "type": "number" },
+          "stdout": { "type": "string" },
+          "stderr": { "type": "string" },
+          "error": { "type": "string" }
+        }
+      }
+    },
+    "secret_candidates": { "type": "array" },
+    "blocking_secret_candidates": { "type": "array" },
+    "fake_completion_candidates": { "type": "array" },
+    "blocking_fake_completion_candidates": { "type": "array" },
+    "proof": { "type": "object" },
+    "rejected_proof": { "type": "object" },
+    "rejected_proof_details": { "type": "object" },
+    "scan_stats": { "type": "object" },
+    "evidence_levels": { "type": "array", "items": { "type": "string" } },
+    "score_caps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["max_score", "reason"],
+        "properties": {
+          "max_score": { "type": "number", "minimum": 0, "maximum": 100 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "not_verified": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
 }

@@ -24,7 +24,7 @@ ShipVitals must operate as a reproducible release gate rather than a static chec
 - Missing security or secret scan: maximum `90`.
 - Missing falsification scan: maximum `88`.
 - Missing CI or hook path: maximum `92`.
-- Missing independent review for paid or client delivery: maximum `94`.
+- Missing independent review for paid or client delivery: maximum `89`.
 - Exposed secret, broken auth/payment, or fake core integration: `NOT READY`.
 
 ## READY Evidence

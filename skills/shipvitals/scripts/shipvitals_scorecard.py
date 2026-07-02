@@ -13,7 +13,7 @@ groups={
  'docs':['README.md','docs/INSTALLATION.md','docs/ARCHITECTURE.md','docs/SCORING_RUBRIC.md','docs/EDITORIAL_STANDARD.md'],
  'trust':['SECURITY.md','docs/TRUST_AND_SAFETY.md','docs/PERMISSIONS.md'],
  'agents':['agents/product-promise-auditor.md','agents/visual-qa-auditor.md','agents/release-manager.md'],
- 'proof':['schemas/evidence.schema.json','schemas/report.schema.json','benchmarks/BENCHMARK_PLAN.md','evals/rubric.json'],
+ 'proof':['schemas/evidence.schema.json','schemas/evidence-manifest.schema.json','schemas/report.schema.json','benchmarks/BENCHMARK_PLAN.md','evals/rubric.json'],
  'distribution':['registry/skill-card.md','registry/listing.md','LICENSE','CONTRIBUTING.md','SUPPORT.md','README_ACTION.md','action.yml','skills/shipvitals/agents/openai.yaml'],
  'automation':['.github/workflows/ci.yml','.claude/commands/shipvitals.md','.claude/settings/shipvitals.hooks.example.json','.pre-commit-hooks.yaml'],
  'sessions':['skills/shipvitals/examples/session-ready.md','skills/shipvitals/examples/session-almost-ready.md','skills/shipvitals/examples/session-not-ready.md','skills/shipvitals/examples/session-demo-only.md'],

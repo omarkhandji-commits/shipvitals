@@ -178,22 +178,47 @@ function inside(root, candidate) {
   return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
 }
 
+function findEndOfCentralDirectory(bytes) {
+  if (bytes.length < 22) return -1;
+  const min = Math.max(0, bytes.length - 0xffff - 22);
+  for (let offset = bytes.length - 22; offset >= min; offset -= 1) {
+    if (bytes.readUInt32LE(offset) !== 0x06054b50) continue;
+    const commentLength = bytes.readUInt16LE(offset + 20);
+    if (offset + 22 + commentLength === bytes.length) return offset;
+  }
+  return -1;
+}
+
 function zipEntryNames(bytes) {
+  if (bytes.length < 22 || bytes.readUInt32LE(0) !== 0x04034b50) return [];
+  const end = findEndOfCentralDirectory(bytes);
+  if (end < 0) return [];
+  const diskNumber = bytes.readUInt16LE(end + 4);
+  const centralDisk = bytes.readUInt16LE(end + 6);
+  const entriesOnDisk = bytes.readUInt16LE(end + 8);
+  const entries = bytes.readUInt16LE(end + 10);
+  const centralSize = bytes.readUInt32LE(end + 12);
+  const centralOffset = bytes.readUInt32LE(end + 16);
+  if (diskNumber !== 0 || centralDisk !== 0 || entriesOnDisk !== entries || entries > 5000) return [];
+  if (centralOffset + centralSize > end) return [];
+
   const names = [];
-  for (let offset = 0; offset + 46 <= bytes.length && names.length < 5000; offset += 1) {
-    if (bytes.readUInt32LE(offset) !== 0x02014b50) continue;
+  let offset = centralOffset;
+  for (let index = 0; index < entries; index += 1) {
+    if (offset + 46 > end || bytes.readUInt32LE(offset) !== 0x02014b50) return [];
     const nameLength = bytes.readUInt16LE(offset + 28);
     const extraLength = bytes.readUInt16LE(offset + 30);
     const commentLength = bytes.readUInt16LE(offset + 32);
+    const localOffset = bytes.readUInt32LE(offset + 42);
     const nameStart = offset + 46;
     const nameEnd = nameStart + nameLength;
-    if (nameEnd > bytes.length) break;
+    const next = nameEnd + extraLength + commentLength;
+    if (nameEnd > end || next > end || localOffset + 4 > bytes.length || bytes.readUInt32LE(localOffset) !== 0x04034b50) return [];
     names.push(bytes.subarray(nameStart, nameEnd).toString('utf8').replaceAll('\\', '/'));
-    offset = nameEnd + extraLength + commentLength - 1;
+    offset = next;
   }
-  return names;
+  return offset === centralOffset + centralSize ? names : [];
 }
-
 function validPlaywrightTrace(bytes) {
   const names = zipEntryNames(bytes);
   return names.includes('trace.trace') && (names.includes('trace.network') || names.some(name => name.startsWith('resources/')));

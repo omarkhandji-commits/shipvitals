@@ -9,7 +9,7 @@ required=[
  'scripts/shipvitals_probe.py','scripts/shipvitals_gate.py','scripts/shipvitals_secret_scan.py','scripts/shipvitals_link_check.py',
  'scripts/shipvitals_falsification_scan.py','scripts/shipvitals_evidence_pack.py','templates/final-report.md','templates/product-promise.md'
 ]
-root_required=['README.md','LICENSE','CHANGELOG.md','CONTRIBUTING.md','RELEASE.md','VALIDATION.md','package.json','.github/workflows/validate.yml','assets/shipvitals-hero.svg']
+root_required=['README.md','LICENSE','CHANGELOG.md','CONTRIBUTING.md','RELEASE.md','VALIDATION.md','package.json','.github/workflows/ci.yml','assets/shipvitals-hero.svg']
 missing=[x for x in required if not (skill/x).exists()]+[x for x in root_required if not (root/x).exists()]
 skill_text=(skill/'SKILL.md').read_text(errors='ignore') if (skill/'SKILL.md').exists() else ''
 checks={

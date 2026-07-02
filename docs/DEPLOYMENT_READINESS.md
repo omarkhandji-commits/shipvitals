@@ -40,8 +40,8 @@ Ten deterministic commands passed:
 
 - Python: wheel and sdist built successfully as `shipvitals_cli-1.0.0b1`.
 - npm: packed tarball installed into a temporary project and audited successfully.
-- Node CLI: 12 tests pass, including timeout, saturation, provenance, and invalid-proof regressions.
-- Python suite: 24 tests pass, including matching adversarial, trace, and provenance coverage.
+- Node CLI: 14 tests pass, including timeout, saturation, provenance, trace, and invalid-proof regressions.
+- Python suite: 25 tests pass, including matching adversarial, trace, provenance, and CLI routing coverage.
 - GitHub Action: local metadata validates; remote execution and L5 evidence require the public repository.
 
 ## Website Evidence

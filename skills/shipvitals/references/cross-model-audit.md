@@ -20,4 +20,4 @@ An AI agent should not be the only judge of its own work. A premium-grade gate r
 
 ## Cap rule
 
-Without independent audit, public paid/client projects are capped at 94 unless risk is very low.
+Without independent audit, public paid/client projects are capped at 89 unless risk is very low.
