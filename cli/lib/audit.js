@@ -173,8 +173,16 @@ function gitRepository(root) {
   return match ? (match[1] + '/' + match[2]).toLowerCase() : '';
 }
 
+function canonicalPath(value) {
+  try {
+    return fs.existsSync(value) ? fs.realpathSync(value) : path.resolve(value);
+  } catch {
+    return path.resolve(value);
+  }
+}
+
 function inside(root, candidate) {
-  const relative = path.relative(path.resolve(root), path.resolve(candidate));
+  const relative = path.relative(canonicalPath(root), canonicalPath(candidate));
   return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
 }
 

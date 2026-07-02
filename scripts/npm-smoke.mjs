@@ -4,8 +4,9 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = path.resolve(import.meta.dirname, '..');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const workspace = fs.mkdtempSync(path.join(os.tmpdir(), 'shipvitals-package-'));
 const project = path.join(workspace, 'fixture');
 fs.mkdirSync(project);
