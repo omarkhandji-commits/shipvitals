@@ -100,7 +100,7 @@ Proof flags accept typed .shipvitals-evidence.json manifests. Local artifacts re
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
+  - uses: actions/checkout@v5
   - id: shipvitals
     uses: omarkhandji-commits/shipvitals@v1
     with:
