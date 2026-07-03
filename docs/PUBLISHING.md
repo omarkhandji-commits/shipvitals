@@ -1,26 +1,26 @@
 # Publishing
 
-ShipVitals uses manual registry publishing until npm and PyPI credentials are configured.
+ShipVitals is published on npm. PyPI publishing remains manual until credentials are configured.
 
 ## Current Status
 
 - npm package target: `shipvitals`
 - PyPI package target: `shipvitals-cli`
-- npm registry check: package not found before first publish
+- npm registry check: `shipvitals@1.0.0-beta.1` is public
 - PyPI registry check: package not found before first publish
 
 ## Required Secrets
 
 Configure these GitHub repository secrets before running `.github/workflows/publish.yml`:
 
-- `NPM_TOKEN`: npm automation token with publish access.
+- `NPM_TOKEN`: optional for future npm releases; current beta was published locally.
 - `PYPI_API_TOKEN`: PyPI API token for `shipvitals-cli`.
 
 ## Manual GitHub Publish
 
 1. Open GitHub Actions.
 2. Run `Publish Packages`.
-3. Select `publish_npm` and/or `publish_pypi`.
+3. Select `publish_pypi` for the remaining registry publish, or `publish_npm` for future npm releases.
 4. Verify clean installs after publication:
 
 ```bash
@@ -36,7 +36,7 @@ npm whoami
 npm run test:node
 npm run test:package
 npm pack --dry-run
-npm publish --tag beta --access public
+npm publish --tag beta --access public --otp <code>
 ```
 
 ```bash

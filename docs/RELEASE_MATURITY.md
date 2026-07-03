@@ -10,13 +10,13 @@ This scorecard separates local verification from public distribution and externa
 | Repository validation | Passing | `npm run validate` |
 | Schema validation | Passing | `npm run schema:check` |
 | Tone check | Passing | `npm run tone:check` |
-| npm package | Packed install passes | `npm run test:package` |
+| npm package | Published and clean exec passes | `npm view shipvitals`, `npm exec --yes shipvitals@beta -- --help` |
 | Python package | Wheel and sdist pass | `shipvitals_cli-1.0.0b1` artifacts |
 | GitHub Pages site | Passing | `npm run site:check`, `https://omarkhandji-commits.github.io/shipvitals/` |
 | Real-project benchmark | 20 projects executed | `benchmarks/real-world/results/` |
 | Self-audit | `ALMOST READY`, P0/P1 `0/0` | `case-studies/shipvitals-self-audit/report.public.json` |
 | Independent review | Pending | [Issue #6](https://github.com/omarkhandji-commits/shipvitals/issues/6) requests external L6 review |
-| npm publication | Pending | [Issue #8](https://github.com/omarkhandji-commits/shipvitals/issues/8); registry returns 404 until publication |
+| npm publication | Passing | `shipvitals@1.0.0-beta.1` is public on npm |
 | PyPI publication | Pending | [Issue #8](https://github.com/omarkhandji-commits/shipvitals/issues/8); registry returns 404 until publication |
 | Remote GitHub Action | Passing | Public CI runs `uses: ./` on `main` |
 | External feedback | Pending | [Issue #7](https://github.com/omarkhandji-commits/shipvitals/issues/7) invites real-world audit examples |
@@ -33,7 +33,7 @@ Status: complete for the public beta baseline.
 
 ## Stable Release Requirements
 
-- publish npm and PyPI packages;
+- publish PyPI package;
 - verify registry installation in clean environments;
 - publish and test the `v1` Action reference;
 - complete the independent L6 review;

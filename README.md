@@ -9,10 +9,10 @@ ShipVitals is a release-readiness audit for AI-built apps. It runs the project c
 [![License: MIT](https://img.shields.io/badge/license-MIT-1f6f5f.svg)](./LICENSE)
 
 ```bash
-npx github:omarkhandji-commits/shipvitals audit .
+npx shipvitals audit .
 ```
 
-The Node CLI runs without Python. npm and PyPI registry releases will be documented here only after clean installs from both registries pass.
+The Node CLI runs without Python. npm is published; PyPI remains pending until clean install from the registry passes.
 
 Registry publication is tracked in [docs/PUBLISHING.md](./docs/PUBLISHING.md) and [issue #8](https://github.com/omarkhandji-commits/shipvitals/issues/8).
 
@@ -51,16 +51,16 @@ ShipVitals does not replace tests, Lighthouse, Playwright, security scanners, or
 
 ### Node CLI
 
-Run directly from GitHub before the npm registry release:
+Run from the npm registry:
 
 ```bash
-npx github:omarkhandji-commits/shipvitals audit .
+npx shipvitals audit .
 ```
 
 Initialize repeatable project context:
 
 ```bash
-npx github:omarkhandji-commits/shipvitals init .
+npx shipvitals init .
 ```
 
 ### Python CLI

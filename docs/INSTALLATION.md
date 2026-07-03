@@ -5,7 +5,7 @@
 Node 18 or newer is required. Python is not required for the Node CLI.
 
 ```bash
-npx github:omarkhandji-commits/shipvitals audit .
+npx shipvitals audit .
 ```
 
 To install from a checkout:
