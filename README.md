@@ -14,6 +14,8 @@ npx github:omarkhandji-commits/shipvitals audit .
 
 The Node CLI runs without Python. npm and PyPI registry releases will be documented here only after clean installs from both registries pass.
 
+Registry publication is tracked in [docs/PUBLISHING.md](./docs/PUBLISHING.md) and [issue #8](https://github.com/omarkhandji-commits/shipvitals/issues/8).
+
 ## The Release Question
 
 Tests answer whether known code paths behave as expected. ShipVitals asks a different question: **is there enough evidence to publish, sell, submit, deploy, or deliver this project?**

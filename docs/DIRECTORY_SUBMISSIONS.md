@@ -49,9 +49,9 @@ Enable:
 
 | Target | Status | Submitted | Link | Notes |
 |---|---|---:|---|---|
-| GitHub Action Marketplace | Not submitted | - | - | Requires public repo and release tag |
-| npm package | Not published | - | - | Publish as `shipvitals` |
-| PyPI package | Not published | - | - | Publish as `shipvitals-cli` |
+| GitHub Action Marketplace | Ready | 2026-07-03 | https://github.com/omarkhandji-commits/shipvitals | Public repo, `action.yml`, and beta release exist |
+| npm package | Blocked | - | https://github.com/omarkhandji-commits/shipvitals/issues/8 | Requires maintainer npm login or `NPM_TOKEN` |
+| PyPI package | Blocked | - | https://github.com/omarkhandji-commits/shipvitals/issues/8 | Requires `PYPI_API_TOKEN` and upload |
 | awesome-claude-skills | Not submitted | - | - | Use `marketing/launch-kit/awesome-list-pr.md` |
 | awesome-agent-skills | Not submitted | - | - | Use same PR copy |
 | Claude Code list | Not submitted | - | - | Submit only if list accepts tools/skills |
